@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chenghengsheng' => 'chenghs@shinemo.com' }
-  s.source           = { :git => 'https://github.com/chenghengsheng/YPUIKit-ObjC.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/HansenCCC/YPUIKit-ObjC', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
