@@ -1,0 +1,22 @@
+{
+  "name": "YPUIKit-ObjC",
+  "version": "0.1.0",
+  "summary": "A short description of YPUIKit-ObjC.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/chenghengsheng/YPUIKit-ObjC",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "chenghengsheng": "chenghs@shinemo.com"
+  },
+  "source": {
+    "git": "https://github.com/chenghengsheng/YPUIKit-ObjC.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "YPUIKit-ObjC/Classes/**/*"
+}
