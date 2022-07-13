@@ -9,5 +9,6 @@
 #define YPUIKit_h
 
 #import "YPKitDefines.h"
+#import "YPCategoryHeader.h"
 
 #endif /* YPUIKit_h */
