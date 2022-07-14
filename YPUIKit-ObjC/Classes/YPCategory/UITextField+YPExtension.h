@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (YPExtension)
 
+/// 设置输入框输入长度
+@property (assign, nonatomic) IBInspectable NSUInteger yp_maxLength;
+
 /// 获取光标位置
 - (NSRange)yp_selectedRange;
 

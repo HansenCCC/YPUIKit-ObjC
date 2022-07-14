@@ -10,5 +10,6 @@
 
 #import "YPKitDefines.h"
 #import "YPCategoryHeader.h"
+#import "YPButton.h"
 
 #endif /* YPUIKit_h */
