@@ -12,11 +12,15 @@
 /// 十六进制转化为图片 例如: #FFFFFF
 /// @param hexString 十六进制字符
 + (UIColor *)yp_colorWithHexString:(NSString *)hexString {
+    return [self yp_colorWithHexString:hexString withAlpha:1.0f];
+}
+
++ (UIColor *)yp_colorWithHexString:(NSString *)hexString withAlpha:(CGFloat)alpha {
     NSString *colorString = [[hexString stringByReplacingOccurrencesOfString:@"#"withString:@""] uppercaseString];
-    CGFloat alpha, red, blue, green;
+    CGFloat red, blue, green;
     switch ([colorString length]) {
         case 3: // #RGB
-            alpha = 1.0f;
+            alpha = alpha;
             red   = [self colorComponentFrom: colorString start: 0 length: 1];
             green = [self colorComponentFrom: colorString start: 1 length: 1];
             blue  = [self colorComponentFrom: colorString start: 2 length: 1];
@@ -28,7 +32,7 @@
             blue  = [self colorComponentFrom: colorString start: 3 length: 1];
             break;
         case 6: // #RRGGBB
-            alpha = 1.0f;
+            alpha = alpha;
             red   = [self colorComponentFrom: colorString start: 0 length: 2];
             green = [self colorComponentFrom: colorString start: 2 length: 2];
             blue  = [self colorComponentFrom: colorString start: 4 length: 2];
@@ -214,6 +218,12 @@
         color = [UIColor yp_colorWithHexString:@"#ffffff"];
     });
     return color;
+}
+
+- (UIColor *)yp_alpha:(CGFloat)alpha {
+    UIColor *color = [self copy];
+    NSString *hexStr = [UIColor yp_hexStringFromColor:color];
+    return [UIColor yp_colorWithHexString:hexStr withAlpha:alpha];
 }
 
 @end
