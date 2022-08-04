@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YPUIKit-ObjC'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'YPUIKit-ObjC.'
 
 # This description is used to generate tags and improve search results.
@@ -33,7 +33,6 @@ Pod::Spec.new do |s|
   s.source_files = 'YPUIKit-ObjC/Classes/**/*'
   
   s.dependency 'Masonry', '~> 1.1.0'
-  s.dependency 'MJRefresh', '~> 3.7.5'
   
   # s.resource_bundles = {
   #   'YPUIKit-ObjC' => ['YPUIKit-ObjC/Assets/*.png']
