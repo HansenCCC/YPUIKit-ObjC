@@ -1,16 +1,23 @@
 PODS:
-  - YPUIKit-ObjC (0.1.0)
+  - Masonry (1.1.0)
+  - YPUIKit-ObjC (1.0.5):
+    - Masonry (~> 1.1.0)
 
 DEPENDENCIES:
   - YPUIKit-ObjC (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
 
 EXTERNAL SOURCES:
   YPUIKit-ObjC:
     :path: "../"
 
 SPEC CHECKSUMS:
-  YPUIKit-ObjC: ce1c8f0b8a7e675e020e066f294b0420034b87fe
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  YPUIKit-ObjC: f6354311cfc3820ffad2e2eb37b6e23a010f6406
 
-PODFILE CHECKSUM: 26bd0660c63616430eebfb86ab0f7cf94c3f371d
+PODFILE CHECKSUM: 36aa4b081ffdb63c636d701653a47fe67d1eee0a
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2
