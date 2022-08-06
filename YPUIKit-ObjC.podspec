@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YPUIKit-ObjC'
-  s.version          = '1.0.6'
+  s.version          = '1.0.7'
   s.summary          = 'YPUIKit-ObjC.'
 
 # This description is used to generate tags and improve search results.
