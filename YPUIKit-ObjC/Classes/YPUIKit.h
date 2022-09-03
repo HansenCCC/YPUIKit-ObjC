@@ -12,5 +12,6 @@
 #import "YPCategoryHeader.h"
 #import "YPButton.h"
 #import "YPAlertView.h"
+#import "YPPopupController.h"
 
 #endif /* YPUIKit_h */
