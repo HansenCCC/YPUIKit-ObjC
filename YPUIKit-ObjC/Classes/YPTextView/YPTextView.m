@@ -18,6 +18,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        self.maxLength = 0;
         [self setupSubviews];
     }
     return self;
@@ -50,18 +51,46 @@
 #pragma mark - action
 
 - (void)didTextChange:(NSNotification *)sender {
-    if (self.whenTextDidChange) {
-        self.whenTextDidChange(self);
-    }
     if (sender.object != self){
         return;
     }
+    
+    if (self.whenTextDidChange) {
+        self.whenTextDidChange(self);
+    }
+    
     [self updatePlaceholderViewHidden];
+    [self updateTextWithTextView:self];
 }
 
 - (void)updatePlaceholderViewHidden {
     self.placeholderView.hidden = self.text.length != 0 || self.placeholder.length == 0;
     [self layoutSubviews];
+}
+
+- (void)updateTextWithTextView:(YPTextView *)textView {
+    NSString *destText = textView.text;
+    NSUInteger maxLength = textView.maxLength;
+    if (maxLength == 0) {
+        // 等于0，不限制字符长度
+        return;
+    }
+    UITextRange *selectedRange = [textView markedTextRange];
+    UITextPosition *position = [textView positionFromPosition:selectedRange.start offset:0];
+    if (!position) {
+        if (destText.length > maxLength) {
+            NSRange range;
+            NSUInteger inputLength = 0;
+            for (int i = 0; i < destText.length && inputLength <= maxLength; i += range.length) {
+                range = [textView.text rangeOfComposedCharacterSequenceAtIndex:i];
+                inputLength += [destText substringWithRange:range].length;
+                if (inputLength > maxLength) {
+                    NSString *newText = [destText substringWithRange:NSMakeRange(0, range.location)];
+                    textView.text = newText;
+                }
+            }
+        }
+    }
 }
 
 #pragma mark - setters | getters

@@ -19,6 +19,7 @@ typedef void(^YPTextViewTextDidChange)(YPTextView *textView);
 @property (nonatomic, copy) YPTextViewHeightChange whenContentHeightChange;
 @property (nonatomic, copy) YPTextViewTextDidChange whenTextDidChange;
 
+@property (nonatomic, assign) NSUInteger maxLength;
 @property (nonatomic, strong) NSString *placeholder;
 @property (nonatomic, strong) NSAttributedString *attributedPlaceholder;
 
