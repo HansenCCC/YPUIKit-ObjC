@@ -70,6 +70,18 @@ typedef enum : NSUInteger {
   
 <img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="700">
 
+- ### YPTextView
+  > 如果你想给UITextView设置占位符，又不想写很多代码。
+  ```objectivec
+@interface YPTextView : UITextView
+
+@property (nonatomic, assign) NSUInteger maxLength;
+@property (nonatomic, strong) NSString *placeholder;
+@property (nonatomic, strong) NSAttributedString *attributedPlaceholder;
+
+@end
+  ```
+
 - ### YPPopupController
   > 项目中存在很多popup出来的试图。例如提示更新弹框、闪屏、选择器、交互弹框...等
 可以继承 YPPopupController 来快速实现炫酷的弹框
@@ -137,15 +149,16 @@ chenghengsheng, 2534550460@qq.com
 ## Log
 
 ```
-2021.11.01  1.0.9版本，针对 YPPopupController 优化；feature: 针对popup优化，暴露contentView; 修改podspec s.module_name = 'YPUIKit'；
-2021.10.20  1.0.8版本，增加 YPPopupController 用于实现底部或中间弹出的弹框；
-2021.10.20  1.0.7版本，处理头文件引用问题；
-2021.08.19  1.0.6版本，添加一些常用分类（NSData、NSDate、NSTimer）；
-2021.08.12  1.0.5版本，移除一些无用依赖库；
-2021.08.12  1.0.4版本，增加 YPAlertView 实现弹框提醒【不建议使用此版本】；
-2021.08.12  1.0.3版本，新增 YPButton 处理图文布局【不建议使用此版本】；
-2021.08.07  1.0.2版本，添加一些常用分类（UIViewController、UIView、UITextField、UITableViewCell、UIScrollView、UILabel、UIImage、UIColor、UIButton、NSString）【不建议使用此版本】；
-2021.08.07  1.0.1版本，podspec 编写【不建议使用此版本】；
-2021.08.07  1.0.0版本，新的版本从这里开始【不建议使用此版本】；
+2022.09.05  1.0.10版本，增加 YPTextView 用于UITextView增加占位符、限制最大输入长度；
+2022.09.04  1.0.9版本，针对 YPPopupController 优化；feature: 针对popup优化，暴露contentView; 修改podspec s.module_name = 'YPUIKit'；
+2022.09.04  1.0.8版本，增加 YPPopupController 用于实现底部或中间弹出的弹框；
+2022.08.06  1.0.7版本，处理头文件引用问题；
+2022.08.06  1.0.6版本，添加一些常用分类（NSData、NSDate、NSTimer）；
+2022.08.05  1.0.5版本，移除一些无用依赖库；
+2022.08.02  1.0.4版本，增加 YPAlertView 实现弹框提醒【不建议使用此版本】；
+2022.07.14  1.0.3版本，新增 YPButton 处理图文布局【不建议使用此版本】；
+2022.07.13  1.0.2版本，添加一些常用分类（UIViewController、UIView、UITextField、UITableViewCell、UIScrollView、UILabel、UIImage、UIColor、UIButton、NSString）【不建议使用此版本】；
+2022.07.11  1.0.1版本，podspec 编写【不建议使用此版本】；
+2022.07.11  1.0.0版本，新的版本从这里开始【不建议使用此版本】；
 
 ```
