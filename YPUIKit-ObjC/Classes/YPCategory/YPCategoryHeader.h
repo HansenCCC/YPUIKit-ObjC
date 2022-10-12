@@ -19,6 +19,7 @@
 #import "UIScrollView+YPExtension.h"
 #import "UITableViewCell+YPExtension.h"
 #import "UITextField+YPExtension.h"
+#import "UITextView+YPExtension.h"
 #import "UIView+YPExtension.h"
 #import "UIViewController+YPExtension.h"
 
