@@ -11,11 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (YPExtension)
 
-/// 十六进制转化为图片 例如: #FFFFFF
+/// 十六进制转化为color对象 例如: #FFFFFF
 /// @param hexString 十六进制字符
 + (UIColor *)yp_colorWithHexString:(NSString *)hexString;
 
-/// 十六进制转化为图片 例如: #FFFFFF
+/// 十六进制转化为color对象 例如: #FFFFFF
 /// @param hexString 十六进制字符
 /// @param alpha alpha
 + (UIColor *)yp_colorWithHexString:(NSString *)hexString withAlpha:(CGFloat)alpha;

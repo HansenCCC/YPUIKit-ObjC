@@ -1,7 +1,7 @@
 //
 //  YPKitDefines.h
 //  YPUIKit
-//
+//  各iPhone屏幕尺寸，使用此类中定义宏，处理布局相关问题
 //  Created by Hansen on 2022/7/5.
 //
 
