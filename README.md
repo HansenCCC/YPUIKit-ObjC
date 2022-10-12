@@ -91,7 +91,7 @@ typedef enum : NSUInteger {
   @end
   ```
   
-<img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="600">
+<img src="https://pic1.zhimg.com/80/v2-8e63a737dcb94e4be350cbba0d4ee210_720w.png" width="600">
 
 - ### YPCategory
   ```objectivec
