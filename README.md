@@ -39,7 +39,7 @@ pod 'YPUIKit-ObjC', '~> 1.0.9'
   #define YP_HEIGHT_SEARCH_BAR               44
   ```
   
-<img src="https://pica.zhimg.com/80/v2-d5c28a9585d100bda51ea6a30816f162_720w.png">
+<img src="https://pica.zhimg.com/80/v2-d5c28a9585d100bda51ea6a30816f162_720w.png" width="600">
 
 - ### YPButton
   > 如果你觉得UIButton用起来麻烦，那就试试YPButton。`（左图片，右文字；左文字，右图片；上图片，下文字；上文字，下图片）`
@@ -60,7 +60,7 @@ typedef enum : NSUInteger {
 @end
 ```
 
-<img src="https://pic2.zhimg.com/80/v2-81a730fa8b82f348af8816d109aa5e78_720w.png">
+<img src="https://pic2.zhimg.com/80/v2-81a730fa8b82f348af8816d109aa5e78_720w.png" width="600">
 
 - ### YPAlertView
   > 例子：弹出一个提示，"这是一个提示"
@@ -68,7 +68,7 @@ typedef enum : NSUInteger {
   [YPAlertView alertText:@"这是一个提示"];
   ```
   
-<img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png">
+<img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="600">
 
 - ### YPPopupController
   > 项目中存在很多popup出来的试图。例如提示更新弹框、闪屏、选择器、交互弹框...等
@@ -91,7 +91,7 @@ typedef enum : NSUInteger {
   @end
   ```
   
-<img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png">
+<img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="600">
 
 - ### YPCategory
   ```objectivec
