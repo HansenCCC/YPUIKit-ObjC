@@ -39,28 +39,27 @@ pod 'YPUIKit-ObjC', '~> 1.0.9'
   #define YP_HEIGHT_SEARCH_BAR               44
   ```
   
-<img src="https://pica.zhimg.com/80/v2-d5c28a9585d100bda51ea6a30816f162_720w.png" width="700">
+  <img src="https://pica.zhimg.com/80/v2-d5c28a9585d100bda51ea6a30816f162_720w.png" width="700">
 
 - ### YPButton
   > 如果你觉得UIButton用起来麻烦，那就试试YPButton。`（左图片，右文字；左文字，右图片；上图片，下文字；上文字，下图片）`
+  ```objectivec
+  typedef enum : NSUInteger {
+      YPButtonContentStyleHorizontal = 0, //左图标，右文本
+      YPButtonContentStyleVertical, //上图标，下文本
+  } YPButtonContentStyle;
 
-```objectivec
-typedef enum : NSUInteger {
-    YPButtonContentStyleHorizontal = 0, //左图标，右文本
-    YPButtonContentStyleVertical, //上图标，下文本
-} YPButtonContentStyle;
+  @interface YPButton : UIButton
 
-@interface YPButton : UIButton
+  @property (nonatomic, assign) YPButtonContentStyle contentStyle;
+  @property (nonatomic, assign) NSInteger interitemSpacing;//图标与文字之间的间距，默认是0px
+  @property (nonatomic, assign) BOOL reverseContent;//是否逆转图标与文字的顺序，默认是NO:图标在左/上,文本在右/下
+  @property (nonatomic, assign) CGSize imageSize;//图片尺寸值，image.size，默认为(0,0)，代表自动根据图片大小计算
 
-@property (nonatomic, assign) YPButtonContentStyle contentStyle;
-@property (nonatomic, assign) NSInteger interitemSpacing;//图标与文字之间的间距，默认是0px
-@property (nonatomic, assign) BOOL reverseContent;//是否逆转图标与文字的顺序，默认是NO:图标在左/上,文本在右/下
-@property (nonatomic, assign) CGSize imageSize;//图片尺寸值，image.size，默认为(0,0)，代表自动根据图片大小计算
+  @end
+  ```
 
-@end
-```
-
-<img src="https://pic2.zhimg.com/80/v2-81a730fa8b82f348af8816d109aa5e78_720w.png" width="700">
+  <img src="https://pic2.zhimg.com/80/v2-81a730fa8b82f348af8816d109aa5e78_720w.png" width="700">
 
 - ### YPAlertView
   > 例子：弹出一个提示，"这是一个提示"
@@ -68,18 +67,18 @@ typedef enum : NSUInteger {
   [YPAlertView alertText:@"这是一个提示"];
   ```
   
-<img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="700">
+  <img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="700">
 
 - ### YPTextView
   > 如果你想给UITextView设置占位符，又不想写很多代码。
   ```objectivec
-@interface YPTextView : UITextView
+  @interface YPTextView : UITextView
 
-@property (nonatomic, assign) NSUInteger maxLength;
-@property (nonatomic, strong) NSString *placeholder;
-@property (nonatomic, strong) NSAttributedString *attributedPlaceholder;
+  @property (nonatomic, assign) NSUInteger maxLength;
+  @property (nonatomic, strong) NSString *placeholder;
+  @property (nonatomic, strong) NSAttributedString *attributedPlaceholder;
 
-@end
+  @end
   ```
 
 - ### YPPopupController
@@ -103,7 +102,7 @@ typedef enum : NSUInteger {
   @end
   ```
   
-<img src="https://pic1.zhimg.com/80/v2-8e63a737dcb94e4be350cbba0d4ee210.png" width="700">
+  <img src="https://pic1.zhimg.com/80/v2-8e63a737dcb94e4be350cbba0d4ee210.png" width="700">
 
 - ### YPCategory
   ```objectivec
