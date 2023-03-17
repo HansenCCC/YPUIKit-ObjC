@@ -1,6 +1,6 @@
 {
   "name": "YPUIKit-ObjC",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "summary": "YPUIKit-ObjC.",
   "description": "Some UI components",
   "homepage": "https://github.com/HansenCCC/YPUIKit-ObjC",
@@ -13,15 +13,11 @@
   },
   "source": {
     "git": "https://github.com/HansenCCC/YPUIKit-ObjC",
-    "tag": "1.0.5"
+    "tag": "1.0.9"
   },
   "platforms": {
     "ios": "10.0"
   },
   "source_files": "YPUIKit-ObjC/Classes/**/*",
-  "dependencies": {
-    "Masonry": [
-      "~> 1.1.0"
-    ]
-  }
+  "module_name": "YPUIKit"
 }

@@ -32,8 +32,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'YPUIKit-ObjC/Classes/**/*'
   
-  s.dependency 'Masonry', '~> 1.1.0'
-  
   s.module_name = 'YPUIKit'
   
   # s.resource_bundles = {

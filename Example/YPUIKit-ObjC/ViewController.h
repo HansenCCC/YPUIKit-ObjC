@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface YPViewController : UIViewController
+@interface ViewController : UIViewController
 
 @end

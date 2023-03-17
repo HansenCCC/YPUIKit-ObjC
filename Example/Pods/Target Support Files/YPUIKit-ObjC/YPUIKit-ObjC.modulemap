@@ -1,4 +1,4 @@
-framework module YPUIKit_ObjC {
+framework module YPUIKit {
   umbrella header "YPUIKit-ObjC-umbrella.h"
 
   export *
