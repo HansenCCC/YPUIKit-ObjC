@@ -10,12 +10,23 @@
 
 YPUIKit-ObjC 设计目的是为了快速搭建一个 iOS 项目，提高项目 UI 开发效率。
 
+## Features
+
+- 处理布局（YPKitDefines）
+- 多样按钮（YPButton）
+- 提示弹框（YPAlertView）
+- 日志管理（YPLog）
+- 弹框动画（YPPopupController）
+- 多样输入框（YPTextView）
+- 文件管理（YPFileBrowser）
+- 常用分类（YPCategory）
+
 ## Installation
 
 需要使用 Cocoapods 将 YPUIKit-ObjC 集成到 Xcode 项目中去。在podfile文件中
 
 ```ruby
-pod 'YPUIKit-ObjC', '~> 1.0.9'
+pod 'YPUIKit-ObjC', '~> 1.1.0'
 ```
 
 ## Quickstart
@@ -69,6 +80,17 @@ pod 'YPUIKit-ObjC', '~> 1.0.9'
   
   <img src="https://pic2.zhimg.com/80/v2-5596aaec2b6700760591cdbc0448a54a_720w.png" width="700">
 
+- ### YPLog
+  > 例子：如果你想缓存一些重要的调试日志
+  ```objectivec
+  yplog_msg(@"---------------------信息消息-------------------------");
+  yplog_suc(@"---------------------成功消息-------------------------");
+  yplog_err(@"-------------------很重要的消息------------------------");
+  yplog_warn(@"--------------------警告消息-------------------------");
+  ```
+  
+  <img src="https://pica.zhimg.com/80/v2-06e5e95865a1687883e179ed2f8b52fb_720w.png" width="700">
+
 - ### YPTextView
   > 如果你想给UITextView设置占位符，又不想写很多代码。
   ```objectivec
@@ -104,6 +126,32 @@ pod 'YPUIKit-ObjC', '~> 1.0.9'
   
   <img src="https://pic1.zhimg.com/80/v2-8e63a737dcb94e4be350cbba0d4ee210.png" width="700">
 
+- ### YPFileBrowser
+  > 例子：如果你需要一个轻量级非常适合开发者调试的文件浏览工具。
+  ```objectivec
+  #import <YPFileBrowser/YPFileBrowser.h>
+
+  - (void)showFileBrowserAction:(UIButton *)sender {
+      // 创建YPFileBrowser对象
+      YPFileBrowser *fileBrowser = [[YPFileBrowser alloc] initWithPath:NSHomeDirectory()];
+      UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:fileBrowser];
+      nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+      [self presentViewController:nav animated:YES completion:nil];
+  }
+  ```
+  |支持QuickLook格式|后缀名字|
+  |--|--|
+  |文件 文档|txt、doc、xls、ppt、docx、xlsx、pptx|
+  |图像|jpg、png、pdf、tiff、swf|
+  |视频+音频|flv、rmvb、mp4、mvb、mp3、wma|
+  |work文档|work|
+  |微软office|work|
+  |RTF格式|rtf|
+  |PDF格式|pdf|
+  |文本文件|txt|
+  
+  <img src="https://picx.zhimg.com/80/v2-009acf5105b6cefa651a416b4c39d4fa_720w.png" width="700">
+
 - ### YPCategory
   ```objectivec
   #ifndef YPCategoryHeader_h
@@ -115,7 +163,7 @@ pod 'YPUIKit-ObjC', '~> 1.0.9'
   #import "NSDate+YPExtension.h"
   // 用于 字符拼接；手机号、URL有效性正则判断；通过字符和字体获取宽度；md5生成；
   #import "NSString+YPExtension.h"
-  // 
+  // 用于 处理 NSTimer 循环引用的问题
   #import "NSTimer+YPExtension.h"
   // 用于快速初始化；
   #import "UIButton+YPExtension.h"
@@ -148,6 +196,7 @@ chenghengsheng, 2534550460@qq.com
 ## Log
 
 ```
+2023.03.17  1.1.0版本，增加 YPLog 日志工具、增加 YPFileBrowser 文件预览工具；
 2022.09.05  1.0.10版本，增加 YPTextView 用于UITextView增加占位符、限制最大输入长度；
 2022.09.04  1.0.9版本，针对 YPPopupController 优化；feature: 针对popup优化，暴露contentView; 修改podspec s.module_name = 'YPUIKit'；
 2022.09.04  1.0.8版本，增加 YPPopupController 用于实现底部或中间弹出的弹框；
