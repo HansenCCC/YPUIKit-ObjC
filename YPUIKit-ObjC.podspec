@@ -8,25 +8,15 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YPUIKit-ObjC'
-  s.version          = '1.0.9'
+  s.version          = '1.1.0'
   s.summary          = 'YPUIKit-ObjC.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
   s.description      = <<-DESC
-  Some UI components
+  YPUIKit-ObjC 设计目的是为了快速搭建一个 iOS 项目，提高项目 UI 开发效率。
                        DESC
-
   s.homepage         = 'https://github.com/HansenCCC/YPUIKit-ObjC'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chenghengsheng' => 'chenghs@shinemo.com' }
   s.source           = { :git => 'https://github.com/HansenCCC/YPUIKit-ObjC', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
 
@@ -34,11 +24,4 @@ Pod::Spec.new do |s|
   
   s.module_name = 'YPUIKit'
   
-  # s.resource_bundles = {
-  #   'YPUIKit-ObjC' => ['YPUIKit-ObjC/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
