@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, YPPopupControllerStyle){
 
 @interface YPPopupController : YPViewController
 
-@property (nonatomic, assign) BOOL isEnableTouchMove;//是否允许点击时退出
+@property (nonatomic, assign) BOOL isEnableTouchMove;/// 是否允许点击时退出 default YES
 
 @property (nonatomic, readonly) YPPopupControllerStyle style;
 @property (nonatomic, readonly) UIView *contentView;

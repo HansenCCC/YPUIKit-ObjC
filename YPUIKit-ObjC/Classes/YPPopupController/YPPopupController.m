@@ -24,6 +24,7 @@
 + (instancetype)popupControllerWithStyle:(YPPopupControllerStyle)style {
     YPPopupController *popup = [[self alloc] initPrivate];
     popup.style = style;
+    popup.isEnableTouchMove = YES;
     popup.transitioningDelegate = popup.animatedTransitioning;
     return popup;
 }
@@ -143,7 +144,9 @@
 #pragma mark - action
 
 - (void)touchMoveAction {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.isEnableTouchMove) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - getters | setters
