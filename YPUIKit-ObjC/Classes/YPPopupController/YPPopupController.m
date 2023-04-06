@@ -145,7 +145,7 @@
 
 - (void)touchMoveAction {
     if (self.isEnableTouchMove) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
 }
 
