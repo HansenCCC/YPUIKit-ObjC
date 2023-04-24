@@ -7,6 +7,8 @@
 //
 
 #import "YPLoadingView.h"
+#import "UIColor+YPExtension.h"
+#import "UILabel+YPExtension.h"
 
 @interface YPLoadingView ()
 
