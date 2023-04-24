@@ -16,5 +16,6 @@
 #import "YPPopupController.h"
 #import "YPLog.h"
 #import "YPFileBrowser.h"
+#import "YPLoadingView.h"
 
 #endif /* YPUIKit_h */
