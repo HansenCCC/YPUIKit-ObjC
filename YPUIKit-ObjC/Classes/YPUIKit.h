@@ -17,5 +17,6 @@
 #import "YPLog.h"
 #import "YPFileBrowser.h"
 #import "YPLoadingView.h"
+#import "YPKeychain.h"
 
 #endif /* YPUIKit_h */
