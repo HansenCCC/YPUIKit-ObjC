@@ -12,6 +12,7 @@
 #import "YPLog.h"
 #import "YPKeychain.h"
 #import "YPKitDefines.h"
+#import "YPFormElement.h"
 #import "YPButton.h"
 #import "YPTextView.h"
 #import "YPAlertView.h"

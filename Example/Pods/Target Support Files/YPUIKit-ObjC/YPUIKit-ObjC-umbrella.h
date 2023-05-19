@@ -34,6 +34,7 @@
 #import "YPFileInfo.h"
 #import "YPBaseQLPreviewController.h"
 #import "YPFileBrowser.h"
+#import "YPFormElement.h"
 #import "YPKeychain.h"
 #import "YPKitDefines.h"
 #import "YPLoadingView.h"
