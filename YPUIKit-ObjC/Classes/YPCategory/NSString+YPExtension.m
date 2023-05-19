@@ -86,6 +86,11 @@
     return [NSURL URLWithString:[self copy]];
 }
 
+/// 国际化
+- (NSString *)yp_localizedString {
+    NSString *localizedString = NSLocalizedString([self copy], nil);
+    return localizedString;
+}
 
 @end
 

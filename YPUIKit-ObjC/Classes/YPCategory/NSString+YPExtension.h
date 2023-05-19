@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 返回url
 - (NSURL *)yp_toURL;
 
+/// 国际化
+- (NSString *)yp_localizedString;
+
 @end
 
 
