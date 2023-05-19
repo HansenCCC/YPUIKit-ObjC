@@ -40,6 +40,7 @@
 #import "YPLog.h"
 #import "YPPopupAnimatedTransitioning.h"
 #import "YPPopupController.h"
+#import "YPShakeManager.h"
 #import "YPTextView.h"
 #import "YPUIKit.h"
 #import "YPViewController.h"

@@ -8,15 +8,17 @@
 #ifndef YPUIKit_h
 #define YPUIKit_h
 
-#import "YPKitDefines.h"
 #import "YPCategoryHeader.h"
-#import "YPButton.h"
-#import "YPAlertView.h"
-#import "YPTextView.h"
-#import "YPPopupController.h"
 #import "YPLog.h"
-#import "YPFileBrowser.h"
-#import "YPLoadingView.h"
 #import "YPKeychain.h"
+#import "YPKitDefines.h"
+#import "YPButton.h"
+#import "YPTextView.h"
+#import "YPAlertView.h"
+#import "YPLoadingView.h"
+#import "YPFileBrowser.h"
+#import "YPPopupController.h"
+#import "YPViewController.h"
+#import "YPShakeManager.h"
 
 #endif /* YPUIKit_h */
