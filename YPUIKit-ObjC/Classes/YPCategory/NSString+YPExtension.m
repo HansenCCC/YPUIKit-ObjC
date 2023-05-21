@@ -92,6 +92,14 @@
     return localizedString;
 }
 
+/// json字符转字典
+- (NSDictionary *)yp_jsonStringToDictionary {
+    NSData *data = [[self copy] dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    return jsonDic;
+}
+
 @end
 
 #import <CommonCrypto/CommonDigest.h>

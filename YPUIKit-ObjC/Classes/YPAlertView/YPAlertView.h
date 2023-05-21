@@ -13,13 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)alertText:(NSString *)text;
 
-+ (void)alertText:(NSString *)text complete:(void (^)())complete;
++ (void)alertText:(NSString *)text complete:(void (^)(void))complete;
 
 + (void)alertText:(NSString *)text duration:(CGFloat)duration;
 
-+ (void)alertText:(NSString *)text duration:(CGFloat)duration complete:(void (^)())complete;
++ (void)alertText:(NSString *)text duration:(CGFloat)duration complete:(void (^)(void))complete;
 
-+ (void)alertText:(NSString *)text inWindow:(UIWindow *)window duration:(CGFloat)duration complete:(void (^)())complete;
++ (void)alertText:(NSString *)text inWindow:(UIWindow *)window duration:(CGFloat)duration complete:(void (^)(void))complete;
 
 @end
 

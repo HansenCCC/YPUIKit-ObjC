@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 国际化
 - (NSString *)yp_localizedString;
 
+/// json字符转字典
+- (NSDictionary *)yp_jsonStringToDictionary;
+
 @end
 
 

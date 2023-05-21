@@ -11,6 +11,7 @@
 #import "NSData+YPExtension.h"
 #import "NSDate+YPExtension.h"
 #import "NSString+YPExtension.h"
+#import "NSDictionary+YPExtension.h"
 #import "NSTimer+YPExtension.h"
 #import "UIButton+YPExtension.h"
 #import "UIColor+YPExtension.h"
