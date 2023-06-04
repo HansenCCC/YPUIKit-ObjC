@@ -60,6 +60,9 @@
 /// @param color uicollor
 + (NSString *)yp_hexStringFromColor:(UIColor *)color {
     //http://blog.sina.com.cn/s/blog_a5b73bad0102x01x.html
+    if (color == nil) {
+        return nil;
+    }
     if (CGColorGetNumberOfComponents(color.CGColor) < 4) {
         const CGFloat *components = CGColorGetComponents(color.CGColor);
         color = [UIColor colorWithRed:components[0]
