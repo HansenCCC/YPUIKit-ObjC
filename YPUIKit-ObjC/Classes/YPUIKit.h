@@ -22,5 +22,6 @@
 #import "YPViewController.h"
 #import "YPShakeManager.h"
 #import "YPPurchaseManager.h"
+#import "YPPopupHeader.h"
 
 #endif /* YPUIKit_h */

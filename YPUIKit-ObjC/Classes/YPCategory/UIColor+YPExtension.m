@@ -223,6 +223,32 @@
     return color;
 }
 
++ (NSArray <NSString *>*)yp_allColors {
+    static NSArray *colors;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        colors = @[
+            [UIColor yp_hexStringFromColor:[UIColor blackColor]],
+            [UIColor yp_hexStringFromColor:[UIColor darkGrayColor]],
+            [UIColor yp_hexStringFromColor:[UIColor lightGrayColor]],
+            [UIColor yp_hexStringFromColor:[UIColor whiteColor]],
+            [UIColor yp_hexStringFromColor:[UIColor grayColor]],
+            [UIColor yp_hexStringFromColor:[UIColor redColor]],
+            [UIColor yp_hexStringFromColor:[UIColor greenColor]],
+            [UIColor yp_hexStringFromColor:[UIColor blueColor]],
+            [UIColor yp_hexStringFromColor:[UIColor cyanColor]],
+            [UIColor yp_hexStringFromColor:[UIColor yellowColor]],
+            [UIColor yp_hexStringFromColor:[UIColor magentaColor]],
+            [UIColor yp_hexStringFromColor:[UIColor orangeColor]],
+            [UIColor yp_hexStringFromColor:[UIColor purpleColor]],
+            [UIColor yp_hexStringFromColor:[UIColor brownColor]],
+            [UIColor yp_hexStringFromColor:[UIColor purpleColor]],
+        ];
+    });
+    return colors;
+}
+
+
 - (UIColor *)yp_alpha:(CGFloat)alpha {
     UIColor *color = [self copy];
     NSString *hexStr = [UIColor yp_hexStringFromColor:color];

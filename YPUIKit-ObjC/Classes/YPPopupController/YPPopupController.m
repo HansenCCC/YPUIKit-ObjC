@@ -104,40 +104,48 @@
 - (void)launchDisappearViewAnimation:(void(^)(void))completion {
     self.contentView.alpha = 1.f;
     self.backgroundView.alpha = 1.f;
-    CGAffineTransform transform = CGAffineTransformIdentity;
     switch (self.style) {
         case YPPopupControllerStyleMiddle: {
-            transform = CGAffineTransformMakeScale(0.1, 0.1);
+            CGAffineTransform transform = CGAffineTransformMakeScale(0.1, 0.1);
+            self.contentView.transform = CGAffineTransformIdentity;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.backgroundView.alpha = 0.f;
+                self.contentView.alpha = 0.0f;
+                self.contentView.transform = transform;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion();
+                }
+            }];
         }
             break;
         case YPPopupControllerStyleBottom: {
             CGFloat height = CGRectGetHeight(self.contentView.frame);
-            transform = CGAffineTransformMakeTranslation(0, height);
+            CGRect frame = self.contentView.frame;
+            frame.origin.y += height;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.backgroundView.alpha = 0.f;
+                self.contentView.alpha = 0.0f;
+                self.contentView.frame = frame;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion();
+                }
+            }];
         }
             break;
         default:
             break;
     }
-    
-    self.contentView.transform = CGAffineTransformIdentity;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.backgroundView.alpha = 0.f;
-        self.contentView.alpha = 0.0f;
-        self.contentView.transform = transform;
-    } completion:^(BOOL finished) {
-        if (completion) {
-            completion();
-        }
-    }];
 }
 
 - (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
     if (flag) {
         [self launchDisappearViewAnimation:^{
-            [super dismissViewControllerAnimated:flag completion:completion];
+            [super dismissViewControllerAnimated:NO completion:completion];
         }];
     } else {
-        [super dismissViewControllerAnimated:flag completion:completion];
+        [super dismissViewControllerAnimated:NO completion:completion];
     }
 }
 
@@ -145,7 +153,7 @@
 
 - (void)touchMoveAction {
     if (self.isEnableTouchMove) {
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

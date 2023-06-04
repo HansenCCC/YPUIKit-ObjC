@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)yp_pinkColor;
 + (UIColor *)yp_linkColor;
 + (UIColor *)yp_whiteColor;
++ (NSArray *)yp_allColors;
 
 /// 设置颜色透明度
 /// @param alpha alpha
