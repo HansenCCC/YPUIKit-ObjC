@@ -43,8 +43,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupSubviews];
-    [self layoutSubviews];
+    [self popupLayoutSubviews];
     [self launchAppearViewAnimation:nil];
+    
+    if (self.transitionCoordinator) {
+        [self.transitionCoordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+            if ([context isAnimated]) {
+                // A 通过动画方式呈现 B
+            } else {
+                // A 通过非动画方式呈现 B
+            }
+        }];
+    }
 }
 
 - (void)setupSubviews {
@@ -53,11 +63,10 @@
     [self.view addSubview:self.contentView];
 }
 
-- (void)layoutSubviews {
+- (void)popupLayoutSubviews {
     CGRect bounds = self.view.bounds;
     CGRect f1 = bounds;
     self.backgroundView.frame = f1;
-    
     if (self.style == YPPopupControllerStyleMiddle) {
         f1.origin.x = 40.f;
         f1.size.width = bounds.size.width - f1.origin.x * 2;

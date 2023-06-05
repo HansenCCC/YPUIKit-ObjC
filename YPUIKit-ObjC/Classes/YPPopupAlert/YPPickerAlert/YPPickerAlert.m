@@ -36,8 +36,8 @@
     self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
+- (void)popupLayoutSubviews {
+    [super popupLayoutSubviews];
     CGRect bounds = self.contentView.bounds;
     
     CGRect f1 = bounds;

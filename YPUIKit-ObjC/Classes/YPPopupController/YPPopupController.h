@@ -23,6 +23,9 @@ typedef NS_ENUM(NSInteger, YPPopupControllerStyle){
 
 + (instancetype)popupControllerWithStyle:(YPPopupControllerStyle)style;
 
+/// 布局相关
+- (void)popupLayoutSubviews;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -98,12 +98,12 @@
     [self.contentView addSubview:self.toolbar];
     [self.contentView addSubview:self.pickerView];
     self.contentView.backgroundColor = [UIColor whiteColor];
+    [self popupLayoutSubviews];
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
+- (void)popupLayoutSubviews {
+    [super popupLayoutSubviews];
     CGRect bounds = self.contentView.bounds;
-    
     CGRect f1 = bounds;
     f1.size = [self.toolbar sizeThatFits:CGSizeZero];
     f1.size.width = bounds.size.width;

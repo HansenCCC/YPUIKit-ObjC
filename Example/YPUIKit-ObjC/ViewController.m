@@ -29,11 +29,18 @@
 }
 
 - (void)didClickButton {
-    NSArray *colors = [UIColor yp_allColors];
+//    NSArray *colors = [UIColor yp_allColors];
     YPDatePickerAlert *picker = [YPDatePickerAlert popupWithDate:[NSDate date] completeBlock:^(NSDate * _Nonnull date) {
-        
+
     }];
-    [self presentViewController:picker animated:YES completion:nil];
+    picker.datePickerMode = UIDatePickerModeTime;
+    [self presentViewController:picker animated:NO completion:nil];
+    
+//    NSArray *colors = [UIColor yp_allColors];
+//    YPColorPickerAlert *picker = [YPColorPickerAlert popupWithOptions:colors completeBlock:^(NSInteger index) {
+//
+//    }];
+//    [self presentViewController:picker animated:YES completion:nil];
     
 }
 

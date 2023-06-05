@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YPDatePickerAlert : YPPopupController
 
-@property (nonatomic, assign) UIDatePickerMode datePickerMode;// yyyy-MM-dd HH-mm-ss
+@property (nonatomic, assign) UIDatePickerMode datePickerMode;// default UIDatePickerModeDateAndTime
 
 /// 初始化 时间弹框 picker
 /// - Parameters:
