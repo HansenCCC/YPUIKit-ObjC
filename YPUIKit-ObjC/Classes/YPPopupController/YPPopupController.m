@@ -45,16 +45,6 @@
     [self setupSubviews];
     [self popupLayoutSubviews];
     [self launchAppearViewAnimation:nil];
-    
-    if (self.transitionCoordinator) {
-        [self.transitionCoordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-            if ([context isAnimated]) {
-                // A 通过动画方式呈现 B
-            } else {
-                // A 通过非动画方式呈现 B
-            }
-        }];
-    }
 }
 
 - (void)setupSubviews {
@@ -82,6 +72,7 @@
 
 - (void)launchAppearViewAnimation:(void(^)(void))completion {
     self.contentView.alpha = 0.f;
+    self.backgroundView.alpha = 0.f;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         CGAffineTransform transform = CGAffineTransformMakeScale(0.1, 0.1);
         switch (self.style) {
@@ -101,6 +92,7 @@
         self.contentView.transform = transform;
         [UIView animateWithDuration:0.3 animations:^{
             self.contentView.alpha = 1.0f;
+            self.backgroundView.alpha = 1.f;
             self.contentView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             if (completion) {
