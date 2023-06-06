@@ -22,6 +22,7 @@
 #import "UIColor+YPExtension.h"
 #import "UIImage+YPExtension.h"
 #import "UILabel+YPExtension.h"
+#import "UINavigationBar+YPExtension.h"
 #import "UIScrollView+YPExtension.h"
 #import "UITableViewCell+YPExtension.h"
 #import "UITextField+YPExtension.h"
