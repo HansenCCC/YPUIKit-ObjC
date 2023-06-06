@@ -21,7 +21,7 @@ static char kyp_tintColorKey;
 
 // 重置导航栏
 - (void)yp_resetConfiguration {
-    self.yp_enableScrollEdgeAppearance = NO;// default NO
+    self.yp_enableScrollEdgeAppearance = YES;// default YES
     self.yp_translucent = YES;// default YES
     self.yp_transparent = NO;// default NO
     self.yp_hideBottomLine = NO;// default NO

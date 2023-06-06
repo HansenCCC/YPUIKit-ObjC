@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UINavigationBar (YPExtension)
 
-@property (nonatomic, assign) BOOL yp_enableScrollEdgeAppearance;// 导航外观是否根据滚动边缘变化
+@property (nonatomic, assign) BOOL yp_enableScrollEdgeAppearance;// 导航外观是否根据滚动边缘变化 default YES
 @property (nonatomic, assign) BOOL yp_translucent;// 是否半透明 default YES
 @property (nonatomic, assign) BOOL yp_transparent;// 是否全透明
 @property (nonatomic, assign) BOOL yp_hideBottomLine;// 是否隐藏底部线条
