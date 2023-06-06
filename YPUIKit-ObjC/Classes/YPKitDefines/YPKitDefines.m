@@ -44,6 +44,14 @@
 }
 
 - (CGFloat)statusBarSizeHeight {
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        UIEdgeInsets safeAreaInsets = window.safeAreaInsets;
+        CGFloat topInset = safeAreaInsets.top;
+        if (topInset > 0) {
+            return topInset;
+        }
+    }
     return [UIApplication sharedApplication].statusBarFrame.size.height;
 }
 
