@@ -6,6 +6,7 @@
 //
 
 #import "UINavigationBar+YPExtension.h"
+#import <objc/runtime.h>
 
 static char kyp_enableScrollEdgeAppearanceKey;
 static char kyp_translucentKey;
