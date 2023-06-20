@@ -238,6 +238,9 @@
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = chenghengsheng;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = TB5KM6Y5DQ;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -493,6 +496,7 @@
 			baseConfigurationReference = 5F3DDFD1EF9F0B268B392FF8 /* Pods-YPUIKit-ObjC_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TB5KM6Y5DQ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YPUIKit-ObjC/YPUIKit-ObjC-Prefix.pch";
 				INFOPLIST_FILE = "YPUIKit-ObjC/YPUIKit-ObjC-Info.plist";
@@ -510,6 +514,7 @@
 			baseConfigurationReference = 60B4C8D9F653BB764489DDD8 /* Pods-YPUIKit-ObjC_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TB5KM6Y5DQ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YPUIKit-ObjC/YPUIKit-ObjC-Prefix.pch";
 				INFOPLIST_FILE = "YPUIKit-ObjC/YPUIKit-ObjC-Info.plist";

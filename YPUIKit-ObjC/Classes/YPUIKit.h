@@ -23,5 +23,6 @@
 #import "YPShakeManager.h"
 #import "YPPurchaseManager.h"
 #import "YPPopupHeader.h"
+#import "YPInputHeader.h"
 
 #endif /* YPUIKit_h */

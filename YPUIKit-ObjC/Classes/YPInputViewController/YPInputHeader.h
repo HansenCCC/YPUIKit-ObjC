@@ -8,5 +8,7 @@
 #ifndef YPInputHeader_h
 #define YPInputHeader_h
 
+#import "YPMultiLineInputViewController.h"
+#import "YPSingleLineInputViewController.h"
 
 #endif /* YPInputHeader_h */
