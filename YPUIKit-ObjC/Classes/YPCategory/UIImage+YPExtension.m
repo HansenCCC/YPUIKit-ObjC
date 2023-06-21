@@ -559,7 +559,7 @@
 
 @implementation UIImage (YPImageLocalStorage)
 
-- (NSString *)yp_imagesDirectory {
++ (NSString *)yp_imagesDirectory {
     NSString *imagesDirectory = [NSString stringWithFormat:@"%@/images/",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
     // 创建 images 目录
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -569,10 +569,10 @@
     return imagesDirectory;
 }
 
-- (BOOL)yp_saveImageToDocument:(UIImage *)image {
++ (BOOL)yp_saveImageToDocument:(UIImage *)image {
     NSDate *newDate = [NSDate date];
     NSString *dateString = @([newDate timeIntervalSince1970] * 1000).stringValue;
-    NSString *iconFilePath = [self yp_imagesDirectory];
+    NSString *iconFilePath = [UIImage yp_imagesDirectory];
     NSString *filePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", dateString]];
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     if (imageData) {
@@ -584,8 +584,8 @@
     }
 }
 
-- (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName {
-    NSString *iconFilePath = [self yp_imagesDirectory];
++ (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName {
+    NSString *iconFilePath = [UIImage yp_imagesDirectory];
     NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageName]];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     return image;

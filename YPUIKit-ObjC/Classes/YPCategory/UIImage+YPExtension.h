@@ -119,15 +119,15 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (YPImageLocalStorage)
 
 /// 获取本地 image 存储的路径
-- (NSString *)yp_imagesDirectory;
++ (NSString *)yp_imagesDirectory;
 
 /// 存储 image
 /// - Parameter image: UIImage 对象
-- (BOOL)yp_saveImageToDocument:(UIImage *)image;
++ (BOOL)yp_saveImageToDocument:(UIImage *)image;
 
 /// 根据文件名获取 UIImage 对象
 /// - Parameter imageName: 文件名
-- (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName;
++ (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName;
 
 @end
 
