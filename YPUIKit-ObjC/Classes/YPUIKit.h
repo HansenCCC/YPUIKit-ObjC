@@ -24,5 +24,6 @@
 #import "YPPurchaseManager.h"
 #import "YPPopupHeader.h"
 #import "YPInputHeader.h"
+#import "YPImagePickerController.h"
 
 #endif /* YPUIKit_h */
