@@ -55,12 +55,11 @@
         return;
     }
     
+    [self updatePlaceholderViewHidden];
+    [self updateTextWithTextView:self];
     if (self.whenTextDidChange) {
         self.whenTextDidChange(self);
     }
-    
-    [self updatePlaceholderViewHidden];
-    [self updateTextWithTextView:self];
 }
 
 - (void)updatePlaceholderViewHidden {

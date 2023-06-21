@@ -30,7 +30,7 @@
 }
 
 - (void)didClickButton {
-    YPSingleLineInputViewController *vc = [[YPSingleLineInputViewController alloc] init];
+    YPMultiLineInputViewController *vc = [[YPMultiLineInputViewController alloc] init];
     vc.title = @"修改昵称";
     vc.text = @"程恒盛";
     vc.placeholder = @"我不知道哈哈哈哈";

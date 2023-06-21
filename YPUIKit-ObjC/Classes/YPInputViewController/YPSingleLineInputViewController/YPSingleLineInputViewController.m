@@ -16,6 +16,13 @@
 
 @implementation YPSingleLineInputViewController
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.maxLength = 10;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,7 +41,7 @@
     rightButton.frame = CGRectMake(0, 0, 44.f, 44.f);
     [rightButton setTitle:@"保存" forState:UIControlStateNormal];
     rightButton.tintColor = [UIColor yp_blackColor];
-    rightButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+    rightButton.titleLabel.font = [UIFont systemFontOfSize:17.f];
     [rightButton addTarget:self action:@selector(didRightBarButtonItem) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 }
@@ -77,6 +84,11 @@
     self.textField.placeholder = placeholder;
 }
 
+- (void)setMaxLength:(NSUInteger)maxLength {
+    _maxLength = maxLength;
+    self.textField.yp_maxLength = maxLength;
+}
+
 - (UITextField *)textField {
     if (!_textField) {
         _textField = [[UITextField alloc] init];
@@ -86,6 +98,7 @@
         _textField.clearButtonMode = UITextFieldViewModeAlways;
         _textField.backgroundColor = [UIColor yp_whiteColor];
         _textField.returnKeyType = UIReturnKeyDone;
+        _textField.font = [UIFont systemFontOfSize:17.f];
         _textField.delegate = self;
     }
     return _textField;

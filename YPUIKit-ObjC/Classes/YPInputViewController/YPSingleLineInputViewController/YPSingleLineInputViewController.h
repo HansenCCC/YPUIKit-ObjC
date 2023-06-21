@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YPSingleLineInputViewController : YPViewController
 
+@property (nonatomic, assign) NSUInteger maxLength;// default 10字符
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *placeholder;
 @property (nonatomic, copy) void (^didCompleteCallback)(NSString *text);
