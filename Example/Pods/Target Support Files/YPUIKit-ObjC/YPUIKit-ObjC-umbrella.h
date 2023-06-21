@@ -37,6 +37,7 @@
 #import "YPBaseQLPreviewController.h"
 #import "YPFileBrowser.h"
 #import "YPFormElement.h"
+#import "YPImagePickerController.h"
 #import "YPInputHeader.h"
 #import "YPMultiLineInputViewController.h"
 #import "YPSingleLineInputViewController.h"
