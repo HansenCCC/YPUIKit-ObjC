@@ -9,6 +9,7 @@
 
 @interface YPSingleLineInputViewController () <UITextFieldDelegate>
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextField *textField;
 
 @end
@@ -18,15 +19,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor yp_gray6Color];
-    [self.view addSubview:self.textField];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didRightBarButtonItem:)];
+    [self setNavBarButtonItem];
+    [self setupSubviews];
 }
 
-- (void)didRightBarButtonItem:(id)sender {
+- (void)setupSubviews {
+    self.view.backgroundColor = [UIColor yp_gray6Color];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.textField];
+}
+
+- (void)setNavBarButtonItem {
+    YPButton *rightButton = [YPButton buttonWithType:UIButtonTypeSystem];
+    rightButton.frame = CGRectMake(0, 0, 44.f, 44.f);
+    [rightButton setTitle:@"保存" forState:UIControlStateNormal];
+    rightButton.tintColor = [UIColor yp_blackColor];
+    rightButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+    [rightButton addTarget:self action:@selector(didRightBarButtonItem) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+}
+
+- (void)didRightBarButtonItem {
     [self.textField endEditing:YES];
     if (self.didCompleteCallback) {
         self.didCompleteCallback(self.textField.text);
+    }
+    if (self.presentingViewController) {
+        // present 过来的
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        // push 过来的
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -34,9 +57,11 @@
     [super viewWillLayoutSubviews];
     CGRect bounds = self.view.bounds;
     CGRect f1 = bounds;
-    f1.origin.y = YP_HEIGHT_NAV_BAR;
-    f1.size.height = 44.f;
-    self.textField.frame = f1;
+    self.scrollView.frame = f1;
+    
+    CGRect f2 = bounds;
+    f2.size.height = 44.f;
+    self.textField.frame = f2;
 }
 
 #pragma mark - setters | getters
@@ -66,10 +91,19 @@
     return _textField;
 }
 
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.scrollEnabled = YES;
+        _scrollView.alwaysBounceVertical = YES;
+    }
+    return _scrollView;
+}
+
 #pragma mark - UITextViewDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self didRightBarButtonItem:nil];
+    [self didRightBarButtonItem];
     return YES;
 }
 

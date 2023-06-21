@@ -34,6 +34,8 @@
     vc.title = @"修改昵称";
     vc.text = @"程恒盛";
     vc.placeholder = @"我不知道哈哈哈哈";
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//    [self presentViewController:nav animated:YES completion:nil];
     [self.navigationController pushViewController:vc animated:YES];
     
 //    NSArray *colors = [UIColor yp_allColors];
