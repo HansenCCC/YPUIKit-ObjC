@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 存储 image
 /// - Parameter image: UIImage 对象
-+ (BOOL)yp_saveImageToDocument:(UIImage *)image;
++ (NSString *)yp_saveImageToDocument:(UIImage *)image;
 
 /// 根据文件名获取 UIImage 对象
 /// - Parameter imageName: 文件名

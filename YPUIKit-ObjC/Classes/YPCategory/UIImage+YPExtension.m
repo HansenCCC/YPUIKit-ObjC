@@ -569,19 +569,21 @@
     return imagesDirectory;
 }
 
-+ (BOOL)yp_saveImageToDocument:(UIImage *)image {
++ (NSString *)yp_saveImageToDocument:(UIImage *)image {
     NSDate *newDate = [NSDate date];
     NSString *dateString = @([newDate timeIntervalSince1970] * 1000).stringValue;
     NSString *iconFilePath = [UIImage yp_imagesDirectory];
-    NSString *filePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", dateString]];
+    NSString *fileName = [NSString stringWithFormat:@"%@.png", dateString];
+    NSString *filePath = [iconFilePath stringByAppendingPathComponent:fileName];
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     if (imageData) {
         NSError *error;
         BOOL success = [imageData writeToFile:filePath options:NSDataWritingAtomic error:&error];
-        return success;
-    } else {
-        return NO;
+        if (success) {
+            return fileName;
+        }
     }
+    return nil;
 }
 
 + (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName {
