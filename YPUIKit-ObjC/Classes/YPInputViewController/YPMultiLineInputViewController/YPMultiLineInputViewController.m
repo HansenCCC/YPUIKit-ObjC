@@ -31,6 +31,7 @@
     [self setNavBarButtonItem];
     [self setupSubviews];
     [self needUpdateCountLabel];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)setupSubviews {
@@ -95,7 +96,6 @@
 - (void)setText:(NSString *)text {
     _text = text;
     self.textView.text = text;
-    [self.textView becomeFirstResponder];
     [self needUpdateCountLabel];
 }
 

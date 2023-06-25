@@ -34,6 +34,7 @@
     self.view.backgroundColor = [UIColor yp_gray6Color];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.textField];
+    [self.textField becomeFirstResponder];
 }
 
 - (void)setNavBarButtonItem {
@@ -76,7 +77,6 @@
 - (void)setText:(NSString *)text {
     _text = text;
     self.textField.text = text;
-    [self.textField becomeFirstResponder];
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
