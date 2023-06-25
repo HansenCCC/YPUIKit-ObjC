@@ -12,6 +12,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) YPSwiper *swiperView;
 
 @end
 
@@ -27,6 +28,12 @@
     [self.view addSubview:self.button];
     self.button.frame = CGRectMake(100, 100, 100, 100);
     self.button.backgroundColor = [UIColor redColor];
+    
+    self.swiperView = [[YPSwiper alloc] init];
+    self.swiperView.images = [UIFont familyNames];
+    [self.view addSubview:self.swiperView];
+    self.swiperView.frame = CGRectMake(0, 100, self.view.bounds.size.width, 200.f);
+    self.swiperView.backgroundColor = [UIColor redColor];
 }
 
 - (void)didClickButton {
