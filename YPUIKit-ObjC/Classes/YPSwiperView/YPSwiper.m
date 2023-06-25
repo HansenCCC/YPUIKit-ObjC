@@ -41,12 +41,12 @@
 
 #pragma mark - YPSwiperViewDelegate
 
-- (YPSwiperCell *)swiperView:(YPSwiperView *)swiperView cellForItemAtIndex:(NSInteger)index {
-    YPSwiperCell *cell = [swiperView.collectionView dequeueReusableCellWithReuseIdentifier:@"YPSwiperCell" forIndexPath:[NSIndexPath indexPathWithIndex:index]];
+- (UICollectionViewCell *)swiperCollectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YPSwiperCell" forIndexPath:indexPath];
     return cell;
 }
 
-- (NSInteger)numberOfItemsInSwiperView:(YPSwiperView *)swiperView {
+- (NSInteger)swiperCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.images.count;
 }
 
@@ -56,7 +56,11 @@
     if (!_swiperView) {
         _swiperView = [[YPSwiperView alloc] init];
         _swiperView.delegate = self;
-        [_swiperView.collectionView  registerClass:[YPSwiperCell class] forCellWithReuseIdentifier:@"YPSwiperCell"];
+        _swiperView.autoplay = YES;
+        _swiperView.delay = 3;
+        _swiperView.cellClass = @[
+            [YPSwiperCell class]
+        ];
     }
     return _swiperView;
 }

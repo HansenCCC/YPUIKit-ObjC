@@ -30,7 +30,14 @@
     self.button.backgroundColor = [UIColor redColor];
     
     self.swiperView = [[YPSwiper alloc] init];
-    self.swiperView.images = [UIFont familyNames];
+    self.swiperView.images = @[
+        @"123123",
+        @"123123",
+        @"123123",
+        @"123123",
+        @"123123",
+        @"123123",
+    ];
     [self.view addSubview:self.swiperView];
     self.swiperView.frame = CGRectMake(0, 100, self.view.bounds.size.width, 200.f);
     self.swiperView.backgroundColor = [UIColor redColor];

@@ -15,17 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol YPSwiperViewDelegate <NSObject>
 
 @required
-
 /// 轮播图 单元格样式 【必接】
-- (YPSwiperCell *)swiperView:(YPSwiperView *)swiperView cellForItemAtIndex:(NSInteger)index;
-
+- (UICollectionViewCell *)swiperCollectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 /// 轮播图个数 【必接】
-- (NSInteger)numberOfItemsInSwiperView:(YPSwiperView *)swiperView;
+- (NSInteger)swiperCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;
 
 @optional
-
 /// 轮播图点击回调
-- (void)swiperView:(YPSwiperView *)swiperView didSelectItemAtIndex:(NSInteger)index;
+- (void)swiperCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -36,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL loop;// 是否循环滚动 default YES
 @property (nonatomic, assign) BOOL autoplay;// 是否自动滚动 default NO
 @property (nonatomic, assign) NSTimeInterval delay;// 自动滚动开启时，延迟多久翻页 default 3.0
+@property (nonatomic, strong) NSArray *cellClass;// 保存轮播图的cell class 用于去 collectionVIew 注册 default @[[YPSwiperCell class]];
 
 @property (nonatomic, assign) id <YPSwiperViewDelegate> delegate;
-@property (nonatomic, readonly) UICollectionView *collectionView;
 
 - (void)reloadData;
 
