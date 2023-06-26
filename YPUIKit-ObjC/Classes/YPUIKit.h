@@ -25,7 +25,6 @@
 #import "YPPopupHeader.h"
 #import "YPInputHeader.h"
 #import "YPImagePickerController.h"
-#import "YPSwiper.h"
 #import "YPSwiperView.h"
 
 #endif /* YPUIKit_h */

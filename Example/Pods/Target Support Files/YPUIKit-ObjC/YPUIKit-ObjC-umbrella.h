@@ -53,8 +53,6 @@
 #import "YPPopupController.h"
 #import "YPPurchaseManager.h"
 #import "YPShakeManager.h"
-#import "YPSwiper.h"
-#import "YPSwiperCell.h"
 #import "YPSwiperView.h"
 #import "YPTextView.h"
 #import "YPUIKit.h"

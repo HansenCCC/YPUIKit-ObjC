@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YPSwiperCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,6 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) id <YPSwiperViewDelegate> delegate;
 
 - (void)reloadData;
+
+/// 滚动到下一个
+- (void)scrollToNextIndexPath;
+
+/// 滚动到上一个
+- (void)scrollToLastIndexPath;
 
 @end
 

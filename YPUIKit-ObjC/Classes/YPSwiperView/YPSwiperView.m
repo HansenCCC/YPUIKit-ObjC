@@ -122,11 +122,19 @@
     NSInteger currentPage = pageControl.currentPage;
     if (currentPage > oldCurrentPage) {
         // 下一个
-        [self scrollToIndexPath:[self nextIndexPath] animated:YES];
+        [self scrollToNextIndexPath];
     } else if (currentPage < oldCurrentPage) {
         // 上一个
-        [self scrollToIndexPath:[self lastIndexPath] animated:YES];
+        [self scrollToLastIndexPath];
     }
+}
+
+- (void)scrollToNextIndexPath {
+    [self scrollToIndexPath:[self nextIndexPath] animated:YES];
+}
+
+- (void)scrollToLastIndexPath {
+    [self scrollToIndexPath:[self lastIndexPath] animated:YES];
 }
 
 #pragma mark - getters | setters
@@ -137,6 +145,8 @@
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.pagingEnabled = YES;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.showsVerticalScrollIndicator = NO;
     }
     return _collectionView;
 }
