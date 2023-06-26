@@ -144,7 +144,7 @@
 		362D486636B5493F4D502AC1C3268CF5 /* UITableViewCell+YPExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+YPExtension.h"; sourceTree = "<group>"; };
 		3682D246CDA0C3873C029C878487A490 /* Pods-YPUIKit-ObjC_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-YPUIKit-ObjC_Example"; path = Pods_YPUIKit_ObjC_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1D15219E7BD313E18E6E8116D87169 /* YPPopupAnimatedTransitioning.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YPPopupAnimatedTransitioning.m; sourceTree = "<group>"; };
-		3EA6429023072BD47D8EACD7D3D8499B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		3EA6429023072BD47D8EACD7D3D8499B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40398AAAED42C8B74316F1CF8CDFE365 /* YPSwiperView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YPSwiperView.m; sourceTree = "<group>"; };
 		42296A0E1FF7663E7EFC7F6A4904CE3D /* YPColorPickerAlert.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YPColorPickerAlert.m; sourceTree = "<group>"; };
 		442C54B44491C7308EF99739D9CF8731 /* YPFormElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPFormElement.h; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		529564E0DD31476B1CC96103A98754C3 /* NSDictionary+YPExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+YPExtension.h"; sourceTree = "<group>"; };
 		538D02CDE62FAE792413A8AD15F4DB1C /* YPAlertView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YPAlertView.m; sourceTree = "<group>"; };
 		54380DEA99E3405F7D23B733C9650940 /* YPFileInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPFileInfo.h; sourceTree = "<group>"; };
-		54D85F7ACAA63C9BF3D26391B0EE26C6 /* YPUIKit-ObjC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "YPUIKit-ObjC.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		54D85F7ACAA63C9BF3D26391B0EE26C6 /* YPUIKit-ObjC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = "YPUIKit-ObjC.podspec"; sourceTree = "<group>"; tabWidth = 2; };
 		54F26B8207B8CC2A3B999EAD4C5837F1 /* UITextView+YPExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UITextView+YPExtension.h"; sourceTree = "<group>"; };
 		556A401AAB0BB2FF9029CBEC79952720 /* YPSingleLineInputViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPSingleLineInputViewController.h; sourceTree = "<group>"; };
 		55DB94D74E5294C9287631EB56B11707 /* UIView+YPExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+YPExtension.h"; sourceTree = "<group>"; };
@@ -183,14 +183,14 @@
 		84DB223665682ED72B4B1A2E430CC3F1 /* YPPopupHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPPopupHeader.h; sourceTree = "<group>"; };
 		8B174F048E100E819331345DBA2C7F52 /* UILabel+YPExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YPExtension.m"; sourceTree = "<group>"; };
 		8F2DFF20D44B65FCD387BC703ABCD085 /* Pods-YPUIKit-ObjC_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-YPUIKit-ObjC_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		93D0B20CE7EAE07E3D72081FC81BF241 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		93D0B20CE7EAE07E3D72081FC81BF241 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		93D2858E3CDEEB2254FD29A65FBAFB50 /* Pods-YPUIKit-ObjC_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YPUIKit-ObjC_Example.release.xcconfig"; sourceTree = "<group>"; };
 		951896C22E648AF5E2697F191FA81F61 /* YPCategoryHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPCategoryHeader.h; sourceTree = "<group>"; };
 		98DF01627FF4A38A4A430912332C6B4B /* YPMultiLineInputViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YPMultiLineInputViewController.m; sourceTree = "<group>"; };
 		9C5123006B1DC5F86C5D73B440CACB8B /* YPKitDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPKitDefines.h; sourceTree = "<group>"; };
 		9D35F302E1DA3C8156924309CF084446 /* UIColor+YPExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+YPExtension.h"; sourceTree = "<group>"; };
 		9D7EA337D30EDFEC3ACE7770D4974534 /* UIImage+YPExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+YPExtension.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E99C70922CB703216C888D7A327A593 /* UIColor+YPExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YPExtension.m"; sourceTree = "<group>"; };
 		9EED725A562ABE3F9BD78F0DAE51952D /* YPKeychain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YPKeychain.h; sourceTree = "<group>"; };
 		A0AE81604F9F32388B8A927EB8DA1BB8 /* UINavigationBar+YPExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+YPExtension.m"; sourceTree = "<group>"; };
@@ -291,7 +291,6 @@
 				B8732C546AFE055FC087563090BF3DD6 /* YPMultiLineInputViewController.h */,
 				98DF01627FF4A38A4A430912332C6B4B /* YPMultiLineInputViewController.m */,
 			);
-			name = YPMultiLineInputViewController;
 			path = YPMultiLineInputViewController;
 			sourceTree = "<group>";
 		};
@@ -301,7 +300,6 @@
 				241C7561D4140F30E4C7B569B3FCB708 /* YPColorPickerAlert.h */,
 				42296A0E1FF7663E7EFC7F6A4904CE3D /* YPColorPickerAlert.m */,
 			);
-			name = YPColorPickerAlert;
 			path = YPColorPickerAlert;
 			sourceTree = "<group>";
 		};
@@ -311,7 +309,6 @@
 				F985641D44D11005434C07496E1BF6D6 /* List */,
 				8EFB20AD835C9951ADB928766E90AF98 /* QLPreview */,
 			);
-			name = Main;
 			path = Main;
 			sourceTree = "<group>";
 		};
@@ -341,7 +338,6 @@
 				46D3718CE2AD69C988ED8376735E7B7A /* UIImage+YPResource.h */,
 				DC0AFD8D8686B36864F13922361A4F98 /* UIImage+YPResource.m */,
 			);
-			name = Category;
 			path = Category;
 			sourceTree = "<group>";
 		};
@@ -402,7 +398,6 @@
 				79FF024FFEA837AC57E2B0439A2E4BCC /* YPDatePickerAlert.h */,
 				FEDE301CFA37F9302ED2104C32A800DD /* YPDatePickerAlert.m */,
 			);
-			name = YPDatePickerAlert;
 			path = YPDatePickerAlert;
 			sourceTree = "<group>";
 		};
@@ -479,7 +474,6 @@
 				FD01293DFDB5CAE6FCFD16D20DAA9389 /* YPBaseQLPreviewController.h */,
 				77528A0061C290248C352C2168F3C04E /* YPBaseQLPreviewController.m */,
 			);
-			name = QLPreview;
 			path = QLPreview;
 			sourceTree = "<group>";
 		};
@@ -509,7 +503,6 @@
 				D1303298496014FD3EA5A0FF04CDF444 /* YPPickerAlert.h */,
 				326506D2A0D0CCBA93F104CEB6BF7E61 /* YPPickerAlert.m */,
 			);
-			name = YPPickerAlert;
 			path = YPPickerAlert;
 			sourceTree = "<group>";
 		};
@@ -568,7 +561,6 @@
 				556A401AAB0BB2FF9029CBEC79952720 /* YPSingleLineInputViewController.h */,
 				0C5DEBC18F1FFD232A8D4CB931D72AD6 /* YPSingleLineInputViewController.m */,
 			);
-			name = YPSingleLineInputViewController;
 			path = YPSingleLineInputViewController;
 			sourceTree = "<group>";
 		};
@@ -672,7 +664,6 @@
 				54380DEA99E3405F7D23B733C9650940 /* YPFileInfo.h */,
 				640F6DD13B1279DB004724541A49324F /* YPFileInfo.m */,
 			);
-			name = List;
 			path = List;
 			sourceTree = "<group>";
 		};
@@ -1031,8 +1022,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

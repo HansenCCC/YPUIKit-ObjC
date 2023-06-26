@@ -75,7 +75,9 @@
     [super layoutSubviews];
     CGRect f1 = self.bounds;
     self.collectionView.frame = f1;
-    self.flowLayout.itemSize = f1.size;
+    CGSize itemSize = CGSizeZero;
+    itemSize = f1.size;
+    self.flowLayout.itemSize = itemSize;
     
     CGRect f2 = self.bounds;
     f2.size.height = [self.pageControl sizeThatFits:CGSizeZero].height;
@@ -90,11 +92,13 @@
     [self reloadCurrentPageControl];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 滚动到起始位置
-        int section = (self.loop ? YPSwiperViewNumberOfSections : 1 ) / 2;
-        NSIndexPath *indePath = [NSIndexPath indexPathForItem:0 inSection:section];
-        //设置中间值（当collectionview并未设置frame时，此方法会crash）
-        [self.collectionView scrollToItemAtIndexPath:indePath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-        [self resetTimer];
+        if (row > 0) {
+            int section = (self.loop ? YPSwiperViewNumberOfSections : 1 ) / 2;
+            NSIndexPath *indePath = [NSIndexPath indexPathForItem:0 inSection:section];
+            //设置中间值（当collectionview并未设置frame时，此方法会crash）
+            [self.collectionView scrollToItemAtIndexPath:indePath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+            [self resetTimer];
+        }
     });
 }
 
