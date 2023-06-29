@@ -18,13 +18,13 @@
 #import "YPAlertView.h"
 #import "YPLoadingView.h"
 #import "YPFileBrowser.h"
-#import "YPPopupController.h"
-#import "YPViewController.h"
 #import "YPShakeManager.h"
 #import "YPPurchaseManager.h"
 #import "YPPopupHeader.h"
 #import "YPInputHeader.h"
-#import "YPImagePickerController.h"
 #import "YPSwiperView.h"
+#import "YPViewController.h"
+#import "YPPopupController.h"
+#import "YPImagePickerController.h"
 
 #endif /* YPUIKit_h */
