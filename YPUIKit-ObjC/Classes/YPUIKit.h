@@ -23,7 +23,6 @@
 #import "YPPopupHeader.h"
 #import "YPInputHeader.h"
 #import "YPSwiperView.h"
-#import "YPAVCaptureSessionView.h"
 #import "YPViewController.h"
 #import "YPPopupController.h"
 #import "YPImagePickerController.h"

@@ -11,7 +11,6 @@
 #endif
 
 #import "YPAlertView.h"
-#import "YPAVCaptureSessionView.h"
 #import "YPButton.h"
 #import "NSData+YPExtension.h"
 #import "NSDate+YPExtension.h"
