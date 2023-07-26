@@ -90,7 +90,14 @@
         }
         
         self.contentView.transform = transform;
-        [UIView animateWithDuration:0.3 animations:^{
+        
+        CGFloat duration = 0.f;
+        if (self.transitionCoordinator) {
+            if ([self.transitionCoordinator isAnimated]) {
+                duration = 0.3;
+            }
+        }
+        [UIView animateWithDuration:duration animations:^{
             self.contentView.alpha = 1.0f;
             self.backgroundView.alpha = 1.f;
             self.contentView.transform = CGAffineTransformIdentity;
