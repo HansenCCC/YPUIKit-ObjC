@@ -40,6 +40,7 @@
 #pragma mark - UIViewControllerTransitionDelegate
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    self.isPresentedWithAnimation = YES;
     __YPPopupUIViewControllerAnimatedTransitioning *animation = [[__YPPopupUIViewControllerAnimatedTransitioning alloc] init];
     animation.isPresented = YES;
     return animation;

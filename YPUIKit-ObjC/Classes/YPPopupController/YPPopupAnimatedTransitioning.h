@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YPPopupAnimatedTransitioning : NSObject <UIViewControllerTransitioningDelegate>
 
+@property (nonatomic, assign) BOOL isPresentedWithAnimation;
+
 @end
 
 NS_ASSUME_NONNULL_END
