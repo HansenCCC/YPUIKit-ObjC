@@ -196,6 +196,7 @@ chenghengsheng, 2534550460@qq.com
 ## Log
 
 ```
+2023.07.27  1.2.0版本，主要优化一些组件，增加轮播图组件，增加单行多行输入框，增加图片选择器，图片持久化优化，UIImage 类扩展，增加 UINavigationBar 分类方便定制导航栏，增加选择器，时间选择器，增加内购功能，增加震动管理类，增加 YPKeychain 类，优化弹框 popup 试图，增加 NSObject 扩展；
 2023.03.17  1.1.0版本，增加 YPLog 日志工具、增加 YPFileBrowser 文件预览工具；
 2022.09.05  1.0.10版本，增加 YPTextView 用于UITextView增加占位符、限制最大输入长度；
 2022.09.04  1.0.9版本，针对 YPPopupController 优化；feature: 针对popup优化，暴露contentView; 修改podspec s.module_name = 'YPUIKit'；

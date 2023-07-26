@@ -1,5 +1,5 @@
 PODS:
-  - YPUIKit-ObjC (1.1.0)
+  - YPUIKit-ObjC (1.2.0)
 
 DEPENDENCIES:
   - YPUIKit-ObjC (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  YPUIKit-ObjC: a36259de32eabe4bb19ee5911cc7b23d675d5ecb
+  YPUIKit-ObjC: 00dd22b4005aa9a41721767c92d8b3d6eda77c47
 
 PODFILE CHECKSUM: 36aa4b081ffdb63c636d701653a47fe67d1eee0a
 
