@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YPUIKit-ObjC'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'YPUIKit-ObjC.'
   s.description      = <<-DESC
   YPUIKit-ObjC 设计目的是为了快速搭建一个 iOS 项目，提高项目 UI 开发效率。
