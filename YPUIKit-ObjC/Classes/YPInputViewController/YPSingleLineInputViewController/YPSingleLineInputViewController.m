@@ -6,6 +6,9 @@
 //
 
 #import "YPSingleLineInputViewController.h"
+#import "UIColor+YPExtension.h"
+#import "YPButton.h"
+#import "UITextField+YPExtension.h"
 
 @interface YPSingleLineInputViewController () <UITextFieldDelegate>
 

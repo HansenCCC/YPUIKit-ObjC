@@ -5,7 +5,7 @@
 //  Created by Hansen on 2023/6/20.
 //
 
-#import <YPUIKit/YPUIKit.h>
+#import "YPViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

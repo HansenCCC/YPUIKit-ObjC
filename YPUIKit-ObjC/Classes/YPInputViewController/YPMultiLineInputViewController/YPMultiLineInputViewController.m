@@ -6,6 +6,9 @@
 //
 
 #import "YPMultiLineInputViewController.h"
+#import "YPTextView.h"
+#import "UIColor+YPExtension.h"
+#import "YPButton.h"
 
 @interface YPMultiLineInputViewController ()
 

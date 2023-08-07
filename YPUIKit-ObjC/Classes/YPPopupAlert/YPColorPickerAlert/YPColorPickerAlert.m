@@ -6,6 +6,8 @@
 //
 
 #import "YPColorPickerAlert.h"
+#import "UIColor+YPExtension.h"
+#import "YPKitDefines.h"
 
 @interface __YPColorPickerAlertCell : UIView
 

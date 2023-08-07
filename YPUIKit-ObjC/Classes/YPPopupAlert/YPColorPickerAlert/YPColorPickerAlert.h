@@ -5,7 +5,7 @@
 //  Created by Hansen on 2023/6/4.
 //
 
-#import <YPUIKit/YPUIKit.h>
+#import "YPPopupController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
