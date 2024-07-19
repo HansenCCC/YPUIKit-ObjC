@@ -2,7 +2,7 @@
 //  UIImage+YPFileBrowser.m
 //  KKFileBrowser
 //
-//  Created by shinemo on 2021/8/12.
+//  Created by Hansen on 2021/8/12.
 //
 
 #import "UIImage+YPResource.h"
