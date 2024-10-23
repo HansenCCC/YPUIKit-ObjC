@@ -52,6 +52,7 @@
 #import "YPPopupAnimatedTransitioning.h"
 #import "YPPopupController.h"
 #import "YPPurchaseManager.h"
+#import "YPRunLabel.h"
 #import "YPShakeManager.h"
 #import "YPSwiperView.h"
 #import "YPTextView.h"

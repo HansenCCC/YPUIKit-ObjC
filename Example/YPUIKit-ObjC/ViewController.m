@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) YPSwiperView *swiperView;
 
+@property (nonatomic, strong) YPRunLabel *runLabel;
+
 @end
 
 @implementation ViewController
@@ -32,6 +34,12 @@
 //    [self.view addSubview:self.swiperView];
 //    self.swiperView.frame = CGRectMake(0, 100, self.view.bounds.size.width, 150.f);
 //    [self.swiperView reloadData];
+    
+    self.runLabel = [[YPRunLabel alloc] init];
+    self.runLabel.titleLabel.text = @"你好啊，我是程恒盛";
+    CGSize f1 = [self.runLabel sizeThatFits:CGSizeZero];
+    self.runLabel.frame = CGRectMake(100, 200, f1.width, f1.height);
+    [self.view addSubview:self.runLabel];
 }
 
 - (void)didClickButton {
