@@ -594,3 +594,31 @@
 }
 
 @end
+
+@implementation UIImage (YPBase64)
+
++ (UIImage *)yp_imageWithBase64String:(NSString *)base64String {
+    if (!base64String || [base64String isEqualToString:@""]) {
+        return nil;
+    }
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    if (!imageData) {
+        return nil;
+    }
+    return [UIImage imageWithData:imageData];
+}
+
+- (NSString *)yp_base64String {
+    NSData *imageData;
+    if (self.yp_isPngImage) {
+        imageData = UIImagePNGRepresentation(self);
+    } else {
+        imageData = UIImageJPEGRepresentation(self, 1);
+    }
+    if (!imageData) {
+        return nil;
+    }
+    return [imageData base64EncodedStringWithOptions:0];
+}
+
+@end

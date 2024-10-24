@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YPViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YPFileBrowser : UIViewController
+@interface YPFileBrowserController : YPViewController
 
 - (instancetype)initWithPath:(NSString *)path;
 

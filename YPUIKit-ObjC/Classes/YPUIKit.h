@@ -17,7 +17,7 @@
 #import "YPTextView.h"
 #import "YPAlertView.h"
 #import "YPLoadingView.h"
-#import "YPFileBrowser.h"
+#import "YPFileBrowserController.h"
 #import "YPShakeManager.h"
 #import "YPPurchaseManager.h"
 #import "YPPopupHeader.h"

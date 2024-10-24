@@ -51,12 +51,16 @@
 ////    [self presentViewController:nav animated:YES completion:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
     
-    NSArray *colors = [UIColor yp_allColors];
-    YPDatePickerAlert *picker = [YPDatePickerAlert popupWithDate:[NSDate date] completeBlock:^(NSDate * _Nonnull date) {
-
-    }];
-    picker.datePickerMode = UIDatePickerModeTime;
-    [self presentViewController:picker animated:YES completion:nil];
+    YPFileBrowserController *vc = [[YPFileBrowserController alloc] initWithPath:@"/"];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+    
+//    NSArray *colors = [UIColor yp_allColors];
+//    YPDatePickerAlert *picker = [YPDatePickerAlert popupWithDate:[NSDate date] completeBlock:^(NSDate * _Nonnull date) {
+//
+//    }];
+//    picker.datePickerMode = UIDatePickerModeTime;
+//    [self presentViewController:picker animated:YES completion:nil];
     
 //    NSArray *colors = [UIColor yp_allColors];
 //    YPColorPickerAlert *picker = [YPColorPickerAlert popupWithOptions:colors completeBlock:^(NSInteger index) {

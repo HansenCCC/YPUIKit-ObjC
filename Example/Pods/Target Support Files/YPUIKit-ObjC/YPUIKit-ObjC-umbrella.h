@@ -35,7 +35,7 @@
 #import "YPFileBrowserElementCell.h"
 #import "YPFileInfo.h"
 #import "YPBaseQLPreviewController.h"
-#import "YPFileBrowser.h"
+#import "YPFileBrowserController.h"
 #import "YPFormElement.h"
 #import "YPImagePickerController.h"
 #import "YPInputHeader.h"

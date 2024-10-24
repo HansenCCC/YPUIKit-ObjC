@@ -10,13 +10,14 @@
 #import "NSString+YPFileFormat.h"
 #import "UIImage+YPResource.h"
 #import "UIColor+YPExtension.h"
+#import "UIImage+YPExtension.h"
 
 @interface YPFileBrowserElementCell ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UILabel *rightLabel;
-@property (nonatomic, strong) UILabel *rightImageView;
+@property (nonatomic, strong) UIImageView *rightImageView;
 
 @end
 
@@ -54,7 +55,7 @@
     self.lineView.frame = f2;
     //
     CGRect f3 = bounds;
-    f3.size = CGSizeMake(18.f, 18.f);
+    f3.size = CGSizeMake(15.f, 15.f);
     f3.origin.y = (bounds.size.height - f3.size.height)/2.0;
     f3.origin.x = bounds.size.width - f3.size.width - 8.f;
     self.rightImageView.frame = f3;
@@ -77,9 +78,9 @@
     _cellModel = cellModel;
     self.isDisplayRightImage = YES;
     self.titleLabel.text = cellModel.fileName?:@"";
-    self.rightImageView.text = @"\u2192";
     self.rightLabel.text = cellModel.fileSize?:@"";
-    //
+    UIImage *arrowImage = [UIImage yp_imageWithBase64String:@"iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAArZJREFUeF7t3WtOwzAQBGD3ZnAy4GRwM2AlIlVVk9YbbM/MTiXEj6Zku1/Wr7jl0vyAysAFKhoH0wwCdhEYxCBgGQALxxViELAMgIXjCjEIWAbAwnGFGAQsA2DhuEIMspuB96tnvlpr8VPugVAhL621zzuZD5DXaiIIIN8HSS+HshokKiMq5OgRKB9VmjAGkA0rmi/5foUJJGDkUVaDxMjqrbPjlkZZDRIWR536npUsCgJIpkoCKjr667lLZ6FhHo4AEpkxyt/1gQIS4exNEB9dylKVggRilN92GA2kPAoiSGkUVJANJeYoj5ZWbvsY6j4FGWRL9DPrXTIoDCCR7AwK5UoxC0gZFCaQEihsINlZPU3zxQhyBgX+RhcrSBYF/p4KM4gkCjuIHIoCiBSKCsgZFKilFiUQCRQ1EHoURRDq5XtVEFoUZRBKFHUQOpQKIFQ3uiqBZJfvp85TqoHAo1QEgUapCpJBmXKTqzJIZlY/PF/DT/BoY+7C53v3ErtCBmJldtsbZBBIBiNCmdKaTDnJoMRm/mwWY9ontiqBwGNMK8PMpfzPr6HAqAJCg1EBhApDHSSDMWVoe9Qcq3bqlBiqFUKLoQhCjaEGQo+hBCKBoQKSwZh6W7Znkss+ysp8GBQWg71C5DCYQSQxWEFkMRhBpDHYQOQxWEB6NyNso0zo0dTeUBh92FsKA71CymEgg5TEQAUpi4EIUhoDDaQ8BhJIZsU24qcc2qLfU89WxrTdhD3L52ePRZiH+Mv4rxRXg2SqQ7IyNpPVIL3rU9IYCJ16T2cuj8EEUgIDASRiOKqS5Vs7z46ael+/ug/Z4r3Xl8jNMZ7BQQGJWLcv3Y/f/terz+j5mPEZQKqQ8e+W4AwGAUMyiEHAMgAWjivEIGAZAAvHFWIQsAyAheMKMQhYBsDCcYWAgfwAEO6YZei31R4AAAAASUVORK5CYII="];
+    self.rightImageView.image = [arrowImage yp_imageWithTintColor:[UIColor yp_grayColor]];
     NSFileManager *manager = [NSFileManager defaultManager];
     BOOL isDir;
     [manager fileExistsAtPath:cellModel.filePath isDirectory:&isDir];
@@ -117,9 +118,9 @@
     return _lineView;
 }
 
-- (UILabel *)rightImageView{
+- (UIImageView *)rightImageView{
     if (!_rightImageView) {
-        _rightImageView = [[UILabel alloc] init];
+        _rightImageView = [[UIImageView alloc] init];
     }
     return _rightImageView;
 }

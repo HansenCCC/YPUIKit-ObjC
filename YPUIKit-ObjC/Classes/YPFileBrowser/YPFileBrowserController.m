@@ -6,7 +6,7 @@
 //  Copyright © 2021 Hansen. All rights reserved.
 //
 
-#import "YPFileBrowser.h"
+#import "YPFileBrowserController.h"
 #import "YPFileInfo.h"
 #import "YPFileBrowserElementCell.h"
 #import "NSString+YPFileFormat.h"
@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
 
 static NSString *const kNotificationFileBrowserViewModeChange = @"kNotificationFileBrowserViewModeChange";
 
-@interface YPFileBrowser () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,
+@interface YPFileBrowserController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,
  QLPreviewControllerDataSource, QLPreviewControllerDelegate >
 
 @property (nonatomic, strong) NSString *filePath;
@@ -32,7 +32,7 @@ static NSString *const kNotificationFileBrowserViewModeChange = @"kNotificationF
 
 @end
 
-@implementation YPFileBrowser
+@implementation YPFileBrowserController
 
 - (instancetype)initWithPath:(NSString *)path {
     self = [self init];
@@ -72,7 +72,16 @@ static NSString *const kNotificationFileBrowserViewModeChange = @"kNotificationF
 }
 
 - (void)leftClickAction:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.presentingViewController) {
+        // 通过 present 进入
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else if (self.navigationController) {
+        // 通过 push 进入
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        // 其他情况，可能是模态展示在其他控制器上
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)addNotificationObserver {
@@ -253,7 +262,7 @@ static NSString *const kNotificationFileBrowserViewModeChange = @"kNotificationF
     [manager fileExistsAtPath:cellModel.filePath isDirectory:&isDir];
     if (isDir) {
         /// 是文件夹
-        YPFileBrowser *vc = [[YPFileBrowser alloc] initWithPath:cellModel.filePath];
+        YPFileBrowserController *vc = [[YPFileBrowserController alloc] initWithPath:cellModel.filePath];
         vc.isRoot = NO;
         [self.navigationController pushViewController:vc animated:YES];
     } else {

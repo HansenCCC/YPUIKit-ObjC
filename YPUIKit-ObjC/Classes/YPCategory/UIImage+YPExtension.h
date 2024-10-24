@@ -131,4 +131,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface UIImage (YPBase64)
+
+/// 通过 Base64 字符串生成 UIImage
+/// @param base64String 需要转换的 Base64 字符串
+/// @return 转换后的 UIImage 对象，若无效则返回 nil
++ (UIImage *)yp_imageWithBase64String:(NSString *)base64String;
+
+/// 通过 UIImage 转换为 Base64 字符串
+/// @return 返回转换后的 Base64 字符串，若失败则返回 nil
+- (NSString *)yp_base64String;
+
+@end
+
 NS_ASSUME_NONNULL_END
