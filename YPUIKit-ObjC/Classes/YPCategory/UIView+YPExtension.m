@@ -10,7 +10,7 @@
 @implementation UIView (YPExtension)
 
 /// 获取view垂直位置最底部的subview
-- (UIView *)yp_horizontalBottomView {
+- (UIView *)yp_verticalBottomView {
     UIView *view = nil;
     for (UIView *subview in self.subviews) {
         if (CGRectGetMaxY(subview.frame) > CGRectGetMaxY(view.frame)) {
@@ -21,7 +21,7 @@
 }
 
 /// 获取view水平位置最右部的subview
-- (UIView *)yp_verticalRightView {
+- (UIView *)yp_horizontalBottomView {
     UIView *view = nil;
     for (UIView *subview in self.subviews) {
         if (CGRectGetMaxX(subview.frame) > CGRectGetMaxX(view.frame)) {

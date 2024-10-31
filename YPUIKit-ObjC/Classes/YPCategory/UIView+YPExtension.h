@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIView (YPExtension)
 
 /// 获取view垂直位置最底部的subview
-- (UIView *)yp_horizontalBottomView;
+- (UIView *)yp_verticalBottomView;
 
 /// 获取view水平位置最右部的subview
-- (UIView *)yp_verticalRightView;
+- (UIView *)yp_horizontalBottomView;
 
 /// 找出当前视图subviews中所有是 class（UIView）类
 /// @param aClass 类
