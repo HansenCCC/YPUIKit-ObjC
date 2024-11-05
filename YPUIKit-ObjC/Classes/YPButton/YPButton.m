@@ -97,13 +97,13 @@
                     f2.origin.x = (bounds.size.width - f1.size.width - interitemSpacing - f2.size.width) / 2;
                     f1.origin.y = (bounds.size.height - f1.size.height) / 2;
                     f1.origin.x = CGRectGetMaxX(f2) + interitemSpacing;
-                }else{
+                } else {
                     f1.origin.y = (bounds.size.height - f1.size.height) / 2;
                     f1.origin.x = (bounds.size.width - f1.size.width - interitemSpacing - f2.size.width) / 2;
                     f2.origin.y = (bounds.size.height - f2.size.height) / 2;
                     f2.origin.x = CGRectGetMaxX(f1) + interitemSpacing;
                 }
-            }else{
+            } else {
                 if (!hiddenImage) {
                     f1.origin.x = (bounds.size.width - f1.size.width) / 2;
                     f1.origin.y = (bounds.size.height - f1.size.height) / 2;
@@ -127,10 +127,17 @@
             f2.size = f2_size;
             if (!hiddenImage && !hiddenTitle) {
                 f2.size.height = MIN(f2_size.height,(bounds.size.height - f1_size.height - interitemSpacing));
-                f1.origin.x = (bounds.size.width - f1.size.width) / 2;
-                f1.origin.y = (bounds.size.height - f1.size.height - interitemSpacing - f2.size.height) / 2;
-                f2.origin.x = (bounds.size.width - f2.size.width) / 2;
-                f2.origin.y = CGRectGetMaxY(f1) + interitemSpacing;
+                if (self.reverseContent) {
+                    f2.origin.x = (bounds.size.width - f2.size.width) / 2;
+                    f2.origin.y = (bounds.size.height - f2.size.height - interitemSpacing - f1.size.height) / 2;
+                    f1.origin.x = (bounds.size.width - f1.size.width) / 2;
+                    f1.origin.y = CGRectGetMaxY(f2) + interitemSpacing;
+                } else {
+                    f1.origin.x = (bounds.size.width - f1.size.width) / 2;
+                    f1.origin.y = (bounds.size.height - f1.size.height - interitemSpacing - f2.size.height) / 2;
+                    f2.origin.x = (bounds.size.width - f2.size.width) / 2;
+                    f2.origin.y = CGRectGetMaxY(f1) + interitemSpacing;
+                }
             } else {
                 if (!hiddenImage) {
                     f1.origin.x = (bounds.size.width - f1.size.width) / 2;
@@ -218,7 +225,7 @@
                 f2.size.height = MIN(f2_size.height, (bounds.size.height - f1_size.height - interitemSpacing));
                 sizeFits.height = f1.size.height + f2.size.height + interitemSpacing;
                 sizeFits.width = MAX(f1.size.width, f2.size.width);
-            }else{
+            } else {
                 if (!hiddenImage) {
                     sizeFits = f1_size;
                 }else if (!hiddenTitle) {
