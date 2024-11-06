@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIImage *)yp_screenshotsImageWithScale:(CGFloat)scale;
 - (UIImage *)yp_screenshotsImage;
 
+/// 找出当前试图下所有的 class 类
+/// @param viewClass 寻找的类
+- (NSArray <UIView *>*)yp_findSubviewsOfClass:(Class)viewClass;
+
 @end
 
 @interface UIView (YPCornerRadius)

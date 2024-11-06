@@ -27,5 +27,6 @@
 #import "YPPopupController.h"
 #import "YPImagePickerController.h"
 #import "YPRunLabel.h"
+#import "YPBadgeView.h"
 
 #endif /* YPUIKit_h */

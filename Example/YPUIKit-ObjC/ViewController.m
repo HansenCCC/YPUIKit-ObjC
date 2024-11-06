@@ -43,6 +43,7 @@
 }
 
 - (void)didClickButton {
+    [YPBadgeView showBadgeToView:self.button badgeInteger:99];
 //    YPMultiLineInputViewController *vc = [[YPMultiLineInputViewController alloc] init];
 //    vc.title = @"修改昵称";
 //    vc.text = @"程恒盛";

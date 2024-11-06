@@ -62,6 +62,19 @@
     return image;
 }
 
+/// 找出当前试图下所有的 class 类
+/// @param viewClass 寻找的类
+- (NSArray <UIView *>*)yp_findSubviewsOfClass:(Class)viewClass {
+    NSMutableArray *views = [[NSMutableArray alloc] init];
+    for (UIView *v in self.subviews) {
+        if ([v isKindOfClass:viewClass]) {
+            [views addObject:v];
+        }
+        [views addObjectsFromArray:[v yp_findSubviewsOfClass:viewClass]];
+    }
+    return views.count > 0 ? views : nil;
+}
+
 @end
 
 @implementation UIView (YPCornerRadius)
