@@ -11,7 +11,6 @@
 #endif
 
 #import "YPAlertView.h"
-#import "YPAVCaptureSessionView.h"
 #import "YPBadgeView.h"
 #import "YPButton.h"
 #import "NSData+YPExtension.h"
@@ -40,7 +39,6 @@
 #import "YPBaseQLPreviewController.h"
 #import "YPFileBrowserController.h"
 #import "YPFormElement.h"
-#import "YPImagePickerController.h"
 #import "YPInputHeader.h"
 #import "YPMultiLineInputViewController.h"
 #import "YPSingleLineInputViewController.h"
