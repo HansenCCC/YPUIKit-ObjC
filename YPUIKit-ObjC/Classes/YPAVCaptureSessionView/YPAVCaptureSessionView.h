@@ -8,6 +8,9 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+
+#ifdef YP_USE_CAMERA
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YPAVCaptureSessionView : UIView <AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -36,3 +39,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+    
+#endif

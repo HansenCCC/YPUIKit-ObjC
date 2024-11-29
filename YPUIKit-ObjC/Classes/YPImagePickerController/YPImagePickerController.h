@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#ifdef YP_USE_CAMERA
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YPImagePickerController : UIImagePickerController
@@ -17,3 +19,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+    
+#endif

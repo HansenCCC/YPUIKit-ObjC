@@ -25,8 +25,9 @@
 #import "YPSwiperView.h"
 #import "YPViewController.h"
 #import "YPPopupController.h"
-#import "YPImagePickerController.h"
 #import "YPRunLabel.h"
 #import "YPBadgeView.h"
+#import "YPAVCaptureSessionView.h"
+#import "YPImagePickerController.h"
 
 #endif /* YPUIKit_h */

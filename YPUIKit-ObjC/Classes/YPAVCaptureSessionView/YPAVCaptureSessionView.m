@@ -7,6 +7,8 @@
 
 #import "YPAVCaptureSessionView.h"
 
+#ifdef YP_USE_CAMERA
+
 @interface YPAVCaptureSessionView ()
 
 @property (nonatomic, strong) AVCaptureSession *session;
@@ -94,7 +96,7 @@
     if (!_output) {
         //初始化输出
         dispatch_queue_t outputQueue;
-        outputQueue = dispatch_queue_create("WDAVCaptureSessionViewQueue", NULL);
+        outputQueue = dispatch_queue_create("YPAVCaptureSessionViewQueue", NULL);
         NSString *key = (NSString*)kCVPixelBufferPixelFormatTypeKey;
         NSNumber *value = [NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA];
         NSDictionary *videoSettings = [NSDictionary dictionaryWithObject:value forKey:key];
@@ -230,3 +232,6 @@
 }
 
 @end
+
+
+#endif

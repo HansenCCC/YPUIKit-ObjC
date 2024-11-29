@@ -16,10 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shareInstance;
 
 /// 轻触震动
-- (void)tapShare;
+- (void)tapShake;
 
 /// 长按震动
-- (void)longPressShare;
+- (void)longPressShake;
+
+/// 根据 id 响应震动
+- (void)shakeWithId:(NSInteger)soundID;
 
 @end
 

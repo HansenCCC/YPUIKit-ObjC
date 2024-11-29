@@ -32,6 +32,7 @@
 #import "UIView+YPExtension.h"
 #import "UIViewController+YPExtension.h"
 #import "YPCategoryHeader.h"
+#import "YPCollectionViewWaterfallFlowLayout.h"
 #import "NSString+YPFileFormat.h"
 #import "UIImage+YPResource.h"
 #import "YPFileBrowserElementCell.h"

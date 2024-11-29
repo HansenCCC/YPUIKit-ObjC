@@ -52,9 +52,9 @@
 ////    [self presentViewController:nav animated:YES completion:nil];
 //    [self.navigationController pushViewController:vc animated:YES];
     
-    YPFileBrowserController *vc = [[YPFileBrowserController alloc] initWithPath:@"/"];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+//    YPAVCaptureSessionView *vc = [[YPAVCaptureSessionView alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//    [self presentViewController:nav animated:YES completion:nil];
     
 //    NSArray *colors = [UIColor yp_allColors];
 //    YPDatePickerAlert *picker = [YPDatePickerAlert popupWithDate:[NSDate date] completeBlock:^(NSDate * _Nonnull date) {

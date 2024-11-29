@@ -21,7 +21,7 @@ NSString *kYPShakeManagerIsEnableShareKey = @"kYPShakeManagerIsEnableShareKey";
     return m;
 }
 
-- (void)tapShare {
+- (void)tapShake {
     AudioServicesPlaySystemSound(1519);
 //    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
 //    // 可以自己设定震动间隔与时常（毫秒）
@@ -33,8 +33,12 @@ NSString *kYPShakeManagerIsEnableShareKey = @"kYPShakeManagerIsEnableShareKey";
 //    AudioServicesPlaySystemSound(kAudioServicesPropertyIsUISound);
 }
 
-- (void)longPressShare {
+- (void)longPressShake {
     AudioServicesPlaySystemSound(1521);
+}
+
+- (void)shakeWithId:(NSInteger)soundID {
+    AudioServicesPlaySystemSound((int)soundID);
 }
 
 #pragma mark - setters | setters
