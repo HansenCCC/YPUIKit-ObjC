@@ -7,8 +7,6 @@
 
 #import "YPAVCaptureSessionView.h"
 
-#ifdef YP_USE_CAMERA
-
 @interface YPAVCaptureSessionView ()
 
 @property (nonatomic, strong) AVCaptureSession *session;
@@ -232,6 +230,3 @@
 }
 
 @end
-
-
-#endif

@@ -7,8 +7,6 @@
 
 #import "YPImagePickerController.h"
 
-#ifdef YP_USE_CAMERA
-
 @interface YPImagePickerController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
@@ -48,5 +46,3 @@
 }
 
 @end
-    
-#endif

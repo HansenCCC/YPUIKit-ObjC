@@ -29,5 +29,6 @@
 #import "YPBadgeView.h"
 #import "YPAVCaptureSessionView.h"
 #import "YPImagePickerController.h"
+#import "YPCollectionViewWaterfallFlowLayout.h"
 
 #endif /* YPUIKit_h */
