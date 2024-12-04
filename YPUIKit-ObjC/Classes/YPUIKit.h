@@ -27,6 +27,6 @@
 #import "YPPopupController.h"
 #import "YPRunLabel.h"
 #import "YPBadgeView.h"
-#import "YPCollectionViewWaterfallFlowLayout.h"
+#import "YPWaterfallFlowLayout.h"
 
 #endif /* YPUIKit_h */

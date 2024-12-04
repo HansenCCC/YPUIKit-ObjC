@@ -1,21 +1,21 @@
 //
-//  YPCollectionViewWaterfallFlowLayout.m
+//  YPWaterfallFlowLayout.m
 //  YPLaboratory
 //
 //  Created by Hansen on 2024/11/5.
 //
 
-#import "YPCollectionViewWaterfallFlowLayout.h"
+#import "YPWaterfallFlowLayout.h"
 #import "YPKitDefines.h"
 
-@interface YPCollectionViewWaterfallFlowLayout ()
+@interface YPWaterfallFlowLayout ()
 
 @property (nonatomic, strong) NSMutableArray *columnHeights;
 @property (nonatomic, strong) NSMutableArray *itemAttributes;
 
 @end
 
-@implementation YPCollectionViewWaterfallFlowLayout
+@implementation YPWaterfallFlowLayout
 
 - (instancetype)init {
     if (self = [super init]) {
