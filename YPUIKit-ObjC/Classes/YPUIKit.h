@@ -28,5 +28,6 @@
 #import "YPRunLabel.h"
 #import "YPBadgeView.h"
 #import "YPWaterfallFlowLayout.h"
+#import "YPFloatingView.h"
 
 #endif /* YPUIKit_h */

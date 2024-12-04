@@ -13,8 +13,8 @@
 
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) YPSwiperView *swiperView;
-
 @property (nonatomic, strong) YPRunLabel *runLabel;
+@property (nonatomic, strong) YPFloatingView *floatingView;
 
 @end
 
@@ -40,6 +40,10 @@
     CGSize f1 = [self.runLabel sizeThatFits:CGSizeZero];
     self.runLabel.frame = CGRectMake(100, 200, f1.width, f1.height);
     [self.view addSubview:self.runLabel];
+    
+    self.floatingView = [[YPFloatingView alloc] initWithFrame:CGRectMake(20, 100, 100.f, 100.f)];
+    self.floatingView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:self.floatingView];
 }
 
 - (void)didClickButton {

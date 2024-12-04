@@ -9,15 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol YPCollectionViewWaterfallFlowLayoutDelegate <NSObject>
+@protocol YPWaterfallFlowLayoutDelegate <NSObject>
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
-@interface YPCollectionViewWaterfallFlowLayout : UICollectionViewFlowLayout
+@interface YPWaterfallFlowLayout : UICollectionViewFlowLayout
 
-@property (nonatomic, weak) id <YPCollectionViewWaterfallFlowLayoutDelegate, UICollectionViewDelegate, UICollectionViewDataSource> delegate;
+@property (nonatomic, weak) id <YPWaterfallFlowLayoutDelegate, UICollectionViewDelegate, UICollectionViewDataSource> delegate;
 @property (nonatomic, assign) NSInteger numberOfColumns;
 
 @end
