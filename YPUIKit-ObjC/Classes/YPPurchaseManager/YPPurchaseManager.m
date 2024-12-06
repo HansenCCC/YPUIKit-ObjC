@@ -12,6 +12,8 @@
 /// 购买内购商品回调
 typedef void(^YPPurchasePaymentProductCallback)(SKPaymentTransaction *transaction,
                                                 NSError *error);
+/// 恢复订阅的内购回调
+typedef void(^YPPurchaseRestorePaymentCallback)(NSArray<SKPaymentTransaction *> *transactions, NSError *error);
 
 NSString *const kYPPurchaseNeedCheckInternalPurchasePayment = @"kYPPurchaseNeedCheckInternalPurchasePayment";//需要检查一下丢单情况
 NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当前支付缓存信息
@@ -109,7 +111,7 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
     }];
 }
 /// 恢复用户先前的订阅信息
-- (void)restoreCompletedTransactions:(void(^)(NSError *error))completion {
+- (void)restoreCompletedTransactions:(void(^)(NSArray<SKPaymentTransaction *> *transactions, NSError *error))completion {
     self.restoreCallback = completion;
     SKPaymentQueue *paymentQueue = [SKPaymentQueue defaultQueue];
     [paymentQueue restoreCompletedTransactions];
@@ -241,7 +243,7 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.restoreCallback) {
-            self.restoreCallback(nil);
+            self.restoreCallback(queue.transactions, nil);
         }
     });
 }
@@ -249,7 +251,7 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.restoreCallback) {
-            self.restoreCallback(error);
+            self.restoreCallback(nil, error);
         }
     });
 }

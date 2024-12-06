@@ -46,9 +46,6 @@ typedef void(^YPPurchaseGetProductsCallback)(SKProductsRequest *request, SKProdu
 /// 校验缓存的内购支付
 typedef void(^YPPurchaseCheckPaymentCallback)(NSString *checkPath, NSDictionary *payDic, NSError *error);
 
-/// 恢复订阅的内购回调
-typedef void(^YPPurchaseRestorePaymentCallback)(NSError *error);
-
 
 @interface YPPurchaseManager : NSObject
 
@@ -68,7 +65,7 @@ typedef void(^YPPurchaseRestorePaymentCallback)(NSError *error);
                          completion:(void(^)(SKPaymentTransaction *transaction, NSError *error))completion;
 
 /// 恢复用户先前的订阅信息
-- (void)restoreCompletedTransactions:(void(^)(NSError *error))completion;
+- (void)restoreCompletedTransactions:(void(^)(NSArray<SKPaymentTransaction *> *transactions, NSError *error))completion;
 
 // 根据 SKPaymentTransaction 查找本地缓存的订单信息
 - (NSDictionary *)scanLocalPaymentsBySKPaymentTransaction:(SKPaymentTransaction *)transaction;
