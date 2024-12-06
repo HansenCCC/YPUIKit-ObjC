@@ -7,6 +7,7 @@
 
 #import "YPPurchaseManager.h"
 #import "YPLoadingView.h"
+#import "NSString+YPExtension.h"
 
 /// 购买内购商品回调
 typedef void(^YPPurchasePaymentProductCallback)(SKPaymentTransaction *transaction,
@@ -20,6 +21,7 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
 @property (nonatomic, strong) SKProductsRequest *requestProducts;/// 请求商品列表
 @property (nonatomic, copy) YPPurchaseGetProductsCallback productsListCallback;/// 获取商品列表回调
 @property (nonatomic, copy) YPPurchasePaymentProductCallback buyProductCallback;/// 购买商品回调
+@property (nonatomic, copy) YPPurchaseRestorePaymentCallback restoreCallback;/// 订阅恢复的回调
 @property (nonatomic, strong) NSArray <SKProduct *>*products;/// 商品列表
 
 @property (nonatomic, strong) NSDictionary *order;// 缓存订单信息
@@ -81,7 +83,7 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
                 self.order = [order copy];
                 /// 开始支付
                 [YPLoadingView hideLoading];
-                [YPLoadingView showLoading:@"交易进行中，请稍等"];
+                [YPLoadingView showLoading:@"交易进行中，请稍等".yp_localizedString];
                 [weakSelf buyProduct:product onCompletion:^(SKPaymentTransaction * _Nullable transaction, NSError * _Nullable error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (!error) {
@@ -98,13 +100,19 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
                     });
                 }];
             } else {
-                NSError *errorTemp = error ? error : [NSError errorWithDomain:[NSString stringWithFormat:@"查不到商品 %@",productId] code:10010 userInfo:nil];
+                NSError *errorTemp = error ? error : [NSError errorWithDomain:[NSString stringWithFormat:@"查不到商品 %@".yp_localizedString,productId] code:10010 userInfo:nil];
                 if (completion) {
                     completion(nil, errorTemp);
                 }
             }
         });
     }];
+}
+/// 恢复用户先前的订阅信息
+- (void)restoreCompletedTransactions:(void(^)(NSError *error))completion {
+    self.restoreCallback = completion;
+    SKPaymentQueue *paymentQueue = [SKPaymentQueue defaultQueue];
+    [paymentQueue restoreCompletedTransactions];
 }
 
 // 根据商品 productId 获取 SKProducts
@@ -126,7 +134,7 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
         [[SKPaymentQueue defaultQueue] addPayment:payment];
     } else {
         if (self.buyProductCallback) {
-            NSError *error = [NSError errorWithDomain:@"商品id为空" code:10010 userInfo:nil];
+            NSError *error = [NSError errorWithDomain:@"商品id为空".yp_localizedString code:10010 userInfo:nil];
             self.buyProductCallback(nil, error);
             self.buyProductCallback = nil;
         }
@@ -137,26 +145,26 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
 + (NSString *)descriptionFailWithError:(NSError *)error {
     NSString *description = error.userInfo[NSLocalizedDescriptionKey];
     if (description.length == 0) {
-        description = @"支付失败！";
+        description = @"支付失败！".yp_localizedString;
     }
     if (error.code == 2) {
-        description = @"支付已取消！";
+        description = @"支付已取消！".yp_localizedString;
     }else if (error.code == 21000) {
-        description = @"App Store不能读取你提供的JSON对象";
+        description = @"App Store不能读取你提供的JSON对象".yp_localizedString;
     }else if (error.code == 21002) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }else if (error.code == 21003) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }else if (error.code == 21004) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }else if (error.code == 21005) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }else if (error.code == 21006) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }else if (error.code == 21007) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }else if (error.code == 21008) {
-        description = @"不支持该地区的apple ID";
+        description = @"不支持该地区的apple ID".yp_localizedString;
     }
     return description;
 }
@@ -228,6 +236,22 @@ NSString *const kYPPurchaseCurrentOrderKey = @"kYPPurchaseCurrentOrderKey";//当
 - (void)purchasingTransaction:(SKPaymentTransaction *)transaction {
     /// 正在将事务添加到服务器队列。（正在购买）
     
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.restoreCallback) {
+            self.restoreCallback(nil);
+        }
+    });
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.restoreCallback) {
+            self.restoreCallback(error);
+        }
+    });
 }
 
 - (void)purchasedTransaction:(SKPaymentTransaction *)transaction {
