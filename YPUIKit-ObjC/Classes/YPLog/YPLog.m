@@ -53,12 +53,12 @@
     [self writeAllLogs];
 }
 
-- (NSString *)logPath {
++ (NSString *)logPath {
     NSString *logsDirectory = [NSString stringWithFormat:@"%@/logs/",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
     return logsDirectory;
 }
 
-- (NSString *)todayLogPath {
++ (NSString *)todayLogPath {
     NSDate *newDate = [NSDate date];
     NSString *dateString = [newDate yp_StringWithDateFormat:@"yyyy-MM-dd"];
     NSString *logsDirectory = [self logPath];
@@ -73,8 +73,8 @@
     NSArray *msgs = [self.logDataList copy];
     [self.logDataList removeAllObjects];
     
-    NSString *logsDirectory = [self logPath];
-    NSString *logsFilePath = [self todayLogPath];
+    NSString *logsDirectory = [YPLog logPath];
+    NSString *logsFilePath = [YPLog todayLogPath];
     // 创建logs目录
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:logsDirectory]) {

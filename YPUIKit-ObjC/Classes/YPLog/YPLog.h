@@ -38,10 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 获取日志的文件夹路径
-- (NSString *)logPath;
++ (NSString *)logPath;
 
 /// 今天的日志文件路径
-- (NSString *)todayLogPath;
++ (NSString *)todayLogPath;
 
 @end
 
