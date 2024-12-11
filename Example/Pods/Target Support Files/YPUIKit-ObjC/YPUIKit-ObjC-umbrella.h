@@ -11,6 +11,7 @@
 #endif
 
 #import "YPAlertView.h"
+#import "YPAppManager.h"
 #import "YPBadgeView.h"
 #import "YPButton.h"
 #import "NSData+YPExtension.h"
@@ -53,6 +54,7 @@
 #import "YPPopupAnimatedTransitioning.h"
 #import "YPPopupController.h"
 #import "YPPurchaseManager.h"
+#import "YPReachability.h"
 #import "YPRunLabel.h"
 #import "YPShakeManager.h"
 #import "YPSwiperView.h"
