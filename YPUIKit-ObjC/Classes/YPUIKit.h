@@ -29,5 +29,6 @@
 #import "YPBadgeView.h"
 #import "YPWaterfallFlowLayout.h"
 #import "YPFloatingView.h"
+#import "YPAppManager.h"
 
 #endif /* YPUIKit_h */
