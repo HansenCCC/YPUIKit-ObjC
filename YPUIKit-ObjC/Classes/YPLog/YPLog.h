@@ -36,6 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
             lineNumber:(int)lineNumber
                 format:(NSString *)format, ...;
 
+
+/// 获取日志的文件夹路径
+- (NSString *)logPath;
+
+/// 今天的日志文件路径
+- (NSString *)todayLogPath;
+
 @end
 
 NS_ASSUME_NONNULL_END
