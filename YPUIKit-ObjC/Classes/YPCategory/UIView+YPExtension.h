@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param viewClass 寻找的类
 - (NSArray <UIView *>*)yp_findSubviewsOfClass:(Class)viewClass;
 
+/// 找出当前父视图所有的 class 类
+/// @param viewClass 寻找的类
+- (NSArray <UIView *>*)yp_findSuperviewsOfClass:(Class)viewClass;
+
 @end
 
 @interface UIView (YPCornerRadius)

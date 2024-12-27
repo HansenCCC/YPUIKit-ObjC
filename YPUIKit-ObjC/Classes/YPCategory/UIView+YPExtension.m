@@ -41,7 +41,21 @@
         }
         [views addObjectsFromArray:[v yp_searchAllSubviewsForClass:aClass]];
     }
-    return views.count>0?views:nil;
+    return views.count > 0 ? views : nil;
+}
+
+/// 找出当前父视图所有的 class 类
+/// @param viewClass 寻找的类
+- (NSArray <UIView *>*)yp_findSuperviewsOfClass:(Class)viewClass {
+    NSMutableArray *views = [[NSMutableArray alloc] init];
+    UIView *currentView = self.superview;
+    while (currentView) {
+        if ([currentView isKindOfClass:viewClass]) {
+            [views addObject:currentView];
+        }
+        currentView = currentView.superview;
+    }
+    return views.count > 0 ? views : nil;
 }
 
 /// 返回视图的截屏图片
