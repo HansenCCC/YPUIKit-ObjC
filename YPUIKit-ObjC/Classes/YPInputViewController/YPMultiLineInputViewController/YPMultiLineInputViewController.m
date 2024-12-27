@@ -64,7 +64,10 @@
     if (self.didCompleteCallback) {
         self.didCompleteCallback(self.textView.text);
     }
-    if (self.presentingViewController) {
+    if (self.navigationController && [self.navigationController.viewControllers containsObject:self]) {
+        // present 但是有导航栏子视图
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if (self.presentingViewController) {
         // present 过来的
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
