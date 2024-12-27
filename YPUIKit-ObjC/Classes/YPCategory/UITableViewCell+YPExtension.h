@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 刷新当前试图
 - (void)yp_reloadCurrentTableViewCell;
 
+/// 刷新当前表格
+- (void)yp_reloadCurrentTableView;
+
 @end
 
 NS_ASSUME_NONNULL_END

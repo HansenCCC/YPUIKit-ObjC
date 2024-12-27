@@ -20,4 +20,12 @@
     }
 }
 
+/// 刷新当前表格
+- (void)yp_reloadCurrentTableView {
+    UITableView *tableView = (UITableView *)self.superview;
+    if ([tableView isKindOfClass:[UITableView class]]) {
+        [tableView reloadData];
+    }
+}
+
 @end
