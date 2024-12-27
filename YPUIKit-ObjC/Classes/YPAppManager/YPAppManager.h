@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSString *appName;// 应用名称
 @property (nonatomic, readonly) NSString *build;// build 号
 @property (nonatomic, readonly) NSString *bundleID;// 包名bundleID
-@property (nonatomic, readonly) NSString *appID;// 应用id，在 info.plist 设置 yp_appid
+@property (nonatomic, readonly) NSString *appID;// 应用id，在 info.plist 设置 yp_appid【非必填】
+@property (nonatomic, readonly) NSString *author;// 作者，在 info.plist 设置 yp_author【非必填】
+@property (nonatomic, readonly) NSString *authorMail;// 作者邮件，在 info.plist 设置 yp_author_mail【非必填】
 
 @property (nonatomic, readonly) NSString *deviceName;// 设备信号 例如 iPhone 12
 @property (nonatomic, readonly) NSString *deviceString;// 设备信号字符 例如 iPhone13,2
@@ -44,6 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 在 App Store 查看应用
 /// - Parameter appID: 应用 id
 - (void)openAppStoreWithAppID:(NSString *)appID;
+
+/// 弹出分享弹框分享应用
+- (void)shareAppLink;
+
+/// 弹出意见反馈的邮件
+- (void)sendFeedbackEmail;
 
 /// 获取 userAgent
 /// - callback 回调 userAgent

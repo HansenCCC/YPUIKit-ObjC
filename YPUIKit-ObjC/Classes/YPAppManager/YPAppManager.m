@@ -17,8 +17,11 @@
 #import "YPReachability.h"// 出自三方库
 #import "YPKeychain.h"
 #import "NSString+YPExtension.h"
+#import "UIViewController+YPExtension.h"
+#import <MessageUI/MessageUI.h>
+#import "YPAlertView.h"
 
-@interface YPAppManager ()
+@interface YPAppManager () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSDictionary *appInfoPlist;
 @property (nonatomic, strong) NSString *userAgent;
@@ -61,6 +64,48 @@
     if ([[UIApplication sharedApplication] canOpenURL:appStoreURL]) {
         [[UIApplication sharedApplication] openURL:appStoreURL options:@{} completionHandler:nil];
     }
+}
+
+- (void)shareAppLink {
+    NSString *appId = [self appID];
+    NSString *appLink = [NSString stringWithFormat:@"https://apps.apple.com/app/id%@",appId];
+    NSArray *itemsToShare = @[appLink];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+    // 在 iPad 上，设置 popoverPresentationController 的 sourceView 和 sourceRect
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        activityVC.popoverPresentationController.sourceView = [[UIViewController yp_topViewController] view]; // 设置来源视图
+        activityVC.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX([[UIViewController yp_topViewController] view].bounds),
+                                                                         CGRectGetMidY([[UIViewController yp_topViewController] view].bounds),
+                                                                         0,
+                                                                         0); // 设置来源矩形区域
+        activityVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny; // 设置箭头方向
+    }
+    [[UIViewController yp_topViewController] presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (void)sendFeedbackEmail {
+    NSString *email = self.authorMail;
+    if (email.length == 0) {
+        [YPAlertView alertText:@"方法不可用，请开发者在 info.plist 设置 yp_author_mail".yp_localizedString duration:3.f];
+        return;
+    }
+    if (![MFMailComposeViewController canSendMail]) {
+        // 处理无法发送邮件的情况
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"无法发送邮件".yp_localizedString
+                                                                       message:@"请在设备上设置邮件账户。".yp_localizedString
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定".yp_localizedString style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [[UIViewController yp_topViewController] presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    MFMailComposeViewController *mailComposeVC = [[MFMailComposeViewController alloc] init];
+    mailComposeVC.mailComposeDelegate = self; // 记得实现MFMailComposeViewControllerDelegate
+    [mailComposeVC setToRecipients:@[email]]; // 设置收件人
+    [mailComposeVC setSubject:[NSString stringWithFormat:@"%@ %@", self.appName, @"意见反馈".yp_localizedString]];
+    NSString *messageBody = @"亲爱的用户，感谢您使用我的应用！\n我非常重视您的反馈。\n请在下方输入您的意见或建议：\n------------------------------------\n您的意见：\n\n\n\n\n\n------------------------------------\n\n".yp_localizedString;
+    [mailComposeVC setMessageBody:messageBody isHTML:NO];
+    [[UIViewController yp_topViewController] presentViewController:mailComposeVC animated:YES completion:nil];
 }
 
 - (void)requestUserAgent:(nullable void(^)(NSString *userAgent))callback {
@@ -118,8 +163,12 @@
     return self.appInfoPlist[@"yp_appid"];
 }
 
-+ (void)load {
-    NSLog(@"%@", [YPAppManager shareInstance].ipAddress);
+- (NSString *)author {
+    return self.appInfoPlist[@"yp_author"];
+}
+
+- (NSString *)authorMail {
+    return self.appInfoPlist[@"yp_author_mail"];
 }
 
 - (NSString *)deviceString {
@@ -411,6 +460,31 @@
     NSString *bundleIdentifier = [NSBundle mainBundle].bundleIdentifier;
     NSString *identifier = [NSString stringWithFormat:@"%@+%@", uuid.UUIDString, bundleIdentifier];
     return identifier.yp_md5.localizedUppercaseString;
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    // 提示用户邮件发送结果
+    NSString *message;
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            message = @"邮件取消发送。".yp_localizedString;
+            break;
+        case MFMailComposeResultSaved:
+            message = @"邮件已保存到草稿。".yp_localizedString;
+            break;
+        case MFMailComposeResultSent:
+            message = @"邮件发送成功！".yp_localizedString;
+            break;
+        case MFMailComposeResultFailed:
+            message = [NSString stringWithFormat:@"邮件发送失败：%@".yp_localizedString, error.localizedDescription];
+            break;
+        default:
+            break;
+    }
+    [YPAlertView alertText:message];
+    [[UIViewController yp_topViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

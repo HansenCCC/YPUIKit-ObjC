@@ -47,5 +47,9 @@
 	</array>
 	<key>yp_appid</key>
 	<string>1</string>
+	<key>yp_author_mail</key>
+	<string>2534550460@qq.com</string>
+	<key>yp_author</key>
+	<string>Hansen</string>
 </dict>
 </plist>
