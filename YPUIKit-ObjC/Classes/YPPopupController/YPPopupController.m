@@ -45,12 +45,23 @@
     [self setupSubviews];
     [self popupLayoutSubviews];
     [self launchAppearViewAnimation:nil];
+    [self addNotificationObserver];
 }
 
 - (void)setupSubviews {
     self.backgroundView.backgroundColor = [[UIColor yp_blackColor] yp_alpha:0.4];
     [self.view addSubview:self.backgroundView];
     [self.view addSubview:self.contentView];
+}
+
+- (void)deviceOrientationDidChange {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self popupLayoutSubviews];
+    });
+}
+
+- (void)addNotificationObserver {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)popupLayoutSubviews {
@@ -154,6 +165,10 @@
     } else {
         [super dismissViewControllerAnimated:NO completion:completion];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 #pragma mark - action
