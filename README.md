@@ -50,7 +50,7 @@ pod 'YPUIKit-ObjC', '~> 1.1.0'
   #define YP_HEIGHT_SEARCH_BAR               44
   ```
   
-  <img src="https://pica.zhimg.com/80/v2-d5c28a9585d100bda51ea6a30816f162_720w.png" width="700">
+  <img src="https://pica.zhimg.com/80/v2-d5c28a9585d100bda51ea6a30816f162_720w.png" width="700"> 
 
 - ### YPButton
   > 如果你觉得UIButton用起来麻烦，那就试试YPButton。`（左图片，右文字；左文字，右图片；上图片，下文字；上文字，下图片）`
