@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shareInstance;
 
+#pragma mark - AudioServicesPlaySystemSound
+
 /// 轻触震动
 - (void)tapShake;
 
@@ -23,6 +25,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 根据 id 响应震动
 - (void)shakeWithId:(NSInteger)soundID;
+
+#pragma mark - UIImpactFeedbackGenerator
+
+/// 轻微震动
+- (void)lightShake;
+
+/// 中等震动
+- (void)mediumShake;
+
+/// 高度震动
+- (void)heavyShake;
 
 @end
 

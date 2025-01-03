@@ -10,6 +10,12 @@
 
 NSString *kYPShakeManagerIsEnableShareKey = @"kYPShakeManagerIsEnableShareKey";
 
+@interface YPShakeManager ()
+
+@property (nonatomic, assign) BOOL cache_isEnableShare;
+
+@end
+
 @implementation YPShakeManager
 
 + (instancetype)shareInstance {
@@ -17,6 +23,11 @@ NSString *kYPShakeManagerIsEnableShareKey = @"kYPShakeManagerIsEnableShareKey";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         m = [[YPShakeManager alloc] init];
+        // 检查NSUserDefaults中是否有值，如果没有，设置默认值
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:kYPShakeManagerIsEnableShareKey]) {
+            m.isEnableShare = YES;
+        }
+        m.cache_isEnableShare = [[NSUserDefaults standardUserDefaults] boolForKey:kYPShakeManagerIsEnableShareKey];
     });
     return m;
 }
@@ -34,22 +45,53 @@ NSString *kYPShakeManagerIsEnableShareKey = @"kYPShakeManagerIsEnableShareKey";
 }
 
 - (void)longPressShake {
+    if (!self.isEnableShare) {
+        return;
+    }
     AudioServicesPlaySystemSound(1521);
 }
 
 - (void)shakeWithId:(NSInteger)soundID {
+    if (!self.isEnableShare) {
+        return;
+    }
     AudioServicesPlaySystemSound((int)soundID);
+}
+
+- (void)lightShake {
+    if (!self.isEnableShare) {
+        return;
+    }
+    UIImpactFeedbackGenerator *feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
+    [feedbackGenerator impactOccurred];
+}
+
+- (void)mediumShake {
+    if (!self.isEnableShare) {
+        return;
+    }
+    UIImpactFeedbackGenerator *feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
+    [feedbackGenerator impactOccurred];
+}
+
+- (void)heavyShake {
+    if (!self.isEnableShare) {
+        return;
+    }
+    UIImpactFeedbackGenerator *feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
+    [feedbackGenerator impactOccurred];
 }
 
 #pragma mark - setters | setters
 
 - (BOOL)isEnableShare {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kYPShakeManagerIsEnableShareKey];
+    return self.cache_isEnableShare;
 }
 
 - (void)setIsEnableShare:(BOOL)isEnableShare {
     [[NSUserDefaults standardUserDefaults] setBool:isEnableShare forKey:kYPShakeManagerIsEnableShareKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    self.cache_isEnableShare = isEnableShare;
 }
 
 @end
