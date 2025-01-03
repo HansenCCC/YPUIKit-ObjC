@@ -30,5 +30,6 @@
 #import "YPWaterfallFlowLayout.h"
 #import "YPFloatingView.h"
 #import "YPAppManager.h"
+#import "YPColorPickerViewController.h"
 
 #endif /* YPUIKit_h */

@@ -47,7 +47,13 @@
 }
 
 - (void)didClickButton {
-    [[YPAppManager shareInstance] sendFeedbackEmail];
+    YPColorPickerViewController *vc = [YPColorPickerViewController popupPickerWithCompletion:^(UIColor *selectedColor) {
+        NSLog(@"%@",selectedColor);
+    }];
+    [[UIViewController yp_topViewController] presentViewController:vc animated:YES completion:nil];
+    
+    
+//    [[YPAppManager shareInstance] sendFeedbackEmail];
 //    [YPBadgeView showBadgeToView:self.button badgeInteger:99];
 //    YPMultiLineInputViewController *vc = [[YPMultiLineInputViewController alloc] init];
 //    vc.title = @"修改昵称";
