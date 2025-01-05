@@ -575,7 +575,12 @@
     NSString *iconFilePath = [UIImage yp_imagesDirectory];
     NSString *fileName = [NSString stringWithFormat:@"%@.png", dateString];
     NSString *filePath = [iconFilePath stringByAppendingPathComponent:fileName];
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    NSData *imageData = nil;
+    if (image.yp_isPngImage) {
+        imageData = UIImagePNGRepresentation(image);
+    } else {
+        imageData = UIImageJPEGRepresentation(image, 1.0);
+    }
     if (imageData) {
         NSError *error;
         BOOL success = [imageData writeToFile:filePath options:NSDataWritingAtomic error:&error];
