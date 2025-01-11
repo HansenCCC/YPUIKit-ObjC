@@ -11,7 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YPFloatingView : UIView
 
+@property (nonatomic, assign) CGPoint currentLocation;
+
 @property (nonatomic, copy) void (^didClickCallback)(void);
+@property (nonatomic, copy) void (^didMoveCallback)(CGPoint location);
 
 @end
 

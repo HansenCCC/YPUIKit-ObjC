@@ -48,12 +48,27 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         self.startLocation = self.frame.origin;
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.didMoveCallback) {
+            self.didMoveCallback(self.frame.origin);
+        }
+    });
 }
 
 - (void)didClickAction {
     if (self.didClickCallback) {
         self.didClickCallback();
     }
+}
+
+- (CGPoint)currentLocation {
+    return self.frame.origin;
+}
+
+- (void)setCurrentLocation:(CGPoint)currentLocation {
+    CGRect frame = self.frame;
+    frame.origin = currentLocation;
+    self.frame = frame;
 }
 
 @end
