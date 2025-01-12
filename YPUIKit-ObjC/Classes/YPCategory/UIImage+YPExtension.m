@@ -6,6 +6,7 @@
 //
 
 #import "UIImage+YPExtension.h"
+#import <Photos/Photos.h>
 
 @implementation UIImage (YPExtension)
 
@@ -513,20 +514,24 @@
 /// 生成二维码
 /// @param qrcode 二维码数据
 /// @param size 尺寸
-+ (UIImage *)yp_imageWithQRCodeString:(NSString *)qrcode size:(CGSize)size {
+/// @param correctionLevel 动态设置容错级别（L、M、Q、H）
++ (UIImage *)yp_imageWithQRCodeString:(NSString *)qrcode size:(CGSize)size correctionLevel:(NSString *)correctionLevel {
     NSData *stringData = [qrcode dataUsingEncoding:NSUTF8StringEncoding];
     CIFilter *qrFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     [qrFilter setValue:stringData forKey:@"inputMessage"];
-    [qrFilter setValue:@"M" forKey:@"inputCorrectionLevel"];
+    // 动态设置容错级别（L、M、Q、H）
+    if (![@[@"L", @"M", @"Q", @"H"] containsObject:correctionLevel]) {
+        correctionLevel = @"M"; // 默认使用中等容错级别
+    }
+    [qrFilter setValue:correctionLevel forKey:@"inputCorrectionLevel"];
     UIColor *onColor = [UIColor blackColor];
     UIColor *offColor = [UIColor whiteColor];
     CIFilter *colorFilter = [CIFilter filterWithName:@"CIFalseColor"
                                        keysAndValues:
-                             @"inputImage",qrFilter.outputImage,
-                             @"inputColor0",[CIColor colorWithCGColor:onColor.CGColor],
-                             @"inputColor1",[CIColor colorWithCGColor:offColor.CGColor],
+                             @"inputImage", qrFilter.outputImage,
+                             @"inputColor0", [CIColor colorWithCGColor:onColor.CGColor],
+                             @"inputColor1", [CIColor colorWithCGColor:offColor.CGColor],
                              nil];
-    
     CIImage *qrImage = colorFilter.outputImage;
     CGImageRef cgImage = [[CIContext contextWithOptions:nil] createCGImage:qrImage fromRect:qrImage.extent];
     UIGraphicsBeginImageContext(size);
@@ -538,6 +543,10 @@
     UIGraphicsEndImageContext();
     CGImageRelease(cgImage);
     return codeImage;
+}
+
++ (UIImage *)yp_imageWithQRCodeString:(NSString *)qrcode size:(CGSize)size {
+    return [self yp_imageWithQRCodeString:qrcode size:size correctionLevel:@"M"];
 }
 
 - (NSArray<CIFeature *> *)featuresWithType:(NSString *)type options:(NSDictionary *)options{
@@ -596,6 +605,26 @@
     NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageName]];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     return image;
+}
+
+@end
+
+@implementation UIImage (YPSaveToAlbum)
+
+/// 保存到相册
+/// - Parameters:
+///   - image: 图片对象
+///   - completion: 响应回调
++ (void)yp_saveImageToAlbum:(UIImage *)image completion:(void (^)(BOOL success, NSError *error))completion {
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+    } completionHandler:^(BOOL success, NSError *error) {
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(success, error);
+            });
+        }
+    }];
 }
 
 @end

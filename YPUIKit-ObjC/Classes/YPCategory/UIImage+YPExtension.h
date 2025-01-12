@@ -112,6 +112,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 生成二维码
 /// @param qrcode 二维码数据
 /// @param size 尺寸
+/// @param correctionLevel 动态设置容错级别（L、M、Q、H）
++ (UIImage *)yp_imageWithQRCodeString:(NSString *)qrcode size:(CGSize)size correctionLevel:(NSString *)correctionLevel;
 + (UIImage *)yp_imageWithQRCodeString:(NSString *)qrcode size:(CGSize)size;
 
 @end
@@ -128,6 +130,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 根据文件名获取 UIImage 对象
 /// - Parameter imageName: 文件名
 + (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName;
+
+@end
+
+@interface UIImage (YPSaveToAlbum)
+
+/// 保存到相册
+/// - Parameters:
+///   - image: 图片对象
+///   - completion: 响应回调
++ (void)yp_saveImageToAlbum:(UIImage *)image completion:(void (^)(BOOL success, NSError *error))completion;
 
 @end
 
