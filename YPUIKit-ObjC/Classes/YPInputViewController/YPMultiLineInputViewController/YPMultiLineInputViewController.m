@@ -9,6 +9,7 @@
 #import "YPTextView.h"
 #import "UIColor+YPExtension.h"
 #import "YPButton.h"
+#import "NSString+YPExtension.h"
 
 @interface YPMultiLineInputViewController ()
 
@@ -48,7 +49,7 @@
 - (void)setNavBarButtonItem {
     YPButton *rightButton = [YPButton buttonWithType:UIButtonTypeSystem];
     rightButton.frame = CGRectMake(0, 0, 44.f, 44.f);
-    [rightButton setTitle:@"保存" forState:UIControlStateNormal];
+    [rightButton setTitle:@"保存".yp_localizedString forState:UIControlStateNormal];
     rightButton.tintColor = [UIColor yp_blackColor];
     rightButton.titleLabel.font = [UIFont systemFontOfSize:17.f];
     [rightButton addTarget:self action:@selector(didRightBarButtonItem) forControlEvents:UIControlEventTouchUpInside];

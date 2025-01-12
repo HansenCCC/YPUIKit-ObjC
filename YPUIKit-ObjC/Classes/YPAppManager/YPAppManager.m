@@ -334,7 +334,7 @@
     switch ([reach currentYPReachabilityStatus]) {
         case YPNotReachable: {
             // 没有网络
-            netconnType = @"无网络";
+            netconnType = @"无网络".yp_localizedString;
         }
             break;
         case YPReachableViaWiFi:{

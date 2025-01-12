@@ -11,6 +11,7 @@
 #import "YPFileBrowserElementCell.h"
 #import "NSString+YPFileFormat.h"
 #import "YPBaseQLPreviewController.h"
+#import "NSString+YPExtension.h"
 
 typedef enum : NSUInteger {
     YPFileBrowserStyleList, // 纯文本列表展示
@@ -109,7 +110,7 @@ static NSString *const kNotificationFileBrowserViewModeChange = @"kNotificationF
         if (isDir) {
             /// 文件夹
             NSArray *tempArray = [manager contentsOfDirectoryAtPath:currentPath error:nil];
-            value = [NSString stringWithFormat:@"%@ 个项目",@(tempArray.count).stringValue];
+            value = [NSString stringWithFormat:@"%@ 个项目".yp_localizedString,@(tempArray.count).stringValue];
         } else{
             /// 文件
             double byte = 1000.0;
