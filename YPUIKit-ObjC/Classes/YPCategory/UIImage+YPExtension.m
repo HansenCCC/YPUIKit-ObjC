@@ -565,6 +565,34 @@
 
 @end
 
+@implementation UIImage (YPBRCode)
+
+/// 生成条形码
+/// - Parameters:
+///   - qrcode: 要生成条形码的内容（通常是一个字符串），例如数字或字母。
+///   - scaleX: 条形码宽度的缩放倍数，默认为 1.0。设置大于 1.0 会放大条形码，设置小于 1.0 会缩小条形码。
+///   - scaleY: 条形码高度的缩放倍数，默认为 1.0。设置大于 1.0 会放大条形码，设置小于 1.0 会缩小条形码。
+///   - quietSpace: 条形码两侧的边距，单位为像素。默认值为 0。该值设置条形码左右的空白区域，增大此值可以使条形码更为清晰易读。
++ (UIImage *)yp_imageWithBRCodeString:(NSString *)qrcode scaleX:(CGFloat)scaleX scaleY:(CGFloat)scaleY quietSpace:(CGFloat)quietSpace {
+    CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
+    [filter setDefaults];
+    NSData *data = [qrcode dataUsingEncoding:NSUTF8StringEncoding];
+    [filter setValue:data forKey:@"inputMessage"];
+    [filter setValue:@(quietSpace) forKey:@"inputQuietSpace"];
+    CIImage *ciImage = filter.outputImage;
+    if (!ciImage) {
+        return nil;
+    }
+    CIImage *transformedImage = [ciImage imageByApplyingTransform:CGAffineTransformMakeScale(scaleX, scaleY)];
+    return [UIImage imageWithCIImage:transformedImage];
+}
+
++ (UIImage *)yp_imageWithBRCodeString:(NSString *)qrcode {
+    return [self yp_imageWithBRCodeString:qrcode scaleX:10.f scaleY:10.f quietSpace:5.f];
+}
+
+@end
+
 
 @implementation UIImage (YPImageLocalStorage)
 
