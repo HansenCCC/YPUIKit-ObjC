@@ -8,6 +8,7 @@
 #ifndef YPCategoryHeader_h
 #define YPCategoryHeader_h
 
+#import "NSObject+YPExtension.h"
 #import "NSData+YPExtension.h"
 #import "NSDate+YPExtension.h"
 #import "NSString+YPExtension.h"
