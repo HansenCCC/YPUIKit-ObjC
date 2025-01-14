@@ -22,7 +22,6 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        
         _backgroundView = [[UIView alloc] init];
         _backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.77];
         [self addSubview:_backgroundView];
@@ -44,7 +43,6 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect bounds = self.frame;
-    
     CGRect f1 = bounds;
     f1.size = [self.indicator sizeThatFits:CGSizeZero];
     
@@ -56,7 +54,6 @@
         f2.size = [self.titleLabel sizeThatFits:CGSizeMake(maxWidth - 20.f, 0)];
         maxWidth = MAX(f2.size.width + 20.f, minWidth);
         f2.size.width = maxWidth - 20.f;
-        
         self.titleLabel.hidden = NO;
         
         f1.origin.x = (maxWidth - f1.size.width) / 2.f;
@@ -83,7 +80,6 @@
     f3.origin.y = (bounds.size.height - f3.size.height) / 2.f;
     self.backgroundView.frame = f3;
     self.backgroundView.layer.cornerRadius = 8.f;
-    
 }
 
 + (YPLoadingView *)showWithView:(UIView *)view translucent:(BOOL)translucent userInteractionEnabled:(BOOL)userInteractionEnabled {

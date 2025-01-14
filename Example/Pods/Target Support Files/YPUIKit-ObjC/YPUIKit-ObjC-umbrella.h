@@ -54,6 +54,7 @@
 #import "YPPopupHeader.h"
 #import "YPPopupAnimatedTransitioning.h"
 #import "YPPopupController.h"
+#import "YPProgressView.h"
 #import "YPPurchaseManager.h"
 #import "YPReachability.h"
 #import "YPRunLabel.h"

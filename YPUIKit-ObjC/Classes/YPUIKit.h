@@ -31,5 +31,6 @@
 #import "YPFloatingView.h"
 #import "YPAppManager.h"
 #import "YPColorPickerViewController.h"
+#import "YPProgressView.h"
 
 #endif /* YPUIKit_h */
