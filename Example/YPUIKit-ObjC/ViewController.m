@@ -49,14 +49,14 @@
 }
 
 - (void)didClickButton {
-    _progress += 0.001;
+    _progress += 0.01;
     NSString *text = [NSString stringWithFormat:@"%.2f%%", _progress * 100];
-    [YPProgressView showProgress:_progress text:text];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [YPRingProgressView showProgress:_progress text:text];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self->_progress > 1) {
-            [YPProgressView showProgress:1 text:@"下载完成"];
+            [YPRingProgressView showProgress:1 text:@"下载完成"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [YPProgressView hideProgress];
+                [YPRingProgressView hideProgress];
                 self->_progress = 0;
             });
         } else {
