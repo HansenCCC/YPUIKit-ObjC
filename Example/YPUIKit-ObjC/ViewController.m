@@ -15,6 +15,7 @@
 @property (nonatomic, strong) YPSwiperView *swiperView;
 @property (nonatomic, strong) YPRunLabel *runLabel;
 @property (nonatomic, strong) YPFloatingView *floatingView;
+@property (nonatomic, strong) YPVideoPlayerView *playerView;
 
 @end
 
@@ -46,6 +47,60 @@
     self.floatingView = [[YPFloatingView alloc] initWithFrame:CGRectMake(20, 100, 100.f, 100.f)];
     self.floatingView.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:self.floatingView];
+    
+    self.playerView = [[YPVideoPlayerView alloc] init];
+    [self.view addSubview:self.playerView];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGRect bounds = self.view.bounds;
+    CGRect f1 = bounds;
+    f1.size.height = 250.f;
+    f1.origin.y = (bounds.size.height - f1.size.height) / 2.f;
+    self.playerView.frame = f1;
+}
+
+#pragma mark - getters | setters
+
+- (YPSwiperView *)swiperView {
+    if (!_swiperView) {
+        _swiperView = [[YPSwiperView alloc] init];
+        _swiperView.delegate = self;
+        _swiperView.autoplay = YES;
+        _swiperView.cellClass = @[
+            [UICollectionViewCell class],
+        ];
+    }
+    return _swiperView;
+}
+
+- (YPVideoPlayerView *)playerView {
+    if (!_playerView) {
+        _playerView = [[YPVideoPlayerView alloc] init];
+    }
+    return _playerView;
+}
+
+#pragma mark - YPSwiperViewDelegate
+
+- (UICollectionViewCell *)swiperCollectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+    if (![cell viewWithTag:100]) {
+        UIView *bgView = [[UIView alloc] init];
+        bgView.tag = 100;
+        bgView.frame = CGRectMake(10.f, 0.f, cell.frame.size.width - 20.f, cell.frame.size.height);
+        [cell addSubview:bgView];
+        bgView.layer.cornerRadius = 10.f;
+        bgView.backgroundColor = [UIColor yp_randomColor];
+    }
+    return cell;
+}
+
+- (NSInteger)swiperCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 5;
 }
 
 - (void)didClickButton {
@@ -95,39 +150,6 @@
 //    }];
 //    [self presentViewController:picker animated:YES completion:nil];
     
-}
-
-#pragma mark - getters | setters
-
-- (YPSwiperView *)swiperView {
-    if (!_swiperView) {
-        _swiperView = [[YPSwiperView alloc] init];
-        _swiperView.delegate = self;
-        _swiperView.autoplay = YES;
-        _swiperView.cellClass = @[
-            [UICollectionViewCell class],
-        ];
-    }
-    return _swiperView;
-}
-
-#pragma mark - YPSwiperViewDelegate
-
-- (UICollectionViewCell *)swiperCollectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-    if (![cell viewWithTag:100]) {
-        UIView *bgView = [[UIView alloc] init];
-        bgView.tag = 100;
-        bgView.frame = CGRectMake(10.f, 0.f, cell.frame.size.width - 20.f, cell.frame.size.height);
-        [cell addSubview:bgView];
-        bgView.layer.cornerRadius = 10.f;
-        bgView.backgroundColor = [UIColor yp_randomColor];
-    }
-    return cell;
-}
-
-- (NSInteger)swiperCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
 }
 
 @end

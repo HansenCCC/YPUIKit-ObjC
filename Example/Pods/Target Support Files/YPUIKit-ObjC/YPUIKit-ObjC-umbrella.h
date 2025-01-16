@@ -63,6 +63,10 @@
 #import "YPSwiperView.h"
 #import "YPTextView.h"
 #import "YPUIKit.h"
+#import "YPVideoPlayer.h"
+#import "YPVideoPlayerManager.h"
+#import "YPVideoPlayerView.h"
+#import "YPVideoPlayerViewController.h"
 #import "YPViewController.h"
 #import "YPWaterfallFlowLayout.h"
 

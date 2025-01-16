@@ -33,5 +33,6 @@
 #import "YPColorPickerViewController.h"
 #import "YPProgressView.h"
 #import "YPRingProgressView.h"
+#import "YPVideoPlayer.h"
 
 #endif /* YPUIKit_h */
