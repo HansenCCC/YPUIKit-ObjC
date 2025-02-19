@@ -25,7 +25,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [self.navigationController.navigationBar yp_resetConfiguration];
+    self.navigationController.navigationBar.yp_backgroundColor = [UIColor yp_whiteColor];
+    [self.navigationController.navigationBar yp_configuration];
+    
     self.title = @"阿萨德发送到发";
     self.view.backgroundColor = [UIColor whiteColor];
     self.button = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -104,20 +107,24 @@
 }
 
 - (void)didClickButton {
-    _progress += 0.01;
-    NSString *text = [NSString stringWithFormat:@"%.2f%%", _progress * 100];
-    [YPRingProgressView showProgress:_progress text:text];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (self->_progress > 1) {
-            [YPRingProgressView showProgress:1 text:@"下载完成"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [YPRingProgressView hideProgress];
-                self->_progress = 0;
-            });
-        } else {
-            [self didClickButton];
-        }
-    });
+    NSString *path = [YPFileManager shareInstance].applicationPath;
+    YPFileListViewController *vc = [[YPFileListViewController alloc] initWithPath:path];
+    vc.isRoot = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+//    _progress += 0.01;
+//    NSString *text = [NSString stringWithFormat:@"%.2f%%", _progress * 100];
+//    [YPRingProgressView showProgress:_progress text:text];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        if (self->_progress > 1) {
+//            [YPRingProgressView showProgress:1 text:@"下载完成"];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [YPRingProgressView hideProgress];
+//                self->_progress = 0;
+//            });
+//        } else {
+//            [self didClickButton];
+//        }
+//    });
     
 //    YPColorPickerViewController *vc = [YPColorPickerViewController popupPickerWithCompletion:^(UIColor *selectedColor) {
 //        NSLog(@"%@",selectedColor);

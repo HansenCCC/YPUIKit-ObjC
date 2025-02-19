@@ -17,7 +17,6 @@
 #import "YPTextView.h"
 #import "YPAlertView.h"
 #import "YPLoadingView.h"
-#import "YPFileBrowserController.h"
 #import "YPShakeManager.h"
 #import "YPPurchaseManager.h"
 #import "YPPopupHeader.h"
@@ -34,5 +33,7 @@
 #import "YPProgressView.h"
 #import "YPRingProgressView.h"
 #import "YPVideoPlayer.h"
+#import "YPFileManager.h"
+#import "YPFileListViewController.h"
 
 #endif /* YPUIKit_h */
