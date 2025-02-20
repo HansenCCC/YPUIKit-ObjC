@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YPFileListModel : NSObject
 
+@property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, strong) YPFileItem *fileItem;
 
 @end

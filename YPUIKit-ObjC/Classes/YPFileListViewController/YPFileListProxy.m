@@ -64,39 +64,55 @@
     }
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView
+    trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive
+                                                                               title:@"删除".yp_localizedString
+                                                                             handler:^(UIContextualAction *action, UIView *sourceView, void (^completionHandler)(BOOL)) {
+        [weakSelf deleteItemAtIndexPath:indexPath];
+        if (completionHandler) {
+            completionHandler(YES);
+        }
+    }];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
+    config.performsFirstActionWithFullSwipe = YES;
+    return config;
+}
+
 - (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point  API_AVAILABLE(ios(13.0)){
     return [UIContextMenuConfiguration configurationWithIdentifier:nil
                                                         previewProvider:nil
                                                      actionProvider:^UIMenu *(NSArray<UIMenuElement *> *suggestedActions) {
-        UIAction *renameAction = [UIAction actionWithTitle:@"重新命名" image:[UIImage systemImageNamed:@"pencil"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *renameAction = [UIAction actionWithTitle:@"重新命名".yp_localizedString image:[UIImage systemImageNamed:@"pencil"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             // 重新命名操作
-            [self renameItemAtIndexPath:indexPath];
+            [self renameItemAtIndexPath:indexPath tableView:tableView];
         }];
-        UIAction *compressAction = [UIAction actionWithTitle:@"压缩" image:[UIImage systemImageNamed:@"archivebox"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *compressAction = [UIAction actionWithTitle:@"压缩".yp_localizedString image:[UIImage systemImageNamed:@"archivebox"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             // 压缩操作
             [self compressItemAtIndexPath:indexPath];
         }];
-        UIAction *unzipAction = [UIAction actionWithTitle:@"解压" image:[UIImage systemImageNamed:@"arrow.down.circle.fill"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *unzipAction = [UIAction actionWithTitle:@"解压".yp_localizedString image:[UIImage systemImageNamed:@"arrow.down.circle.fill"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             // 解压操作
             [self unzipItemAtIndexPath:indexPath];
         }];
-        UIAction *copyAction = [UIAction actionWithTitle:@"复制" image:[UIImage systemImageNamed:@"doc.on.doc"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *copyAction = [UIAction actionWithTitle:@"复制".yp_localizedString image:[UIImage systemImageNamed:@"doc.on.doc"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             // 复制操作
             [self copyItemAtIndexPath:indexPath];
         }];
-        UIAction *quickViewAction = [UIAction actionWithTitle:@"快速查看" image:[UIImage systemImageNamed:@"eye"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *quickViewAction = [UIAction actionWithTitle:@"快速查看".yp_localizedString image:[UIImage systemImageNamed:@"eye"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             // 快速查看操作
             [self quickViewItemAtIndexPath:indexPath];
         }];
-        UIAction *openInOtherAppAction = [UIAction actionWithTitle:@"其它App打开" image:[UIImage systemImageNamed:@"square.and.arrow.up"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *openInOtherAppAction = [UIAction actionWithTitle:@"其它App打开".yp_localizedString image:[UIImage systemImageNamed:@"square.and.arrow.up"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             // 其它App打开操作
             [self openInOtherAppAtIndexPath:indexPath];
         }];
-        UIAction *deleteAction = [UIAction actionWithTitle:@"删除" image:[UIImage systemImageNamed:@"trash.fill"] identifier:nil  handler:^(__kindof UIAction * _Nonnull action) {
+        UIAction *deleteAction = [UIAction actionWithTitle:@"删除".yp_localizedString image:[UIImage systemImageNamed:@"trash.fill"] identifier:nil  handler:^(__kindof UIAction * _Nonnull action) {
             // 删除操作
             [self deleteItemAtIndexPath:indexPath];
         }];
-        return [UIMenu menuWithTitle:@"文件操作" image:[UIImage systemImageNamed:@"pencil.and.outline"] identifier:nil options:UIMenuOptionsDestructive children:@[
+        return [UIMenu menuWithTitle:@"文件操作".yp_localizedString image:[UIImage systemImageNamed:@"pencil.and.outline"] identifier:nil options:UIMenuOptionsDestructive children:@[
             renameAction,
             compressAction,
             unzipAction,
@@ -108,9 +124,13 @@
     }];
 }
 
-- (void)renameItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)renameItemAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     // 这里处理重新命名的逻辑
     NSLog(@"重新命名文件夹或文件: %@", indexPath);
+    YPFileListModel *cellModel = self.viewModel.dataList[indexPath.row];
+    cellModel.isEditing = YES;
+    YPFileListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.cellModel = cellModel;
 }
 
 - (void)compressItemAtIndexPath:(NSIndexPath *)indexPath {

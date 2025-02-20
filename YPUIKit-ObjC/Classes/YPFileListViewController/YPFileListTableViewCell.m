@@ -8,12 +8,13 @@
 #import "YPFileListTableViewCell.h"
 #import "YPFileListModel.h"
 
-@interface YPFileListTableViewCell ()
+@interface YPFileListTableViewCell () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UIImageView *thumbnailImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *detailLabel;
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) UITextField *textField;
 
 @end
 
@@ -34,10 +35,13 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.detailLabel];
     [self.contentView addSubview:self.lineView];
+    [self.contentView addSubview:self.textField];
 }
 
 - (void)setCellModel:(YPFileListModel *)cellModel {
     _cellModel = cellModel;
+    self.textField.text = cellModel.fileItem.name?:@"";
+    self.textField.placeholder = cellModel.fileItem.name?:@"";
     self.titleLabel.text = cellModel.fileItem.name?:@"";
     self.thumbnailImageView.image = cellModel.fileItem.thumbnail;
     if (!self.cellModel.fileItem.isLoadThumbnail) {
@@ -49,6 +53,16 @@
     NSString *dateString = [cellModel.fileItem.creationDate yp_StringWithDateFormat:@"yyyy/MM/dd"];
     NSString *sizeString = cellModel.fileItem.stringForFileSize;
     self.detailLabel.text = [NSString stringWithFormat:@"%@ - %@", dateString, sizeString];
+    
+    self.titleLabel.hidden = self.cellModel.isEditing;
+    self.detailLabel.hidden = self.cellModel.isEditing;
+    self.textField.hidden = !self.cellModel.isEditing;
+    
+    if (self.cellModel.isEditing) {
+        // 如果是编辑状态，主动弹出编辑框
+        [self.textField becomeFirstResponder];
+    }
+    
     [self layoutSubviews];
 }
 
@@ -80,6 +94,13 @@
     f4.size.width = bounds.size.width - f4.origin.x - 15.f;
     f4.origin.y = bounds.size.height - f4.size.height;
     self.lineView.frame = f4;
+    
+    CGRect f5 = bounds;
+    f5.origin.x = f2.origin.x;
+    f5.size.height = bounds.size.height;
+    f5.origin.y = 0;
+    f5.size.width = bounds.size.width - f5.origin.x - 15.f;
+    self.textField.frame = f5;
 }
 
 #pragma mark - getters | setters
@@ -116,6 +137,32 @@
         _lineView.backgroundColor = [UIColor yp_colorWithHexString:@"#3c3c4349"];
     }
     return _lineView;
+}
+
+- (UITextField *)textField {
+    if (!_textField) {
+        _textField = [[UITextField alloc] init];
+        _textField.delegate = self;
+        _textField.returnKeyType = UIReturnKeyDone;
+        _textField.font = [UIFont systemFontOfSize:16.f];
+        _textField.clearButtonMode = UITextFieldViewModeAlways;
+        _textField.enablesReturnKeyAutomatically = YES;
+    }
+    return _textField;
+}
+
+#pragma mrak - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+    self.cellModel.isEditing = NO;
+    self.cellModel.fileItem.name = textField.text;
+    self.cellModel = self.cellModel;
 }
 
 @end

@@ -94,7 +94,8 @@
         tableView.showsVerticalScrollIndicator = NO;
         tableView.delegate = self.proxy;
         tableView.dataSource = self.proxy;
-        
+        tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+
         NSArray *classs = @[
             [UITableViewCell class],
             [YPFileListTableViewCell class],
