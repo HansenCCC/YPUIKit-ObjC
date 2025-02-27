@@ -107,7 +107,7 @@
 }
 
 - (void)didClickButton {
-    NSString *path = [YPFileManager shareInstance].appFilesPath;
+    NSString *path = [YPFileManager shareInstance].applicationPath;
     YPFileListViewController *vc = [[YPFileListViewController alloc] initWithPath:path];
     vc.isRoot = YES;
     [self.navigationController pushViewController:vc animated:YES];

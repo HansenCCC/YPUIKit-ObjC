@@ -154,6 +154,23 @@
 #pragma mrak - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    // 文件名不能为空
+    NSString *fileName = textField.text;
+    if (fileName.length == 0) {
+        return NO;
+    }
+    // 判断是否存在同名文件
+    YPFileItem *fileItem = self.cellModel.fileItem;
+    NSString *parentPath = [fileItem.path stringByDeletingLastPathComponent];
+    NSString *newFileName = [parentPath stringByAppendingPathComponent:fileName];
+    // 已修改
+    if (![newFileName isEqualToString:fileItem.path]) {
+        // 当前目录已经存在
+        if ([[YPFileManager shareInstance] existsAtPath:newFileName]) {
+            [YPAlertView alertText:[NSString stringWithFormat:@"'%@' 名称已被占用。".yp_localizedString, fileName]];
+            return NO;
+        }
+    }
     [textField resignFirstResponder];
     return YES;
 }

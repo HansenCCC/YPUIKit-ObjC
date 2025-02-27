@@ -35,6 +35,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startLoadData) name:kNotificationFileManagerDidUpdate object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [self setupSubviews];
     [self startLoadData];
@@ -76,6 +78,31 @@
     CGRect boudns = self.view.bounds;
     CGRect f1 = boudns;
     self.tableView.frame = f1;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = keyboardFrame.size.height;
+    for (UITableViewCell *cell in [self.tableView visibleCells]) {
+        UITextField *textField = (UITextField *)[cell yp_findSubviewsOfClass:[UITextField class]].firstObject;
+        if (textField.isFirstResponder) {
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            CGRect cellRectInWindow = [self.view convertRect:cell.frame toView:nil];
+            if (CGRectGetMaxY(cellRectInWindow) > self.view.frame.size.height - keyboardHeight) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight, 0);
+                    self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+                }];
+            }
+        }
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.contentInset = UIEdgeInsetsZero;
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    }];
 }
 
 #pragma mark - YPFileListViewModelDelegate
