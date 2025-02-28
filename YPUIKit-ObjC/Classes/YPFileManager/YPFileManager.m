@@ -70,6 +70,11 @@ NSString *const kYPFileManagerAscendingKey = @"kYPFileManagerAscendingKey";
     fileItem.modificationDate = attributes[NSFileModificationDate];
     fileItem.fileAttributes = [attributes copy];
     fileItem.isLoadThumbnail = NO;
+    
+    fileItem.isReadable = [fileManager isReadableFileAtPath:filePath];
+    fileItem.isWritable = [fileManager isWritableFileAtPath:filePath];
+    fileItem.isExecutable = [fileManager isExecutableFileAtPath:filePath];
+    
     return fileItem;
 }
 
@@ -154,6 +159,82 @@ NSString *const kYPFileManagerAscendingKey = @"kYPFileManagerAscendingKey";
     return success;
 }
 
+/// 移动文件或文件夹到指定路径 例如：/a/b/c.txt /a/c/b.txt |  /a/b /a/c
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // 1. 检查源路径是否存在
+    if (![self existsAtPath:sourcePath]) {
+        NSLog(@"移动失败，源路径不存在: %@", sourcePath);
+        return NO;
+    }
+    // 2. 检查目标路径是否已存在
+    if ([self existsAtPath:destinationPath]) {
+        NSLog(@"移动失败，目标路径已存在: %@", destinationPath);
+        return NO;
+    }
+    // 3. 检查源路径是否为目标路径的子目录
+    NSString *absoluteSourcePath = [sourcePath stringByStandardizingPath];
+    NSString *absoluteDestinationPath = [destinationPath stringByStandardizingPath];
+    if ([absoluteDestinationPath hasPrefix:absoluteSourcePath] && ![absoluteSourcePath isEqualToString:absoluteDestinationPath]) {
+        NSLog(@"移动失败，不能将文件或目录移动到其自身的子目录中: %@ -> %@", sourcePath, destinationPath);
+        return NO;
+    }
+    // 4. 确保目标路径的父目录存在
+    NSString *destinationDirectory = [destinationPath stringByDeletingLastPathComponent];
+    [self ensureDirectoryExistsAtPath:destinationDirectory];
+    // 5. 执行移动操作
+    NSError *error = nil;
+    BOOL success = [fileManager moveItemAtPath:sourcePath toPath:destinationPath error:&error];
+    if (!success) {
+        NSLog(@"移动失败: %@ -> %@，错误: %@", sourcePath, destinationPath, error.localizedDescription);
+    }
+    return success;
+}
+
+
+/// 重命名文件或文件夹
+- (BOOL)renameItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![self existsAtPath:sourcePath]) {
+        NSLog(@"重命名失败，源路径不存在: %@", sourcePath);
+        return NO;
+    }
+    if ([self existsAtPath:destinationPath]) {
+        NSLog(@"重命名失败，目标路径已存在: %@", destinationPath);
+        return NO;
+    }
+    NSError *error = nil;
+    BOOL success = [fileManager moveItemAtPath:sourcePath toPath:destinationPath error:&error];
+    if (!success) {
+        NSLog(@"重命名失败: %@ -> %@，错误: %@", sourcePath, destinationPath, error.localizedDescription);
+    }
+    return success;
+}
+
+/// 创建文件或文件夹到指定路径
+- (BOOL)createItemAtPath:(NSString *)path isDirectory:(BOOL)isDirectory {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (isDirectory) {
+        // 创建文件夹
+        NSError *error = nil;
+        BOOL success = [fileManager createDirectoryAtPath:path
+                              withIntermediateDirectories:YES
+                                               attributes:nil
+                                                    error:&error];
+        if (!success) {
+            NSLog(@"创建文件夹失败: %@，错误: %@", path, error.localizedDescription);
+        }
+        return success;
+    } else {
+        // 创建文件
+        BOOL success = [fileManager createFileAtPath:path contents:nil attributes:nil];
+        if (!success) {
+            NSLog(@"创建文件失败: %@", path);
+        }
+        return success;
+    }
+}
+
 /// 确保目录存在，不存在则创建
 - (BOOL)ensureDirectoryExistsAtPath:(NSString *)path {
     if ([self isDirectoryAtPath:path]) {
@@ -171,7 +252,7 @@ NSString *const kYPFileManagerAscendingKey = @"kYPFileManagerAscendingKey";
 - (BOOL)deleteItemAtPath:(NSString *)path {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // 确保文件或文件夹存在
-    if ([self existsAtPath:path]) {
+    if (![self existsAtPath:path]) {
         NSLog(@"删除失败，路径不存在: %@", path);
         return NO;
     }
@@ -197,7 +278,8 @@ NSString *const kYPFileManagerAscendingKey = @"kYPFileManagerAscendingKey";
 
 // 判断文件或目录是否存在
 - (BOOL)existsAtPath:(NSString *)path {
-    return [[NSFileManager defaultManager] fileExistsAtPath:path];
+    BOOL result = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    return result;
 }
 
 #pragma mark - private

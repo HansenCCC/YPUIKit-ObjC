@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImage *thumbnail;      // 缩略图（仅适用于图片或视频）
 @property (nonatomic, strong) NSDictionary *fileAttributes;// 文件属性
 
+@property (nonatomic, assign) BOOL isReadable;         // 是否可读
+@property (nonatomic, assign) BOOL isWritable;         // 是否可写
+@property (nonatomic, assign) BOOL isExecutable;       // 是否可执行
+
 - (NSString *)stringForFileSize;
 
 - (void)loadThumbnailWithCompletion:(void (^)(UIImage *thumbnail))completion;

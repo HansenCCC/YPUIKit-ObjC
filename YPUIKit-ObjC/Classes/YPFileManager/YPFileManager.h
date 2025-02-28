@@ -48,6 +48,7 @@ extern NSString *const kNotificationFileManagerDidUpdate;
 @property (nonatomic, assign) YPFileLayoutOption layoutOption;
 @property (nonatomic, assign) YPFileSortOption sortOption;
 @property (nonatomic, assign) BOOL ascending;
+@property (nonatomic, strong) NSString *copiedItemPath;
 
 + (instancetype)shareInstance;
 
@@ -67,11 +68,30 @@ extern NSString *const kNotificationFileManagerDidUpdate;
 ///   - ascending: 是否是升序
 - (NSArray<YPFileItem *> *)listFilesInDirectoryAtPath:(NSString *)directoryPath search:(nullable NSString *)searchKeyword sortOption:(YPFileSortOption)sortOption ascending:(BOOL)ascending;
 
+
+/// 创建文件或文件夹到指定路径
+/// - Parameters:
+///   - path: 文件夹或者文件路径
+///   - isDirectory: 是否是文件夹
+- (BOOL)createItemAtPath:(NSString *)path isDirectory:(BOOL)isDirectory;
+
 /// 复制文件或文件夹到指定路径 例如：/a/b/c.txt /a/c/b.txt |  /a/b /a/c
 /// - Parameters:
 ///   - sourcePath: 文件或者文件夹路径
 ///   - destinationPath: 目标路径
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath;
+
+/// 移动文件或文件夹到指定路径 例如：/a/b/c.txt /a/c/b.txt |  /a/b /a/c
+/// - Parameters:
+///   - sourcePath: 文件或者文件夹路径
+///   - destinationPath: 目标路径
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath;
+
+/// 重命名文件或文件夹 例如：/a/b/c.txt/a/b/d.txt |  /a/b /a/c
+/// - Parameters:
+///   - sourcePath: 文件或者文件夹路径
+///   - destinationPath: 目标路径
+- (BOOL)renameItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath;
 
 /// 确保目录存在，不存在则创建
 /// - Parameter path: 文件夹路径
@@ -96,6 +116,12 @@ extern NSString *const kNotificationFileManagerDidUpdate;
 /// 获取文件缩略图
 /// - Parameter filePath: 文件路径
 - (UIImage *)generateThumbnailForFileAtPath:(NSString *)filePath;
+
+/// 获取一个唯一的文件路径，避免与已存在的文件或文件夹重名
+/// 如果目标路径已存在，则会根据文件名加上数字后缀（如 "file 1.txt"）来生成新的路径
+/// - Parameter path: 要检查并生成唯一路径的文件路径
+/// @return 如果目标路径不存在，返回原路径；如果目标路径已存在，返回一个唯一的路径
+- (NSString *)uniqueFilePathForPath:(NSString *)path;
 
 @end
 

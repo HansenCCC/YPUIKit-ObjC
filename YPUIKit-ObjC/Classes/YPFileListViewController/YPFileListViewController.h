@@ -9,9 +9,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    YPFileListTypeDefault,
+    YPFileListTypeSelect,
+} YPFileListType;
+
 @interface YPFileListViewController : YPViewController
 
+@property (nonatomic, readonly) NSString *path;
 @property (nonatomic, assign) BOOL isRoot;
+@property (nonatomic, assign) YPFileListType type;
 
 - (instancetype)initWithPath:(NSString *)path;
 

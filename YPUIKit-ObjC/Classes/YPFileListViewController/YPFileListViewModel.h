@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSMutableArray *dataList;
 
 @property (nonatomic, strong) NSString *filePath;
+@property (nonatomic, assign) YPFileListType type;
 
 - (void)startLoadData;
 

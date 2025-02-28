@@ -60,6 +60,13 @@
     
     if (self.cellModel.isEditing) {
         // 如果是编辑状态，主动弹出编辑框
+        NSString *fileName = self.textField.text;
+        NSRange dotRange = [fileName rangeOfString:@"."];
+        if (dotRange.location != NSNotFound) {
+            [self.textField yp_setSelectedRange:NSMakeRange(dotRange.location, 0)];
+        } else {
+            [self.textField yp_setSelectedRange:NSMakeRange(fileName.length, 0)];
+        }
         [self.textField becomeFirstResponder];
     }
     
@@ -80,6 +87,10 @@
     f2.origin.x = CGRectGetMaxX(f1) + 10.f;
     f2.origin.y = 15.f;
     f2.size = [self.titleLabel sizeThatFits:CGSizeZero];
+    CGFloat maxWith = bounds.size.width - f2.origin.x - 15.f;
+    if (f2.size.width >= maxWith) {
+        f2.size.width = maxWith;
+    }
     self.titleLabel.frame = f2;
     
     CGRect f3 = bounds;
@@ -162,24 +173,38 @@
     // 判断是否存在同名文件
     YPFileItem *fileItem = self.cellModel.fileItem;
     NSString *parentPath = [fileItem.path stringByDeletingLastPathComponent];
-    NSString *newFileName = [parentPath stringByAppendingPathComponent:fileName];
-    // 已修改
-    if (![newFileName isEqualToString:fileItem.path]) {
-        // 当前目录已经存在
-        if ([[YPFileManager shareInstance] existsAtPath:newFileName]) {
-            [YPAlertView alertText:[NSString stringWithFormat:@"'%@' 名称已被占用。".yp_localizedString, fileName]];
-            return NO;
-        }
+    NSString *newFilePath = [parentPath stringByAppendingPathComponent:fileName];
+    // 尚未修改名字
+    if ([newFilePath isEqualToString:fileItem.path]) {
+        [textField resignFirstResponder];
+        return YES;
+    }
+    // 当前目录已经存在
+    if ([[YPFileManager shareInstance] existsAtPath:newFilePath]) {
+        [YPAlertView alertText:[NSString stringWithFormat:@"'%@' 名称已被占用。".yp_localizedString, fileName]];
+        return NO;
     }
     [textField resignFirstResponder];
+    self.cellModel.isEditing = NO;
+    // 开始修改文件名字
+    NSString *oldPath = fileItem.path;
+    NSString *newPath = newFilePath;
+    BOOL success = [[YPFileManager shareInstance] renameItemAtPath:oldPath toPath:newPath];
+    if (!success) {
+        [YPAlertView alertText:@"重命名文件失败".yp_localizedString];
+        return YES;
+    }
+    self.cellModel.fileItem.name = textField.text;
+    self.cellModel = self.cellModel;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFileManagerDidUpdate object:nil];
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [textField resignFirstResponder];
     self.cellModel.isEditing = NO;
-    self.cellModel.fileItem.name = textField.text;
-    self.cellModel = self.cellModel;
+    self.titleLabel.hidden = self.cellModel.isEditing;
+    self.detailLabel.hidden = self.cellModel.isEditing;
+    self.textField.hidden = !self.cellModel.isEditing;
 }
 
 @end
