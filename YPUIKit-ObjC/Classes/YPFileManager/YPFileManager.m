@@ -42,7 +42,7 @@ NSString *const kYPFileManagerAscendingKey = @"kYPFileManagerAscendingKey";
             m.cache_sortOption = m.sortOption;
         }
         if (![[NSUserDefaults standardUserDefaults] boolForKey:kYPFileManagerAscendingKey]) {
-            m.ascending = NO;
+            m.ascending = YES;
             m.cache_ascending = m.ascending;
         }
     });
@@ -167,30 +167,35 @@ NSString *const kYPFileManagerAscendingKey = @"kYPFileManagerAscendingKey";
         NSLog(@"移动失败，源路径不存在: %@", sourcePath);
         return NO;
     }
-    // 2. 检查目标路径是否已存在
-    if ([self existsAtPath:destinationPath]) {
-        NSLog(@"移动失败，目标路径已存在: %@", destinationPath);
-        return NO;
+    BOOL isDirectory = NO;
+    [fileManager fileExistsAtPath:destinationPath isDirectory:&isDirectory];
+    // 2. 计算最终目标路径
+    NSString *finalDestinationPath = destinationPath;
+    if (isDirectory) {
+        finalDestinationPath = [destinationPath stringByAppendingPathComponent:[sourcePath lastPathComponent]];
     }
-    // 3. 检查源路径是否为目标路径的子目录
+    // 3. 如果目标存在，生成唯一路径
+    if ([self existsAtPath:finalDestinationPath]) {
+        finalDestinationPath = [self uniqueFilePathForPath:finalDestinationPath];
+    }
+    // 4. 防止自己移动到子目录（加"/"精确匹配文件夹路径）
     NSString *absoluteSourcePath = [sourcePath stringByStandardizingPath];
-    NSString *absoluteDestinationPath = [destinationPath stringByStandardizingPath];
-    if ([absoluteDestinationPath hasPrefix:absoluteSourcePath] && ![absoluteSourcePath isEqualToString:absoluteDestinationPath]) {
+    NSString *absoluteDestinationPath = [finalDestinationPath stringByStandardizingPath];
+    if ([[absoluteDestinationPath stringByAppendingString:@"/"] hasPrefix:[absoluteSourcePath stringByAppendingString:@"/"]]) {
         NSLog(@"移动失败，不能将文件或目录移动到其自身的子目录中: %@ -> %@", sourcePath, destinationPath);
         return NO;
     }
-    // 4. 确保目标路径的父目录存在
-    NSString *destinationDirectory = [destinationPath stringByDeletingLastPathComponent];
+    // 5. 确保目标父目录存在
+    NSString *destinationDirectory = [finalDestinationPath stringByDeletingLastPathComponent];
     [self ensureDirectoryExistsAtPath:destinationDirectory];
-    // 5. 执行移动操作
+    // 6. 执行移动操作
     NSError *error = nil;
-    BOOL success = [fileManager moveItemAtPath:sourcePath toPath:destinationPath error:&error];
+    BOOL success = [fileManager moveItemAtPath:sourcePath toPath:finalDestinationPath error:&error];
     if (!success) {
-        NSLog(@"移动失败: %@ -> %@，错误: %@", sourcePath, destinationPath, error.localizedDescription);
+        NSLog(@"移动失败: %@ -> %@，错误: %@", sourcePath, finalDestinationPath, error.localizedDescription);
     }
     return success;
 }
-
 
 /// 重命名文件或文件夹
 - (BOOL)renameItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath {

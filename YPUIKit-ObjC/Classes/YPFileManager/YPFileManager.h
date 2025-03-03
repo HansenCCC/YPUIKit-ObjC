@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
     YPFileSortByName,
     YPFileSortByType,
-    YPFileSortByModificationDate,
     YPFileSortByCreationDate,
+    YPFileSortByModificationDate,
     YPFileSortBySize
 } YPFileSortOption;
 
@@ -47,7 +47,7 @@ extern NSString *const kNotificationFileManagerDidUpdate;
 
 @property (nonatomic, assign) YPFileLayoutOption layoutOption;
 @property (nonatomic, assign) YPFileSortOption sortOption;
-@property (nonatomic, assign) BOOL ascending;
+@property (nonatomic, assign) BOOL ascending;// 升序 从小到大
 @property (nonatomic, strong) NSString *copiedItemPath;
 
 + (instancetype)shareInstance;

@@ -50,16 +50,77 @@
     // 判断当前文件夹是否拥有读写权限
     if (item.isWritable && item.isReadable) {
         if (@available(iOS 14.0, *)) {
-            UIAction *createFolderAction = [UIAction actionWithTitle:@"创建文件夹".yp_localizedString image:[UIImage systemImageNamed:@"folder.badge.plus"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            // 文件操作组
+            UIAction *createFolderAction = [UIAction actionWithTitle:@"创建文件夹".yp_localizedString
+                                                               image:[UIImage systemImageNamed:@"folder.badge.plus"]
+                                                          identifier:nil
+                                                             handler:^(__kindof UIAction * _Nonnull action) {
                 [weakSelf createFinder];
             }];
-            UIAction *createFileAction = [UIAction actionWithTitle:@"创建文件".yp_localizedString image:[UIImage systemImageNamed:@"doc.badge.plus"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            UIAction *createFileAction = [UIAction actionWithTitle:@"创建文件".yp_localizedString
+                                                             image:[UIImage systemImageNamed:@"doc.badge.plus"]
+                                                        identifier:nil
+                                                           handler:^(__kindof UIAction * _Nonnull action) {
                 [weakSelf createFile];
             }];
-            UIMenu *menu = [UIMenu menuWithTitle:@"选择操作".yp_localizedString children:@[createFolderAction, createFileAction]];
-            UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"ellipsis.circle"] style:UIBarButtonItemStyleDone target:nil action:nil];
+            UIMenu *fileOperationsMenu = [UIMenu menuWithTitle:@"文件操作".yp_localizedString
+                                                         image:nil identifier:nil options:UIMenuOptionsDisplayInline
+                                                      children:@[createFolderAction, createFileAction]];
+            NSArray *sortList = @[
+                @{
+                    @"name": @"按名称".yp_localizedString,
+                    @"type": @(YPFileSortByName),
+                },
+                @{
+                    @"name": @"按种类".yp_localizedString,
+                    @"type": @(YPFileSortByType),
+                },
+                @{
+                    @"name": @"按添加日期".yp_localizedString,
+                    @"type": @(YPFileSortByCreationDate),
+                },
+                @{
+                    @"name": @"按修改日期".yp_localizedString,
+                    @"type": @(YPFileSortByModificationDate),
+                },
+                @{
+                    @"name": @"按大小".yp_localizedString,
+                    @"type": @(YPFileSortBySize),
+                }
+            ];
+            NSMutableArray *sortItems = [[NSMutableArray alloc] init];
+            for (NSDictionary *item in sortList) {
+                YPFileSortOption option = [NSString stringWithFormat:@"%@",item[@"type"]].integerValue;
+                BOOL isSelected = NO;
+                UIImage *image = [YPFileManager shareInstance].ascending ? [UIImage systemImageNamed:@"chevron.up"] : [UIImage systemImageNamed:@"chevron.down"];
+                if ([YPFileManager shareInstance].sortOption == [NSString stringWithFormat:@"%@",item[@"type"]].integerValue) {
+                    isSelected = YES;
+                }
+                UIAction *sort = [UIAction actionWithTitle:item[@"name"]
+                                                     image: isSelected ? image : nil
+                                                identifier:nil
+                                                   handler:^(__kindof UIAction * _Nonnull action) {
+                    if ([YPFileManager shareInstance].sortOption == option) {
+                        [YPFileManager shareInstance].ascending = ![YPFileManager shareInstance].ascending;
+                    } else {
+                        [YPFileManager shareInstance].sortOption = option;
+                    }
+                    [weakSelf setNavigationItem];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFileManagerDidUpdate object:nil];
+                }];
+                [sortItems addObject:sort];
+            }
+            // 排序操作单选组
+            UIMenu *sortOperationsMenu = [UIMenu menuWithTitle:@"排序操作" image:nil identifier:nil options:UIMenuOptionsDisplayInline  children:sortItems];
+            UIMenu *menu = [UIMenu menuWithTitle:@""
+                                        children:@[fileOperationsMenu, sortOperationsMenu]];
+            UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"ellipsis.circle"]
+                                                                           style:UIBarButtonItemStyleDone
+                                                                          target:nil
+                                                                          action:nil];
             menuButton.menu = menu;
             self.navigationItem.rightBarButtonItem = menuButton;
+
         } else {
             UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(rightClickAction:)];
             self.navigationItem.rightBarButtonItem = menuButton;
@@ -88,15 +149,22 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"取消".yp_localizedString style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     } else if (self.viewModel.type == YPFileListTypeSelect) {
-        NSString *sourceItemPath = [YPFileManager shareInstance].copiedItemPath; // 源文件或目录
-        NSString *destinationPath = self.filePath; // 目标文件或目录路径
+        NSString *sourceItemPath = [YPFileManager shareInstance].copiedItemPath;
+        NSString *destinationPath = self.filePath;
         if (sourceItemPath.length == 0 || destinationPath.length == 0) {
             return;
         }
+        // 标准化路径（去掉..和~等）
         NSString *absoluteSourcePath = [sourceItemPath stringByStandardizingPath];
         NSString *absoluteDestinationPath = [destinationPath stringByStandardizingPath];
-        if ([absoluteDestinationPath hasPrefix:absoluteSourcePath] && ![absoluteSourcePath isEqualToString:absoluteDestinationPath]) {
+        // 判断目标路径是不是源路径的子目录（严格判断）[absoluteDestinationPath stringByAppendingString:@"/"]
+        if ([[absoluteDestinationPath stringByAppendingString:@"/"] hasPrefix:[absoluteSourcePath stringByAppendingString:@"/"]]) {
             [YPAlertView alertText:@"不能将文件或目录移动到其自身的子目录中".yp_localizedString];
+            return;
+        }
+        // 2. 判断源路径和目标路径是否是同一个文件夹
+        if ([[absoluteSourcePath stringByDeletingLastPathComponent] isEqualToString:absoluteDestinationPath]) {
+            [YPAlertView alertText:@"源文件夹与目标文件夹相同，无法移动".yp_localizedString];
             return;
         }
         [[YPFileManager shareInstance] moveItemAtPath:sourceItemPath toPath:destinationPath];
