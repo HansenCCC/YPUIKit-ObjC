@@ -2,7 +2,7 @@ PODS:
   - LookinServer (1.2.8):
     - LookinServer/Core (= 1.2.8)
   - LookinServer/Core (1.2.8)
-  - YPUIKit-ObjC (1.2.2)
+  - YPUIKit-ObjC (1.3.0)
 
 DEPENDENCIES:
   - LookinServer
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
-  YPUIKit-ObjC: 5c9cd5d703fc85c0f346ede0b98028b33be43784
+  YPUIKit-ObjC: dbe33bbf6731b7e809a10467b0567eb51913da48
 
 PODFILE CHECKSUM: 95b499ba38bb8cab6edcaa6a74f930e085afe69d
 
