@@ -21,6 +21,11 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6034D0B82D983304006B3C52 /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = 6034D0B62D983304006B3C52 /* end.png */; };
+		6034D0B92D983304006B3C52 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 6034D0B72D983304006B3C52 /* start.png */; };
+		6034D0BB2D9833F5006B3C52 /* landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6034D0BA2D9833F5006B3C52 /* landscape.png */; };
+		6034D0BD2D9838AC006B3C52 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6034D0BC2D9838AC006B3C52 /* bg.png */; };
+		608D54852D8D20B100D0493B /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 608D54842D8D20B100D0493B /* 1.mp4 */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -55,7 +60,12 @@
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		6034D0B62D983304006B3C52 /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
+		6034D0B72D983304006B3C52 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
+		6034D0BA2D9833F5006B3C52 /* landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape.png; sourceTree = "<group>"; };
+		6034D0BC2D9838AC006B3C52 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		608D54842D8D20B100D0493B /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
 		60B4C8D9F653BB764489DDD8 /* Pods-YPUIKit-ObjC_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YPUIKit-ObjC_Example.release.xcconfig"; path = "Target Support Files/Pods-YPUIKit-ObjC_Example/Pods-YPUIKit-ObjC_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6DA9EE07F71E0947CC97346A /* YPUIKit-ObjC.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "YPUIKit-ObjC.podspec"; path = "../YPUIKit-ObjC.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -128,6 +138,11 @@
 			children = (
 				6003F59C195388D20070C39A /* YPAppDelegate.h */,
 				6003F59D195388D20070C39A /* YPAppDelegate.m */,
+				608D54842D8D20B100D0493B /* 1.mp4 */,
+				6034D0B62D983304006B3C52 /* end.png */,
+				6034D0B72D983304006B3C52 /* start.png */,
+				6034D0BA2D9833F5006B3C52 /* landscape.png */,
+				6034D0BC2D9838AC006B3C52 /* bg.png */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* ViewController.h */,
 				6003F5A6195388D20070C39A /* ViewController.m */,
@@ -271,6 +286,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				608D54852D8D20B100D0493B /* 1.mp4 in Resources */,
+				6034D0B82D983304006B3C52 /* end.png in Resources */,
+				6034D0BD2D9838AC006B3C52 /* bg.png in Resources */,
+				6034D0B92D983304006B3C52 /* start.png in Resources */,
+				6034D0BB2D9833F5006B3C52 /* landscape.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
@@ -502,7 +522,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YPUIKit-ObjC/YPUIKit-ObjC-Prefix.pch";
 				INFOPLIST_FILE = "YPUIKit-ObjC/YPUIKit-ObjC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -520,7 +539,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YPUIKit-ObjC/YPUIKit-ObjC-Prefix.pch";
 				INFOPLIST_FILE = "YPUIKit-ObjC/YPUIKit-ObjC-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

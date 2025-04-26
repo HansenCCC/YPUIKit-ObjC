@@ -29,29 +29,28 @@
     self.navigationController.navigationBar.yp_backgroundColor = [UIColor yp_whiteColor];
     [self.navigationController.navigationBar yp_configuration];
     
-    self.title = @"阿萨德发送到发";
+    self.title = @"YPUIKit-ObjC";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.button addTarget:self action:@selector(didClickButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.button];
-    self.button.frame = CGRectMake(100, 100, 100, 100);
-    self.button.backgroundColor = [UIColor redColor];
+//    self.button = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [self.button addTarget:self action:@selector(didClickButton) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:self.button];
+//    self.button.frame = CGRectMake(100, 100, 100, 100);
+//    self.button.backgroundColor = [UIColor redColor];
     
 //    [self.view addSubview:self.swiperView];
 //    self.swiperView.frame = CGRectMake(0, 100, self.view.bounds.size.width, 150.f);
 //    [self.swiperView reloadData];
     
-    self.runLabel = [[YPRunLabel alloc] init];
-    self.runLabel.titleLabel.text = @"你好啊，我是程恒盛";
-    CGSize f1 = [self.runLabel sizeThatFits:CGSizeZero];
-    self.runLabel.frame = CGRectMake(100, 200, f1.width, f1.height);
-    [self.view addSubview:self.runLabel];
+//    self.runLabel = [[YPRunLabel alloc] init];
+//    self.runLabel.titleLabel.text = @"你好啊，我是程恒盛";
+//    CGSize f1 = [self.runLabel sizeThatFits:CGSizeZero];
+//    self.runLabel.frame = CGRectMake(100, 200, f1.width, f1.height);
+//    [self.view addSubview:self.runLabel];
     
-    self.floatingView = [[YPFloatingView alloc] initWithFrame:CGRectMake(20, 100, 100.f, 100.f)];
-    self.floatingView.backgroundColor = [UIColor yellowColor];
-    [self.view addSubview:self.floatingView];
+//    self.floatingView = [[YPFloatingView alloc] initWithFrame:CGRectMake(20, 100, 100.f, 100.f)];
+//    self.floatingView.backgroundColor = [UIColor yellowColor];
+//    [self.view addSubview:self.floatingView];
     
-    self.playerView = [[YPVideoPlayerView alloc] init];
     [self.view addSubview:self.playerView];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -83,6 +82,15 @@
 - (YPVideoPlayerView *)playerView {
     if (!_playerView) {
         _playerView = [[YPVideoPlayerView alloc] init];
+        NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]];
+        YPVideoItem *item = [[YPVideoItem alloc] init];
+        item.url = fileURL;
+        item.type = YPVideoTypeLocal;
+        [_playerView playWithURL:item];
+        _playerView.onProgressUpdate = ^(float progress) {
+            NSLog(@"%f", progress);
+        };
+        _playerView.backgroundColor = [UIColor yp_blackColor];
     }
     return _playerView;
 }

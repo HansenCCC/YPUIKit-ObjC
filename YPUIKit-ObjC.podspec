@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.author           = { 'chenghengsheng' => '2534550460@qq.com' }
   s.source           = { :git => 'https://github.com/HansenCCC/YPUIKit-ObjC', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '13.0'
 
   s.source_files = 'YPUIKit-ObjC/Classes/**/*'
   
