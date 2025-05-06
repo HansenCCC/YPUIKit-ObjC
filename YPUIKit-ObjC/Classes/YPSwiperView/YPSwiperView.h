@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *cellClass;// 保存轮播图的cell class 用于去 collectionVIew 注册 default @[[YPSwiperCell class]];
 
 @property (nonatomic, assign) id <YPSwiperViewDelegate> delegate;
+@property (nonatomic, assign) BOOL showPageControl;// 是否展示 pageControl default YES
 
 - (void)reloadData;
 

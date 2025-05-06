@@ -27,6 +27,7 @@
         _loop = YES;
         _autoplay = NO;
         _delay = 3.0f;
+        _showPageControl = YES;
         [self addSubview:self.collectionView];
         [self addSubview:self.pageControl];
         [self removeTimer];
@@ -111,10 +112,15 @@
 }
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
-    UICollectionViewCell *cell = [self collectionView:self.collectionView cellForItemAtIndexPath:indexPath];
-    CGFloat f1_minX = cell.frame.origin.x;
-    CGPoint point = CGPointZero;
-    point.x = f1_minX;
+    UICollectionViewLayoutAttributes *attr = [self.flowLayout layoutAttributesForItemAtIndexPath:indexPath];
+    if (!attr) {
+        [self.collectionView layoutIfNeeded];
+        attr = [self.flowLayout layoutAttributesForItemAtIndexPath:indexPath];
+        if (!attr) {
+            return;
+        }
+    }
+    CGPoint point = CGPointMake(attr.frame.origin.x, 0);
     CGPoint nextPoint = [self.flowLayout targetContentOffsetForProposedContentOffset:point withScrollingVelocity:CGPointZero];
     [self.collectionView setContentOffset:nextPoint animated:animated];
     //推迟，调用此方法重新开始计时
@@ -234,6 +240,26 @@
     _delay = delay;
     [self removeTimer];
     [self addTimer];
+    [self reloadData];
+}
+
+- (void)setLoop:(BOOL)loop {
+    _loop = loop;
+    [self removeTimer];
+    [self addTimer];
+    [self reloadData];
+}
+
+- (void)setAutoplay:(BOOL)autoplay {
+    _autoplay = autoplay;
+    [self removeTimer];
+    [self addTimer];
+    [self reloadData];
+}
+
+- (void)setShowPageControl:(BOOL)showPageControl {
+    _showPageControl = showPageControl;
+    self.pageControl.hidden = !showPageControl;
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout

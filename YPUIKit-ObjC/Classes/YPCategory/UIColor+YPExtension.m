@@ -223,6 +223,15 @@
     return color;
 }
 
++ (UIColor *)cp_clearColor {
+    static UIColor *color;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        color = [UIColor clearColor];
+    });
+    return color;
+}
+
 + (NSArray <NSString *>*)yp_allColors {
     static NSArray *colors;
     static dispatch_once_t onceToken;

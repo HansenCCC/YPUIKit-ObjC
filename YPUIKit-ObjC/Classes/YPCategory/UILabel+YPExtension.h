@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UILabel (YPExtension)
 
+@property (nonatomic, assign) CGFloat cp_lineSpacing;
+
 /// 快速初始化
 /// @param font font
 /// @param textColor color
