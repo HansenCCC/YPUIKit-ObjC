@@ -114,6 +114,12 @@
     [[YPVideoPlayerManager shareInstance] needUpdateUI];
 }
 
+- (void)toggleRotateAction:(id)sender {
+    if (self.onRotateButtonTapped) {
+        self.onRotateButtonTapped();
+    }
+}
+
 - (void)progressSliderChanged:(UISlider *)slider {
     // 更新当前进度的显示
     CGFloat progress = slider.value;
@@ -174,6 +180,7 @@
         _toggleRotateButton.imageSize = CGSizeMake(25.f, 25.f);
         _toggleRotateButton.tintColor = [UIColor yp_whiteColor];
         _toggleRotateButton.adjustsImageWhenHighlighted = NO;
+        [_toggleRotateButton addTarget:self action:@selector(toggleRotateAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _toggleRotateButton;
 }

@@ -65,35 +65,48 @@
     self.playerView.frame = f1;
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    YPVideoPlayerViewController *vc = [[YPVideoPlayerViewController alloc] init];
+    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]];
+    YPVideoSource *videoSource = [[YPVideoSource alloc] init];
+    videoSource.title = @"玉皇大帝";
+    videoSource.url = fileURL;
+    videoSource.type = YPVideoTypeLocal;
+    vc.videoSource = videoSource;
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    [[UIViewController yp_topViewController] presentViewController:vc animated:YES completion:nil];
+}
+
 #pragma mark - getters | setters
 
-- (YPSwiperView *)swiperView {
-    if (!_swiperView) {
-        _swiperView = [[YPSwiperView alloc] init];
-        _swiperView.delegate = self;
-        _swiperView.autoplay = YES;
-        _swiperView.cellClass = @[
-            [UICollectionViewCell class],
-        ];
-    }
-    return _swiperView;
-}
+//- (YPSwiperView *)swiperView {
+//    if (!_swiperView) {
+//        _swiperView = [[YPSwiperView alloc] init];
+//        _swiperView.delegate = self;
+//        _swiperView.autoplay = YES;
+//        _swiperView.cellClass = @[
+//            [UICollectionViewCell class],
+//        ];
+//    }
+//    return _swiperView;
+//}
 
-- (YPVideoPlayerView *)playerView {
-    if (!_playerView) {
-        _playerView = [[YPVideoPlayerView alloc] init];
-        NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]];
-        YPVideoItem *item = [[YPVideoItem alloc] init];
-        item.url = fileURL;
-        item.type = YPVideoTypeLocal;
-        [_playerView playWithURL:item];
-        _playerView.onProgressUpdate = ^(float progress) {
-            NSLog(@"%f", progress);
-        };
-        _playerView.backgroundColor = [UIColor yp_blackColor];
-    }
-    return _playerView;
-}
+//- (YPVideoPlayerView *)playerView {
+//    if (!_playerView) {
+//        _playerView = [[YPVideoPlayerView alloc] init];
+//        NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]];
+//        YPVideoSource *item = [[YPVideoSource alloc] init];
+//        item.title = @"玉皇大帝";
+//        item.url = fileURL;
+//        item.type = YPVideoTypeLocal;
+//        [_playerView playWithSource:item];
+//        _playerView.onProgressUpdate = ^(float progress) {
+//            NSLog(@"%f", progress);
+//        };
+//        _playerView.backgroundColor = [UIColor yp_blackColor];
+//    }
+//    return _playerView;
+//}
 
 #pragma mark - YPSwiperViewDelegate
 

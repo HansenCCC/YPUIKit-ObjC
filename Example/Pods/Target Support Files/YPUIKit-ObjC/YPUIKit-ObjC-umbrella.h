@@ -64,7 +64,7 @@
 #import "YPSwiperView.h"
 #import "YPTextView.h"
 #import "YPUIKit.h"
-#import "YPVideoItem.h"
+#import "YPVideoSource.h"
 #import "YPVideoPlayerBottomView.h"
 #import "YPVideoPlayerBrightnessView.h"
 #import "YPVideoPlayerControlView.h"

@@ -271,4 +271,12 @@
     return _progressView;
 }
 
+- (void)setOnRotateButtonTapped:(void (^)(void))onRotateButtonTapped {
+    self.bottomView.onRotateButtonTapped = onRotateButtonTapped;
+}
+
+- (void)setOnBackButtonTapped:(void (^)(void))onBackButtonTapped {
+    self.topView.onBackButtonTapped = onBackButtonTapped;
+}
+
 @end

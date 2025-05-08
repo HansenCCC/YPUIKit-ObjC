@@ -1,5 +1,5 @@
 //
-//  YPVideoItem.h
+//  YPVideoSource.h
 //  YPUIKit-ObjC
 //
 //  Created by Hansen on 2025/4/27.
@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, YPVideoType) {
     YPVideoTypeLocal,
 };
 
-@interface YPVideoItem : NSObject
+@interface YPVideoSource : NSObject
 
 @property (nonatomic, strong) NSURL *url;             // 视频地址
 @property (nonatomic, strong) NSString *title;        // 视频标题

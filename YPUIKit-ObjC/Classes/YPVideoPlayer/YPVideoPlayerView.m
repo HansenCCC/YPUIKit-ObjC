@@ -18,7 +18,7 @@
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) YPVideoPlayerControlView *controlView;
 @property (nonatomic, strong) id timeObserver;
-@property (nonatomic, strong) YPVideoItem *videoItem;
+@property (nonatomic, strong) YPVideoSource *videoSource;
 
 @end
 
@@ -74,11 +74,11 @@
 }
 
 - (void)applicationWillResignActive {
-    [self.videoItem saveLastPlayTime];
+    [self.videoSource saveLastPlayTime];
 }
 
 - (void)applicationDidEnterBackground {
-    [self.videoItem saveLastPlayTime];
+    [self.videoSource saveLastPlayTime];
 }
 
 - (void)setupAudioSession {
@@ -88,12 +88,13 @@
     [session setActive:YES error:&error];
 }
 
-- (void)playWithURL:(YPVideoItem *)videoItem {
-    if (!videoItem) {
+- (void)playWithSource:(YPVideoSource *)videoSource {
+    if (!videoSource) {
         return;
     }
-    self.videoItem = videoItem;
-    NSURL *url = videoItem.url;
+    [YPVideoPlayerManager shareInstance].videoSource = videoSource;
+    self.videoSource = videoSource;
+    NSURL *url = videoSource.url;
     [self setupAudioSession];
     AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
     [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
@@ -110,21 +111,21 @@
 
 - (void)play {
     [[YPVideoPlayerManager shareInstance] play];
-    [self.videoItem saveLastPlayTime];
+    [self.videoSource saveLastPlayTime];
 }
 
 - (void)pause {
     [[YPVideoPlayerManager shareInstance] pause];
-    [self.videoItem saveLastPlayTime];
+    [self.videoSource saveLastPlayTime];
 }
 
 - (void)stop {
     [[YPVideoPlayerManager shareInstance] stop];
-    [self.videoItem saveLastPlayTime];
+    [self.videoSource saveLastPlayTime];
 }
 
 - (void)dealloc {
-    [self.videoItem saveLastPlayTime];
+    [self.videoSource saveLastPlayTime];
     [YPVideoPlayerManager shareInstance].player = nil;
     [self.player.currentItem removeObserver:self forKeyPath:@"status"];
     [self.player.currentItem removeObserver:self forKeyPath:@"error"];
@@ -192,6 +193,14 @@
         _controlView = [[YPVideoPlayerControlView alloc] init];
     }
     return _controlView;
+}
+
+- (void)setOnRotateButtonTapped:(void (^)(void))onRotateButtonTapped {
+    self.controlView.onRotateButtonTapped = onRotateButtonTapped;
+}
+
+- (void)setOnBackButtonTapped:(void (^)(void))onBackButtonTapped {
+    self.controlView.onBackButtonTapped = onBackButtonTapped;
 }
 
 @end

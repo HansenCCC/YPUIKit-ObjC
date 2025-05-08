@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "YPVideoItem.h"
+#import "YPVideoSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,10 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CMTime currentTime;   // 播放时间
 @property (nonatomic, copy) void (^onProgressUpdate)(float progress);
 @property (nonatomic, copy) void (^onCompletion)(float progress);
+@property (nonatomic, copy) void (^onRotateButtonTapped)(void);
+@property (nonatomic, copy) void (^onBackButtonTapped)(void);
 
-- (void)playWithURL:(YPVideoItem *)videoItem;
+- (void)playWithSource:(YPVideoSource *)videoSource;
+
 - (void)play;
+
 - (void)pause;
+
 - (void)stop;
 
 @end

@@ -8,6 +8,7 @@
 #import "YPVideoPlayerTopView.h"
 #import "YPButton.h"
 #import "UIColor+YPExtension.h"
+#import "YPVideoPlayerManager.h"
 
 @interface YPVideoPlayerTopView ()
 
@@ -24,12 +25,19 @@
         [self addSubview:self.backButton];
         [self addSubview:self.titleLabel];
         [self addSubview:self.speedButton];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needUpdateUI) name:kYPVideoPlayerManagerUpdateUIKey object:nil];
     }
     return self;
 }
 
+- (void)needUpdateUI {
+    self.titleLabel.text = [YPVideoPlayerManager shareInstance].videoSource.title;
+}
+
 - (void)backAction:(id)sender {
-    
+    if (self.onBackButtonTapped) {
+        self.onBackButtonTapped();
+    }
 }
 
 - (void)speedAction:(id)sender {
@@ -64,6 +72,10 @@
     self.speedButton.frame = f3;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - setters | getters
 
 - (YPButton *)backButton {
@@ -84,7 +96,6 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:18.f];
         _titleLabel.textColor = [UIColor yp_whiteColor];
-        _titleLabel.text  = @"金瓶梅";
     }
     return _titleLabel;
 }

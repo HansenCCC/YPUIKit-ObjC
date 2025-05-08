@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YPVideoPlayerBottomView : UIView
 
+@property (nonatomic, copy) void (^onRotateButtonTapped)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,17 +1,17 @@
 //
-//  YPVideoItem.m
+//  YPVideoSource.m
 //  YPUIKit-ObjC
 //
 //  Created by Hansen on 2025/4/27.
 //
 
-#import "YPVideoItem.h"
+#import "YPVideoSource.h"
 #import "NSString+YPExtension.h"
 #import "YPVideoPlayerManager.h"
 
-NSString *const kYPVideoItemLastPlayTimeKey = @"kYPVideoItemLastPlayTimeKey";
+NSString *const kYPVideoSourceLastPlayTimeKey = @"kYPVideoSourceLastPlayTimeKey";
 
-@implementation YPVideoItem
+@implementation YPVideoSource
 
 - (void)saveLastPlayTime {
     // 保存当前播放的时间
@@ -20,7 +20,7 @@ NSString *const kYPVideoItemLastPlayTimeKey = @"kYPVideoItemLastPlayTimeKey";
         return;
     }
     CGFloat lastPlayTime = currentTime;
-    NSString *key = [NSString stringWithFormat:@"%@_%@", kYPVideoItemLastPlayTimeKey, self.url.absoluteString.yp_md5];
+    NSString *key = [NSString stringWithFormat:@"%@_%@", kYPVideoSourceLastPlayTimeKey, self.url.absoluteString.yp_md5];
     [[NSUserDefaults standardUserDefaults] setObject:@(lastPlayTime) forKey:key];
 }
 
@@ -28,7 +28,7 @@ NSString *const kYPVideoItemLastPlayTimeKey = @"kYPVideoItemLastPlayTimeKey";
     if (self.url.absoluteString.length == 0) {
         return 0.f;
     }
-    NSString *key = [NSString stringWithFormat:@"%@_%@", kYPVideoItemLastPlayTimeKey, self.url.absoluteString.yp_md5];
+    NSString *key = [NSString stringWithFormat:@"%@_%@", kYPVideoSourceLastPlayTimeKey, self.url.absoluteString.yp_md5];
     return [[NSUserDefaults standardUserDefaults] floatForKey:key];
 }
 
