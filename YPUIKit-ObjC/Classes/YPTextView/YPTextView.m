@@ -42,6 +42,8 @@
         self.placeholderView.frame = f1;
         [self sendSubviewToBack:self.placeholderView];
     }
+    // 同步修改，消除占位空格
+    self.placeholderView.textContainer.lineFragmentPadding = self.textContainer.lineFragmentPadding;
 }
 
 - (void)dealloc {
