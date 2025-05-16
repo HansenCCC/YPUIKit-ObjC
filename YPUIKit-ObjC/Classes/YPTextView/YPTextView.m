@@ -130,6 +130,11 @@
     [self.placeholderView setContentInset:contentInset];
 }
 
+- (void)setTextContainerInset:(UIEdgeInsets)textContainerInset {
+    [super setTextContainerInset:textContainerInset];
+    [self.placeholderView setTextContainerInset:textContainerInset];
+}
+
 - (void)setContentSize:(CGSize)contentSize {
     CGSize oldSize = self.contentSize;
     [super setContentSize:contentSize];

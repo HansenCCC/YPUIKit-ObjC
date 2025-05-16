@@ -134,6 +134,12 @@
     }];
 }
 
+- (void)copyToPasteboard:(NSString *)text {
+    if (text.length == 0) return;
+    [UIPasteboard generalPasteboard].string = text;
+    [YPAlertView alertText:@"复制成功！"];
+}
+
 #pragma mark - getter | setter
 
 - (NSDictionary *)appInfoPlist {

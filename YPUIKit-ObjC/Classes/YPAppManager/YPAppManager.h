@@ -57,6 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// - callback 回调 userAgent
 - (void)requestUserAgent:(nullable void(^)(NSString *userAgent))callback;
 
+/// 复制文本到粘贴板
+/// - Parameter text: 复制文本
+- (void)copyToPasteboard:(NSString *)text;
+
 @end
 
 NS_ASSUME_NONNULL_END
