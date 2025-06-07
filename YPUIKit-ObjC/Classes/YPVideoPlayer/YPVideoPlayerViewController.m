@@ -7,11 +7,13 @@
 
 #import "YPVideoPlayerViewController.h"
 #import "YPVideoPlayerView.h"
+#import "UIColor+YPExtension.h"
 
 @interface YPVideoPlayerViewController ()
 
 @property (nonatomic, strong) YPVideoPlayerView *playerView;
-@property (nonatomic, assign) BOOL isLandscape;
+@property (nonatomic, assign) UIDeviceOrientation currentPrientation;
+@property (nonatomic, readonly) BOOL isLandscape;// 是否是横屏
 
 @end
 
@@ -20,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor yp_colorWithHexString:@"#000000"];
     [self.view addSubview:self.playerView];
     [self.playerView playWithSource:self.videoSource];
     // 监听屏幕旋转
@@ -31,70 +34,62 @@
 
 - (void)deviceOrientationDidChange:(NSNotification *)notification {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    if (orientation == UIDeviceOrientationLandscapeRight) {
-        if (self.isLandscape) {
-            return;
-        }
-        [self enterFullScreen];
-    } else if (orientation == UIDeviceOrientationPortrait) {
-        if (!self.isLandscape) {
-            return;
-        }
-        [self exitFullScreen];
-    }
+    self.currentPrientation = orientation;
+    [self rotateScreen];
 }
+
 
 // 是否允许自动旋转
 - (BOOL)shouldAutorotate {
     return NO;
 }
 
-// 当前允许的旋转方向
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return self.isLandscape ? UIInterfaceOrientationMaskLandscapeRight : UIInterfaceOrientationMaskPortrait;
-}
-
-// 横屏
-- (void)enterFullScreen {
-    self.isLandscape = YES;
-    // 强制视图控制器重新计算旋转方向
+// 旋转屏幕
+- (void)rotateScreen {
     [self setNeedsStatusBarAppearanceUpdate];
+    UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskPortrait;
+    UIInterfaceOrientation interfaceOrientation = UIInterfaceOrientationPortrait;
+    if (self.currentPrientation == UIDeviceOrientationPortrait) {
+        mask = UIInterfaceOrientationMaskPortrait;
+        interfaceOrientation = UIInterfaceOrientationPortrait;
+    } else if (self.currentPrientation == UIDeviceOrientationLandscapeLeft) {
+        mask = UIInterfaceOrientationMaskLandscapeRight;
+        interfaceOrientation = UIInterfaceOrientationLandscapeRight;
+    } else if (self.currentPrientation == UIDeviceOrientationLandscapeRight) {
+        mask = UIInterfaceOrientationMaskLandscapeLeft;
+        interfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+    } else if (self.currentPrientation == UIDeviceOrientationPortraitUpsideDown) {
+        mask = UIInterfaceOrientationMaskPortraitUpsideDown;
+        interfaceOrientation = UIInterfaceOrientationPortraitUpsideDown;
+    }
     if (@available(iOS 16.0, *)) {
         UIWindowScene *windowScene = (UIWindowScene *)self.view.window.windowScene;
         if (windowScene) {
-            UIWindowSceneGeometryPreferencesIOS *geometryPreferences =
-                [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:UIInterfaceOrientationMaskLandscapeRight];
-            [windowScene requestGeometryUpdateWithPreferences:geometryPreferences errorHandler:^(NSError * _Nonnull error) {
-                NSLog(@"Error forcing orientation: %@", error);
+            UIWindowSceneGeometryPreferencesIOS *preferences = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:mask];
+            [windowScene requestGeometryUpdateWithPreferences:preferences errorHandler:^(NSError * _Nonnull error) {
+                NSLog(@"Rotation error: %@", error);
             }];
             [UIViewController attemptRotationToDeviceOrientation];
         }
     } else {
-        NSNumber *value = @(UIInterfaceOrientationLandscapeRight);
+        NSNumber *value = @(interfaceOrientation);
         [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
         [UIViewController attemptRotationToDeviceOrientation];
     }
 }
 
-// 竖屏
-- (void)exitFullScreen {
-    self.isLandscape = NO;
-    // 强制视图控制器重新计算旋转方向
-    [self setNeedsStatusBarAppearanceUpdate];
-    if (@available(iOS 16.0, *)) {
-        UIWindowScene *windowScene = (UIWindowScene *)self.view.window.windowScene;
-        if (windowScene) {
-            UIWindowSceneGeometryPreferencesIOS *geometryPreferences =
-                [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:UIInterfaceOrientationMaskPortrait];
-            [windowScene requestGeometryUpdateWithPreferences:geometryPreferences errorHandler:^(NSError * _Nonnull error) {
-                NSLog(@"Error forcing orientation: %@", error);
-            }];
-            [UIViewController attemptRotationToDeviceOrientation];
-        }
+// 当前允许的旋转方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    if (self.currentPrientation == UIDeviceOrientationPortrait) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else if (self.currentPrientation == UIDeviceOrientationLandscapeLeft) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    } else if (self.currentPrientation == UIDeviceOrientationLandscapeRight) {
+        return UIInterfaceOrientationMaskLandscapeLeft;
+    } else if (self.currentPrientation == UIDeviceOrientationPortraitUpsideDown) {
+        return UIInterfaceOrientationMaskPortraitUpsideDown;
     } else {
-        NSNumber *value = @(UIInterfaceOrientationPortrait);
-        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-        [UIViewController attemptRotationToDeviceOrientation];
+        return UIInterfaceOrientationMaskPortrait;
     }
 }
 
@@ -116,21 +111,31 @@
         _playerView = [[YPVideoPlayerView alloc] init];
         __weak typeof(self) weakSelf = self;
         _playerView.onBackButtonTapped = ^{
+            // 全屏状态先旋转竖屏
             if (weakSelf.isLandscape) {
-                [weakSelf exitFullScreen];
+                weakSelf.currentPrientation = UIDeviceOrientationPortrait;
+                [weakSelf rotateScreen];
                 return;
             }
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
         };
         _playerView.onRotateButtonTapped = ^{
             if (weakSelf.isLandscape) {
-                [weakSelf exitFullScreen];
+                weakSelf.currentPrientation = UIDeviceOrientationPortrait;
             } else {
-                [weakSelf enterFullScreen];
+                weakSelf.currentPrientation = UIDeviceOrientationLandscapeRight;
             }
+            [weakSelf rotateScreen];
         };
     }
     return _playerView;
+}
+
+- (BOOL)isLandscape {
+    if (self.currentPrientation == UIDeviceOrientationLandscapeLeft || self.currentPrientation == UIDeviceOrientationLandscapeRight) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

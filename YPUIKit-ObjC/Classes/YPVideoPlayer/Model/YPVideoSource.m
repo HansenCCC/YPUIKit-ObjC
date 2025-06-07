@@ -24,6 +24,13 @@ NSString *const kYPVideoSourceLastPlayTimeKey = @"kYPVideoSourceLastPlayTimeKey"
     [[NSUserDefaults standardUserDefaults] setObject:@(lastPlayTime) forKey:key];
 }
 
+- (void)clearLastPlayTime {
+    // 清空播放进度
+    CGFloat lastPlayTime = 0.f;
+    NSString *key = [NSString stringWithFormat:@"%@_%@", kYPVideoSourceLastPlayTimeKey, self.url.absoluteString.yp_md5];
+    [[NSUserDefaults standardUserDefaults] setObject:@(lastPlayTime) forKey:key];
+}
+
 - (CGFloat)lastPlayTime {
     if (self.url.absoluteString.length == 0) {
         return 0.f;

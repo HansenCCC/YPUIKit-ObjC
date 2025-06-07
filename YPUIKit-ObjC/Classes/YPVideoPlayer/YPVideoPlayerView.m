@@ -19,6 +19,7 @@
 @property (nonatomic, strong) YPVideoPlayerControlView *controlView;
 @property (nonatomic, strong) id timeObserver;
 @property (nonatomic, strong) YPVideoSource *videoSource;
+@property (nonatomic, assign) YPVideoPlayerState state;
 
 @end
 
@@ -27,6 +28,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.state = YPVideoPlayerStateUnknown;
         [self setupSubviews];
         [self addObserverNotification];  // 添加进度更新
     }
@@ -71,6 +73,8 @@
                                              selector:@selector(applicationDidEnterBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
+    
+    [self.player addObserver:self forKeyPath:@"timeControlStatus" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)applicationWillResignActive {
@@ -107,6 +111,7 @@
     self.player.rate = [YPVideoPlayerManager shareInstance].playbackRate;
     [self.player replaceCurrentItemWithPlayerItem:item];
     [self pause];
+    self.state = YPVideoPlayerStatePreparing;
 }
 
 - (void)play {
@@ -139,28 +144,44 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     AVPlayerItem *item = (AVPlayerItem *)object;
     if ([keyPath isEqualToString:@"status"]) {
-        if (item.status == AVPlayerItemStatusReadyToPlay) {
+        if (item.status == AVPlayerItemStatusUnknown) {
+            self.state = YPVideoPlayerStatePreparing;
+        } else if (item.status == AVPlayerItemStatusReadyToPlay) {
             NSLog(@"视频已准备好播放");
+            self.state = YPVideoPlayerStateReadyToPlay;
         } else if (item.status == AVPlayerItemStatusFailed) {
             NSLog(@"视频播放失败: %@", item.error.localizedDescription);
+            self.state = YPVideoPlayerStateFailed;
+        }
+    } else if ([keyPath isEqualToString:@"timeControlStatus"]) {
+        if (self.player.timeControlStatus == AVPlayerTimeControlStatusPlaying) {
+            self.state = YPVideoPlayerStatePlaying;
+        } else if (self.player.timeControlStatus == AVPlayerTimeControlStatusPaused) {
+            self.state = YPVideoPlayerStatePaused;
+        } else if (self.player.timeControlStatus == AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate) {
+            self.state = YPVideoPlayerStateStalled;
         }
     } else if ([keyPath isEqualToString:@"error"]) {
         NSLog(@"视频播放发生错误: %@", item.error.localizedDescription);
+        self.state = YPVideoPlayerStateFailed;
     }
 }
 
 #pragma mark - notification
 
 - (void)playerDidFinish:(NSNotification *)notification {
-    
+    self.state = YPVideoPlayerStateEnded;
+    // 重置播放状态
+    [self.videoSource clearLastPlayTime];
+    [self playWithSource:self.videoSource];
 }
 
 - (void)playerDidFail:(NSNotification *)notification {
-    
+    self.state = YPVideoPlayerStateFailed;
 }
 
 - (void)playerDidStall:(NSNotification *)notification {
-    
+    self.state = YPVideoPlayerStateStalled;
 }
 
 #pragma mark - getters | setters
@@ -201,6 +222,29 @@
 
 - (void)setOnBackButtonTapped:(void (^)(void))onBackButtonTapped {
     self.controlView.onBackButtonTapped = onBackButtonTapped;
+}
+
+- (void)setState:(YPVideoPlayerState)state {
+    if (_state == state) {
+        return;
+    }
+    YPVideoPlayerState oldState = _state;
+    _state = state;
+    NSString * (^stateDescription)(YPVideoPlayerState) = ^(YPVideoPlayerState s) {
+        switch (s) {
+            case YPVideoPlayerStateUnknown: return @"Unknown";
+            case YPVideoPlayerStatePreparing: return @"Preparing";
+            case YPVideoPlayerStateReadyToPlay: return @"ReadyToPlay";
+            case YPVideoPlayerStatePlaying: return @"Playing";
+            case YPVideoPlayerStatePaused: return @"Paused";
+            case YPVideoPlayerStateStalled: return @"Stalled";
+            case YPVideoPlayerStateEnded: return @"Ended";
+            case YPVideoPlayerStateFailed: return @"Failed";
+            default: return @"Invalid";
+        }
+    };
+    [[YPVideoPlayerManager shareInstance] needUpdateUI];
+    NSLog(@"[YPVideoPlayer] 状态变化: %@ → %@", stateDescription(oldState), stateDescription(state));
 }
 
 @end

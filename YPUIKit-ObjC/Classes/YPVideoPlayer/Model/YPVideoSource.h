@@ -26,6 +26,9 @@ typedef NS_ENUM(NSUInteger, YPVideoType) {
 /// 保存登录的时间
 - (void)saveLastPlayTime;
 
+/// 清空播放进度
+- (void)clearLastPlayTime;
+
 @end
 
 NS_ASSUME_NONNULL_END

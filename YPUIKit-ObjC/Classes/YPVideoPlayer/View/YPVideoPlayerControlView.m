@@ -15,6 +15,7 @@
 #import "YPVideoPlayerBrightnessView.h"
 #import "YPVideoPlayerSoundView.h"
 #import "YPVideoPlayerProgressView.h"
+#import "YPShakeManager.h"
 
 @interface YPVideoPlayerControlView ()
 
@@ -79,6 +80,7 @@
 }
 
 - (void)volumeSliderValueChanged:(UISlider *)slider {
+    [[YPShakeManager shareInstance] lightShake];
     [YPVideoPlayerManager shareInstance].volume = slider.value;
     self.soundView.value = _volumeSlider.value;
     [self.brightnessView hideNow];
@@ -118,6 +120,7 @@
 #pragma mark - Gesture
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)gesture {
+    [[YPShakeManager shareInstance] mediumShake];
     if ([YPVideoPlayerManager shareInstance].isPlaying) {
         [[YPVideoPlayerManager shareInstance] pause];
     } else {
@@ -126,6 +129,7 @@
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
+    [[YPShakeManager shareInstance] lightShake];
     CGPoint translation = [recognizer translationInView:self];
     CGPoint location = [recognizer locationInView:self];
     if (recognizer.state == UIGestureRecognizerStateBegan) {

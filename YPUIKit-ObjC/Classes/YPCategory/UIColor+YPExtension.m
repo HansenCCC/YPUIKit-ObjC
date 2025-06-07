@@ -223,7 +223,7 @@
     return color;
 }
 
-+ (UIColor *)cp_clearColor {
++ (UIColor *)yp_clearColor {
     static UIColor *color;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

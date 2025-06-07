@@ -29,19 +29,19 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect bounds = self.bounds;
-    
-    CGRect f1 = bounds;
-    f1.origin.y = 20.f;
-    f1.size = [self.progressView sizeThatFits:CGSizeZero];
-    f1.size.width = bounds.size.width / 3 * 2;
-    f1.origin.x = (bounds.size.width - f1.size.width) / 2.f;
-    self.progressView.frame = f1;
-    
+        
     CGRect f2 = bounds;
     f2.size = CGSizeMake(80.f, 80.f);
     f2.origin.x = (bounds.size.width - f2.size.width) / 2.f;
     f2.origin.y = (bounds.size.height - f2.size.height) / 2.f;
     self.imageView.frame = f2;
+    
+    CGRect f1 = bounds;
+    f1.size = [self.progressView sizeThatFits:CGSizeZero];
+    f1.size.width = bounds.size.width / 3 * 2;
+    f1.origin.y = f2.origin.y - f1.size.height - 50.f;
+    f1.origin.x = (bounds.size.width - f1.size.width) / 2.f;
+    self.progressView.frame = f1;
 }
 
 - (void)setValue:(CGFloat)value {

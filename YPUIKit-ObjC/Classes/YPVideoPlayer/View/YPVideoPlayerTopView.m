@@ -9,6 +9,7 @@
 #import "YPButton.h"
 #import "UIColor+YPExtension.h"
 #import "YPVideoPlayerManager.h"
+#import "YPShakeManager.h"
 
 @interface YPVideoPlayerTopView ()
 
@@ -24,7 +25,7 @@
     if (self = [super init]) {
         [self addSubview:self.backButton];
         [self addSubview:self.titleLabel];
-        [self addSubview:self.speedButton];
+//        [self addSubview:self.speedButton];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needUpdateUI) name:kYPVideoPlayerManagerUpdateUIKey object:nil];
     }
     return self;
@@ -35,6 +36,7 @@
 }
 
 - (void)backAction:(id)sender {
+    [[YPShakeManager shareInstance] mediumShake];
     if (self.onBackButtonTapped) {
         self.onBackButtonTapped();
     }
@@ -51,15 +53,15 @@
     CGFloat space = 10.f;
     
     CGRect f1 = bounds;
-    f1.size = CGSizeMake(25.f, 25.f);
-    f1.origin.x = space;
-    f1.origin.y = space;
+    f1.size = CGSizeMake(45.f, 45.f);
+    f1.origin.x = 0;
+    f1.origin.y = 0;
     self.backButton.frame = f1;
     
     CGRect f2 = bounds;
     f2.size = [self.titleLabel sizeThatFits:CGSizeZero];
     f2.size.width = MIN(bounds.size.width / 2, f2.size.width);
-    f2.origin.x = CGRectGetMaxX(f1) + space;
+    f2.origin.x = CGRectGetMaxX(f1);
     f2.origin.y = CGRectGetMidY(f1) - f2.size.height / 2.f;
     self.titleLabel.frame = f2;
     
@@ -87,6 +89,8 @@
         [_backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
         _backButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
         _backButton.tintColor = [UIColor yp_whiteColor];
+        _backButton.backgroundColor = [UIColor yp_colorWithHexString:@"#000000" withAlpha:0.01];
+        _backButton.adjustsImageWhenHighlighted = NO;
     }
     return _backButton;
 }
