@@ -19,6 +19,7 @@
 
 @interface YPVideoPlayerControlView ()
 
+@property (nonatomic, strong) UITapGestureRecognizer *clickTapRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTapRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, assign) BOOL isProgressControl;       // 是否在控制进度
@@ -34,6 +35,7 @@
 @property (nonatomic, strong) YPVideoPlayerBrightnessView *brightnessView;
 @property (nonatomic, strong) YPVideoPlayerSoundView *soundView;
 @property (nonatomic, strong) YPVideoPlayerProgressView *progressView;
+@property (nonatomic, assign) BOOL isShowControl;// 是否是展示控制
 
 @end
 
@@ -47,8 +49,10 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        self.isShowControl = NO;
         [self setupSubviews];
         [self setupGesture];
+        [self updateSubviews];
     }
     return self;
 }
@@ -70,10 +74,20 @@
     [self addSubview:self.progressView];
 }
 
+- (void)updateSubviews {
+    self.topView.hidden = !self.isShowControl;
+    self.bottomView.hidden = !self.isShowControl;
+}
+
 - (void)setupGesture {
+    self.clickTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleClickTap:)];
+    self.clickTapRecognizer.numberOfTapsRequired = 1;
+    [self addGestureRecognizer:self.clickTapRecognizer];
+    
     self.doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     self.doubleTapRecognizer.numberOfTapsRequired = 2;
     [self addGestureRecognizer:self.doubleTapRecognizer];
+    [self.clickTapRecognizer requireGestureRecognizerToFail:self.doubleTapRecognizer];
     
     self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [self addGestureRecognizer:self.panGestureRecognizer];
@@ -118,6 +132,12 @@
 }
 
 #pragma mark - Gesture
+
+- (void)handleClickTap:(UITapGestureRecognizer *)gesture {
+    [[YPShakeManager shareInstance] mediumShake];
+    self.isShowControl = !self.isShowControl;
+    [self updateSubviews];
+}
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)gesture {
     [[YPShakeManager shareInstance] mediumShake];
