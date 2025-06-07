@@ -13,6 +13,8 @@
 #import "YPVideoPlayerManager.h"
 #import "YPShakeManager.h"
 #import "UIImage+YPExtension.h"
+#import "YPKitDefines.h"
+#import "UIView+YPExtension.h"
 
 @interface YPVideoPlayerBottomView ()
 
@@ -77,14 +79,14 @@
     
     CGRect f1 = bounds;
     f1.size = CGSizeMake(45.f, 45.f);
-    f1.origin.x = 0;
-    f1.origin.y = bounds.size.height - f1.size.height;
+    f1.origin.x = space;
+    f1.origin.y = 5.f;
     self.togglePlayButton.frame = f1;
     
     CGRect f2 = bounds;
     f2.size = CGSizeMake(45.f, 45.f);
-    f2.origin.x = bounds.size.width - f2.size.width;
-    f2.origin.y = bounds.size.height - f2.size.height;
+    f2.origin.x = bounds.size.width - f2.size.width - space;
+    f2.origin.y = CGRectGetMidY(f1) - f2.size.height / 2.f;
     self.toggleRotateButton.frame = f2;
     
     CGRect f3 = bounds;
@@ -105,6 +107,14 @@
     f5.size.height = 25.f;
     f5.origin.y = CGRectGetMidY(f1) - f5.size.height / 2.f;
     self.progressView.frame = f5;
+    
+    [self yp_addGradientColors:@[
+        [UIColor yp_colorWithHexString:@"#000000" withAlpha:0],
+        [UIColor yp_colorWithHexString:@"#000000" withAlpha:1],]
+                     locations:@[@(0), @(1.0f)]
+                    startPoint:CGPointMake(0.5, 0)
+                      endPoint:CGPointMake(0.5, 1)
+    ];
 }
 
 - (void)togglePlayAction:(id)sender {

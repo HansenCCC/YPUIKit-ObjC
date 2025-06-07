@@ -96,12 +96,7 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     CGRect bounds = self.view.bounds;
-    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
-    if (self.isLandscape) {
-        safeInsets.bottom = 0;
-    }
-    CGRect f1 = UIEdgeInsetsInsetRect(bounds, safeInsets);
-    self.playerView.frame = f1;
+    self.playerView.frame = bounds;
 }
 
 #pragma mark - setter | getters

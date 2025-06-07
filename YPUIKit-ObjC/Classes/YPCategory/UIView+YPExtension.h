@@ -45,4 +45,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIView (CPGradientColor)
+
+/// 添加渐变色背景
+/// @param colors 渐变颜色数组（UIColor）
+/// @param locations 渐变位置（可为 nil）
+/// @param startPoint 开始点（0~1）
+/// @param endPoint 结束点（0~1）
+- (void)yp_addGradientColors:(NSArray<UIColor *> *)colors
+                   locations:(nullable NSArray<NSNumber *> *)locations
+                  startPoint:(CGPoint)startPoint
+                    endPoint:(CGPoint)endPoint;
+
+@end
+
 NS_ASSUME_NONNULL_END

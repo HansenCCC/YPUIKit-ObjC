@@ -16,6 +16,7 @@
 #import "YPVideoPlayerSoundView.h"
 #import "YPVideoPlayerProgressView.h"
 #import "YPShakeManager.h"
+#import "YPKitDefines.h"
 
 @interface YPVideoPlayerControlView ()
 
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) YPVideoPlayerSoundView *soundView;
 @property (nonatomic, strong) YPVideoPlayerProgressView *progressView;
 @property (nonatomic, assign) BOOL isShowControl;// 是否是展示控制
+@property (nonatomic, assign) BOOL isAnimating;// 动画执行中
 
 @end
 
@@ -104,11 +106,11 @@
     [super layoutSubviews];
     CGRect bounds = self.bounds;
     CGRect f1 = bounds;
-    f1.size.height = 60.f;
+    f1.size.height = 60.f + YP_HEIGHT_NAV_STATUS;
     self.topView.frame = f1;
     
     CGRect f2 = bounds;
-    f2.size.height = 60.f;
+    f2.size.height = 60.f + YP_HEIGHT_IPHONEX_BOTTOM_MARGIN;
     f2.origin.y = bounds.size.height - f2.size.height;
     self.bottomView.frame = f2;
     

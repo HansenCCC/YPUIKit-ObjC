@@ -107,3 +107,53 @@
 }
 
 @end
+
+@implementation UIView (YPGradientColor)
+
+- (void)yp_addGradientColors:(NSArray<UIColor *> *)colors
+                   locations:(nullable NSArray<NSNumber *> *)locations
+                  startPoint:(CGPoint)startPoint
+                    endPoint:(CGPoint)endPoint {
+    // 尝试查找已有的渐变层
+    CAGradientLayer *existingLayer = nil;
+    for (CALayer *sublayer in self.layer.sublayers) {
+        if ([sublayer.name isEqualToString:@"cp_gradient_layer"]) {
+            existingLayer = (CAGradientLayer *)sublayer;
+            break;
+        }
+    }
+    // 转换颜色数组
+    NSMutableArray *cgColors = [NSMutableArray arrayWithCapacity:colors.count];
+    for (UIColor *color in colors) {
+        [cgColors addObject:(__bridge id)color.CGColor];
+    }
+    // 如果已有渐变层，判断内容是否一致，不一致才更新
+    if (existingLayer) {
+        BOOL shouldUpdate = ![existingLayer.colors isEqualToArray:cgColors]
+            || ![existingLayer.locations isEqualToArray:locations]
+            || !CGPointEqualToPoint(existingLayer.startPoint, startPoint)
+            || !CGPointEqualToPoint(existingLayer.endPoint, endPoint)
+            || !CGRectEqualToRect(existingLayer.frame, self.bounds);
+        if (!shouldUpdate) {
+            return; // 不需要更新
+        }
+        existingLayer.colors = cgColors;
+        existingLayer.locations = locations;
+        existingLayer.startPoint = startPoint;
+        existingLayer.endPoint = endPoint;
+        existingLayer.frame = self.bounds;
+        return;
+    }
+    // 否则添加新的渐变层
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = cgColors;
+    gradientLayer.locations = locations;
+    gradientLayer.startPoint = startPoint;
+    gradientLayer.endPoint = endPoint;
+    gradientLayer.frame = self.bounds;
+    gradientLayer.name = @"cp_gradient_layer";
+    [self.layer insertSublayer:gradientLayer atIndex:0];
+}
+
+
+@end

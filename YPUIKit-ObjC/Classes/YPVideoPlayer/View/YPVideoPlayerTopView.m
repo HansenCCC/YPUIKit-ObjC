@@ -10,6 +10,8 @@
 #import "UIColor+YPExtension.h"
 #import "YPVideoPlayerManager.h"
 #import "YPShakeManager.h"
+#import "YPKitDefines.h"
+#import "UIView+YPExtension.h"
 
 @interface YPVideoPlayerTopView ()
 
@@ -54,8 +56,8 @@
     
     CGRect f1 = bounds;
     f1.size = CGSizeMake(45.f, 45.f);
-    f1.origin.x = 0;
-    f1.origin.y = 0;
+    f1.origin.x = space;
+    f1.origin.y = bounds.size.height - f1.size.height - 5;
     self.backButton.frame = f1;
     
     CGRect f2 = bounds;
@@ -72,6 +74,14 @@
     f3.origin.y = CGRectGetMidY(f1) - f3.size.height / 2.f;
     f3.origin.x = bounds.size.width - f3.size.width - space;
     self.speedButton.frame = f3;
+    
+    [self yp_addGradientColors:@[
+        [UIColor yp_colorWithHexString:@"#000000" withAlpha:1],
+        [UIColor yp_colorWithHexString:@"#000000" withAlpha:0],]
+                             locations:@[@(0), @(1.0f)]
+                            startPoint:CGPointMake(0.5, 0)
+                              endPoint:CGPointMake(0.5, 1)
+    ];
 }
 
 - (void)dealloc {
@@ -100,6 +110,9 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:18.f];
         _titleLabel.textColor = [UIColor yp_whiteColor];
+        _titleLabel.userInteractionEnabled = NO;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backAction:)];
+        [_titleLabel addGestureRecognizer:tap];
     }
     return _titleLabel;
 }
