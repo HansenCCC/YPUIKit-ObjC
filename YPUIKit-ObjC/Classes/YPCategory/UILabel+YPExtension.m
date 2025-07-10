@@ -28,14 +28,26 @@ static const void *kLineSpacingKey = &kLineSpacingKey;
 
 - (void)setCp_lineSpacing:(CGFloat)lineSpacing {
     objc_setAssociatedObject(self, kLineSpacingKey, @(lineSpacing), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    if (!self.text) return;
+    NSAttributedString *currentAttributedText;
+    if (self.attributedText) {
+        currentAttributedText = [self.attributedText mutableCopy];
+    } else if (self.text) {
+        currentAttributedText = [[NSAttributedString alloc] initWithString:self.text];
+    } else {
+        return; // 没有文本，直接返回
+    }
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = lineSpacing;
-    NSDictionary *attributes = @{
-        NSParagraphStyleAttributeName: paragraphStyle,
-        NSFontAttributeName: self.font
-    };
-    self.attributedText = [[NSAttributedString alloc] initWithString:self.text attributes:attributes];
+    NSMutableAttributedString *newAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:currentAttributedText];
+    [newAttributedText addAttribute:NSParagraphStyleAttributeName
+                             value:paragraphStyle
+                             range:NSMakeRange(0, newAttributedText.length)];
+    if (!self.attributedText) {
+        [newAttributedText addAttribute:NSFontAttributeName
+                                 value:self.font
+                                 range:NSMakeRange(0, newAttributedText.length)];
+    }
+    self.attributedText = newAttributedText;
 }
 
 - (CGFloat)cp_lineSpacing {
