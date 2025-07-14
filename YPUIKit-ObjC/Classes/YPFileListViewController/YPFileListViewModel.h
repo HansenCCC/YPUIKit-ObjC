@@ -5,9 +5,14 @@
 //  Created by Hansen on 2025/2/19.
 //
 
-#import <YPUIKit/YPUIKit.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef enum : NSUInteger {
+    YPFileListTypeDefault,
+    YPFileListTypeSelect,
+} YPFileListType;
 
 @protocol YPFileListViewModelDelegate <NSObject>
 

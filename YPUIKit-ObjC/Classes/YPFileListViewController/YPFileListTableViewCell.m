@@ -7,6 +7,12 @@
 
 #import "YPFileListTableViewCell.h"
 #import "YPFileListModel.h"
+#import "YPFileManager.h"
+#import "YPAlertView.h"
+#import "UIColor+YPExtension.h"
+#import "NSString+YPExtension.h"
+#import "NSDate+YPExtension.h"
+#import "UITextField+YPExtension.h"
 
 @interface YPFileListTableViewCell () <UITextFieldDelegate>
 

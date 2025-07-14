@@ -25,5 +25,6 @@
 #import "UIView+YPExtension.h"
 #import "UIViewController+YPExtension.h"
 #import "UINavigationBar+YPExtension.h"
+#import "UIApplication+YPExtension.h"
 
 #endif /* YPCategoryHeader_h */

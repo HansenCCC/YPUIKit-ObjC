@@ -9,6 +9,14 @@
 #import "YPFileListViewModel.h"
 #import "YPFileListProxy.h"
 #import "YPFileListTableViewCell.h"
+#import "YPFileManager.h"
+#import "YPAlertView.h"
+#import "UIColor+YPExtension.h"
+#import "NSString+YPExtension.h"
+#import "NSDate+YPExtension.h"
+#import "UITextField+YPExtension.h"
+#import "UIView+YPExtension.h"
+#import "YPShakeManager.h"
 
 @interface YPFileListViewController () <YPFileListViewModelDelegate>
 

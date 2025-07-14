@@ -66,15 +66,19 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    YPVideoPlayerViewController *vc = [[YPVideoPlayerViewController alloc] init];
-    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]];
-    YPVideoSource *videoSource = [[YPVideoSource alloc] init];
-    videoSource.title = @"玉皇大帝";
-    videoSource.url = fileURL;
-    videoSource.type = YPVideoTypeLocal;
-    vc.videoSource = videoSource;
-    vc.modalPresentationStyle = UIModalPresentationFullScreen;
-    [[UIViewController yp_topViewController] presentViewController:vc animated:YES completion:nil];
+//    YPVideoPlayerViewController *vc = [[YPVideoPlayerViewController alloc] init];
+//    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"]];
+//    YPVideoSource *videoSource = [[YPVideoSource alloc] init];
+//    videoSource.title = @"玉皇大帝";
+//    videoSource.url = fileURL;
+//    videoSource.type = YPVideoTypeLocal;
+//    vc.videoSource = videoSource;
+//    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+//    [[UIViewController yp_topViewController] presentViewController:vc animated:YES completion:nil];
+    
+//    YPImageItem *item = [YPImageItem itemWithURL:[NSURL URLWithString:@"https://obs-wx-ysj-xnl-pro-001.obs.dualstack.cidc-rp-12.joint.cmecloud.cn:443/public/product/image20250701/nsnk75b0.jpg"] toView:nil];
+//    YPImageBrowser *browser = [YPImageBrowser browserWithItems:@[item, item] currentIndex:0];
+//    [self presentViewController:browser animated:YES completion:nil];
 }
 
 #pragma mark - getters | setters

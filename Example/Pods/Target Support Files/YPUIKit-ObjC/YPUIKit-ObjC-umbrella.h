@@ -20,6 +20,7 @@
 #import "NSObject+YPExtension.h"
 #import "NSString+YPExtension.h"
 #import "NSTimer+YPExtension.h"
+#import "UIApplication+YPExtension.h"
 #import "UIButton+YPExtension.h"
 #import "UIColor+YPExtension.h"
 #import "UIImage+YPExtension.h"
