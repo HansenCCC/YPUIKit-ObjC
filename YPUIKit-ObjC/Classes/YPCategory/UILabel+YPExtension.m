@@ -36,7 +36,16 @@ static const void *kLineSpacingKey = &kLineSpacingKey;
     } else {
         return; // 没有文本，直接返回
     }
+    NSParagraphStyle *existingStyle = [currentAttributedText attribute:NSParagraphStyleAttributeName
+                                                               atIndex:0
+                                                        effectiveRange:nil];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = lineSpacing;
+    if (existingStyle) {
+        paragraphStyle.alignment = existingStyle.alignment;
+    } else {
+        paragraphStyle.alignment = self.textAlignment;
+    }
     paragraphStyle.lineSpacing = lineSpacing;
     NSMutableAttributedString *newAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:currentAttributedText];
     [newAttributedText addAttribute:NSParagraphStyleAttributeName
