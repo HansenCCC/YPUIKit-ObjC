@@ -26,7 +26,7 @@ static const void *kLineSpacingKey = &kLineSpacingKey;
     return label;
 }
 
-- (void)setCp_lineSpacing:(CGFloat)lineSpacing {
+- (void)setYp_lineSpacing:(CGFloat)lineSpacing {
     objc_setAssociatedObject(self, kLineSpacingKey, @(lineSpacing), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     NSAttributedString *currentAttributedText;
     if (self.attributedText) {
@@ -50,7 +50,7 @@ static const void *kLineSpacingKey = &kLineSpacingKey;
     self.attributedText = newAttributedText;
 }
 
-- (CGFloat)cp_lineSpacing {
+- (CGFloat)yp_lineSpacing {
     NSNumber *value = objc_getAssociatedObject(self, kLineSpacingKey);
     return value ? value.floatValue : 0;
 }
