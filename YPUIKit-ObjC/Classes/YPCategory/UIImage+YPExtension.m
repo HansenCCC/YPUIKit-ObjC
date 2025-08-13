@@ -635,6 +635,12 @@
     return image;
 }
 
++ (NSString *)yp_getDocumentImagePathWithImageName:(NSString *)imageName {
+    NSString *iconFilePath = [UIImage yp_imagesDirectory];
+    NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageName]];
+    return imagePath;
+}
+
 @end
 
 @implementation UIImage (YPSaveToAlbum)

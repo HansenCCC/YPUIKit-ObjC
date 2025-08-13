@@ -144,6 +144,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter imageName: 文件名
 + (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName;
 
+/// 根据文件名获取 图片的存储路径
+/// - Parameter imageName: 文件名
++ (NSString *)yp_getDocumentImagePathWithImageName:(NSString *)imageName;
+
 @end
 
 @interface UIImage (YPSaveToAlbum)
