@@ -630,14 +630,14 @@
 
 + (UIImage *)yp_getDocumentImageWithImageName:(NSString *)imageName {
     NSString *iconFilePath = [UIImage yp_imagesDirectory];
-    NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageName]];
+    NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", imageName]];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     return image;
 }
 
 + (NSString *)yp_getDocumentImagePathWithImageName:(NSString *)imageName {
     NSString *iconFilePath = [UIImage yp_imagesDirectory];
-    NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", imageName]];
+    NSString *imagePath = [iconFilePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", imageName]];
     return imagePath;
 }
 
