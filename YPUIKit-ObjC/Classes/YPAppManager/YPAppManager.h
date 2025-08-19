@@ -50,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 弹出分享弹框分享应用
 - (void)shareAppLink;
 
+/// 给作者发送邮件
+/// - Parameters:
+///   - subject: 主题【标题】
+///   - messageBody: 内容模板
+- (void)sendEmailWithSubject:(NSString *)subject messageBody:(NSString *)messageBody;
+
 /// 弹出意见反馈的邮件
 - (void)sendFeedbackEmail;
 

@@ -83,7 +83,7 @@
     [[UIViewController yp_topViewController] presentViewController:activityVC animated:YES completion:nil];
 }
 
-- (void)sendFeedbackEmail {
+- (void)sendEmailWithSubject:(NSString *)subject messageBody:(NSString *)messageBody {
     NSString *email = self.authorMail;
     if (email.length == 0) {
         [YPAlertView alertText:@"方法不可用，请开发者在 info.plist 设置 yp_author_mail".yp_localizedString duration:3.f];
@@ -102,10 +102,15 @@
     MFMailComposeViewController *mailComposeVC = [[MFMailComposeViewController alloc] init];
     mailComposeVC.mailComposeDelegate = self; // 记得实现MFMailComposeViewControllerDelegate
     [mailComposeVC setToRecipients:@[email]]; // 设置收件人
-    [mailComposeVC setSubject:[NSString stringWithFormat:@"%@ %@", self.appName, @"意见反馈".yp_localizedString]];
-    NSString *messageBody = @"亲爱的用户，感谢您使用我的应用！\n我非常重视您的反馈。\n请在下方输入您的意见或建议：\n------------------------------------\n您的意见：\n\n\n\n\n\n------------------------------------\n\n".yp_localizedString;
+    [mailComposeVC setSubject:subject];
     [mailComposeVC setMessageBody:messageBody isHTML:NO];
     [[UIViewController yp_topViewController] presentViewController:mailComposeVC animated:YES completion:nil];
+}
+
+- (void)sendFeedbackEmail {
+    NSString *subject = [NSString stringWithFormat:@"%@ %@", self.appName, @"意见反馈".yp_localizedString];
+    NSString *messageBody = @"亲爱的用户，感谢您使用我的应用！\n我非常重视您的反馈。\n请在下方输入您的意见或建议：\n------------------------------------\n您的意见：\n\n\n\n\n\n------------------------------------\n\n".yp_localizedString;
+    [self sendEmailWithSubject:subject messageBody:messageBody];
 }
 
 - (void)requestUserAgent:(nullable void(^)(NSString *userAgent))callback {
